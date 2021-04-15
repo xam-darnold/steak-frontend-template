@@ -29,7 +29,7 @@ const Button: React.FC<ButtonProps> = ({
   let buttonColor: string
   switch (variant) {
     case 'secondary':
-      buttonColor = color.grey[500]
+      buttonColor = color.grey[800]
       break
     case 'default':
     default:
@@ -43,14 +43,14 @@ const Button: React.FC<ButtonProps> = ({
   switch (size) {
     case 'sm':
       boxShadow = `4px 4px 8px ${color.grey[300]},
-        -8px -8px 16px ${color.grey[100]}FF;`
+        -4px -4px 8px ${color.grey[300]}FF;`
       buttonPadding = spacing[3]
       buttonSize = 36
       fontSize = 14
       break
     case 'lg':
       boxShadow = `6px 6px 12px ${color.grey[300]},
-        -12px -12px 24px ${color.grey[100]}ff;`
+        -6px -6px 12px ${color.grey[300]}ff;`
       buttonPadding = spacing[4]
       buttonSize = 72
       fontSize = 16
@@ -58,7 +58,7 @@ const Button: React.FC<ButtonProps> = ({
     case 'md':
     default:
       boxShadow = `6px 6px 12px ${color.grey[300]},
-        -12px -12px 24px -2px ${color.grey[100]}ff;`
+        -6px -6px 12px -2px ${color.grey[300]}ff;`
       buttonPadding = spacing[4]
       buttonSize = 56
       fontSize = 16
@@ -118,7 +118,7 @@ const StyledButton = styled.button<StyledButtonProps>`
   pointer-events: ${props => !props.disabled ? undefined : 'none'};
   width: 100%;
   &:hover {
-    background-color: ${props => props.theme.color.grey[100]};
+    background-color: ${props => props.theme.color.red[200]};
   }
 `
 

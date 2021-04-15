@@ -29,19 +29,22 @@ const StyledPageHeader = styled.div`
   padding-bottom: ${(props) => props.theme.spacing[6]}px;
   padding-top: ${(props) => props.theme.spacing[6]}px;
   margin: 0 auto;
+  justify-content: center;
 `
 
 const StyledIcon = styled.div`
   font-size: 120px;
-  height: 256px;
+  height: 200px;
+  display: flex;
   line-height: 120px;
   text-align: center;
-  width: 256px;
+  width: 200px;
+  justify-content: center;
 `
 
 const StyledTitle = styled.h1`
   font-family: 'Kaushan Script', sans-serif;
-  color: ${(props) => props.theme.color.grey[600]};
+  color: ${(props) => props.theme.color.grey[500]};
   font-size: 36px;
   text-align: center;
   font-weight: 700;

@@ -84,7 +84,7 @@ export const supportedPools = [
     name: 'Ribeye!',
     symbol: 'STEAK-wFTM SLP',
     tokenSymbol: 'STEAK',
-    icon: '/images/steak_logo_64.png',
+    icon: '/images/steak_logo_512.png',
   },
   {
     pid: 1,
