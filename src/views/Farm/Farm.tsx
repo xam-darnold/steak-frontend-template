@@ -57,7 +57,7 @@ const Farm: React.FC = () => {
   return (
     <>
       <PageHeader
-        icon={icon}
+        icon={<img src={icon.toString()} />}
         subtitle={`Deposit ${lpTokenName}  Tokens and earn ${earnTokenName}`}
         title={name}
       />
@@ -78,21 +78,8 @@ const Farm: React.FC = () => {
         <Spacer size="lg" />
         <StyledInfo>
           ⭐️ Every time you stake and unstake LP tokens, the contract will
-          automagically harvest SUSHI rewards for you!
+          automagically harvest STEAK rewards for you!
         </StyledInfo>
-        <Spacer size="md" />
-        <StyledLink
-          target="__blank"
-          href={`https://sushiswap.vision/pair/${lpTokenAddress}`}
-        >
-          {lpTokenName} Info
-        </StyledLink>
-        <StyledLink
-          target="__blank"
-          href={`https://lite.sushiswap.fi/#/migrate`}
-        >
-          UNI to SLP 1 Click Migration
-        </StyledLink>
       </StyledFarm>
     </>
   )

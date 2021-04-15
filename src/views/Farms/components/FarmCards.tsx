@@ -84,7 +84,7 @@ const FarmCards: React.FC = () => {
         ))
       ) : (
         <StyledLoadingWrapper>
-          <Loader text="Cooking the rice ..." />
+          <Loader text="Massaging Cows..." />
         </StyledLoadingWrapper>
       )}
     </StyledCards>
@@ -131,14 +131,16 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
   }, [sushi, lpTokenAddress, account, setHarvestable])
 
   const poolActive = true // startTime * 1000 - Date.now() <= 0
-
   return (
+    
     <StyledCardWrapper>
-      {farm.tokenSymbol === 'SUSHI' && <StyledCardAccent />}
+      {farm.tokenSymbol === 'STEAK' && <StyledCardAccent />}
       <Card>
         <CardContent>
           <StyledContent>
-            <CardIcon>{farm.icon}</CardIcon>
+          <CardIcon>
+            <img src={farm.icon.toString()} width={45} />
+          </CardIcon>
             <StyledTitle>{farm.name}</StyledTitle>
             <StyledDetails>
               <StyledDetail>Deposit {farm.lpToken}</StyledDetail>

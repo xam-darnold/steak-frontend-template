@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Button from '../../../components/Button'
 import Card from '../../../components/Card'
@@ -7,25 +7,25 @@ import CardIcon from '../../../components/CardIcon'
 import Label from '../../../components/Label'
 import Value from '../../../components/Value'
 import useReward from '../../../hooks/useReward'
-import {getBalanceNumber} from '../../../utils/formatBalance'
-import useTokenBalance from "../../../hooks/useTokenBalance";
-import {Contract} from "web3-eth-contract";
-import useModal from "../../../hooks/useModal";
-import WithdrawModal from "./WithdrawModal";
-import useLeave from "../../../hooks/useLeave";
+import { getBalanceNumber } from '../../../utils/formatBalance'
+import useTokenBalance from '../../../hooks/useTokenBalance'
+import { Contract } from 'web3-eth-contract'
+import useModal from '../../../hooks/useModal'
+import WithdrawModal from './WithdrawModal'
+import useLeave from '../../../hooks/useLeave'
+import steak from '../../../assets/img/steak_icons/steak_logo_64.png'
 
 interface HarvestProps {
   lpContract: Contract
 }
 
-const UnstakeXSushi: React.FC<HarvestProps> = ({lpContract}) => {
-
+const UnstakeXSushi: React.FC<HarvestProps> = ({ lpContract }) => {
   const xSushiBalance = useTokenBalance(lpContract.options.address)
   const [pendingTx, setPendingTx] = useState(false)
 
-  const {onLeave} = useLeave()
+  const { onLeave } = useLeave()
 
-  const tokenName = "xSUSHI"
+  const tokenName = 'xSUSHI'
 
   const [onPresentLeave] = useModal(
     <WithdrawModal
@@ -40,14 +40,16 @@ const UnstakeXSushi: React.FC<HarvestProps> = ({lpContract}) => {
       <CardContent>
         <StyledCardContentInner>
           <StyledCardHeader>
-            <CardIcon>🍣</CardIcon>
-            <Value value={getBalanceNumber(xSushiBalance)}/>
-            <Label text="xSUSHI (SushiBar) Available"/>
+            <CardIcon>
+              <img src={steak} width={45} />
+            </CardIcon>
+            <Value value={getBalanceNumber(xSushiBalance)} />
+            <Label text="xSTEAK (SteakHouse) Available" />
           </StyledCardHeader>
           <StyledCardActions>
             <Button
               disabled={!xSushiBalance.toNumber() || pendingTx}
-              text={pendingTx ? 'Converting to SUSHI' : 'Convert to SUSHI'}
+              text={pendingTx ? 'Converting to STEAK' : 'Convert to STEAK'}
               onClick={async () => {
                 setPendingTx(true)
                 await onPresentLeave()

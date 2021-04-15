@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { useWallet } from 'use-wallet'
 
-import chef from '../../assets/img/chef.png'
+import butcher from '../../assets/img/butcher_icons/butcher_256.png'
 
 import Button from '../../components/Button'
 import Page from '../../components/Page'
@@ -26,9 +26,9 @@ const Farms: React.FC = () => {
           <>
             <Route exact path={path}>
               <PageHeader
-                icon={<img src={chef} height="120" />}
-                subtitle="Earn SUSHI tokens by staking SushiSwap V2 SLP Tokens."
-                title="Select Your Favorite Dishes"
+                icon={<img src={butcher} height="120" />}
+                subtitle="Earn STEAK tokens by staking FUSD."
+                title="Pick Your Cut of Meat"
               />
               <div
                 style={{
@@ -36,7 +36,7 @@ const Farms: React.FC = () => {
                   marginBottom: '2%'
                 }}
               >
-                Note: Current APY includes 2/3rd SUSHI emission that is locked for 6 months.
+                Note: Current APY includes 2/3rd STEAK emission that is locked for 6 months.
               </div>
               <FarmCards />
             </Route>

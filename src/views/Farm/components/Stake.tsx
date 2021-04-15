@@ -21,6 +21,7 @@ import useUnstake from '../../../hooks/useUnstake'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import DepositModal from './DepositModal'
 import WithdrawModal from './WithdrawModal'
+import cow from '../../../assets/img/cow_icons/cow_64.png'
 
 interface StakeProps {
   lpContract: Contract
@@ -79,7 +80,7 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName }) => {
       <CardContent>
         <StyledCardContentInner>
           <StyledCardHeader>
-            <CardIcon>👨🏻‍🍳</CardIcon>
+            <CardIcon><img src={cow} width={45} /></CardIcon>
             <Value value={getBalanceNumber(stakedBalance)} />
             <Label text={`${tokenName} Tokens Staked`} />
           </StyledCardHeader>

@@ -16,6 +16,7 @@ import useEnter from "../../../hooks/useEnter";
 import useLeave from "../../../hooks/useLeave";
 import useAllowanceStaking from "../../../hooks/useAllowanceStaking";
 import useApproveStaking from "../../../hooks/useApproveStaking";
+import cow from "../../../assets/img/cow_icons/cow_64.png"
 
 interface StakeProps {
 }
@@ -58,22 +59,22 @@ const StakeSushi: React.FC<StakeProps> = ({}) => {
       <CardContent>
         <StyledCardContentInner>
           <StyledCardHeader>
-            <CardIcon>👨🏻‍🍳</CardIcon>
+            <CardIcon><img src={cow} width={45}/></CardIcon>
             <Value value={getBalanceNumber(tokenBalance)}/>
-            <Label text={`SUSHI Tokens Available`}/>
+            <Label text={`STEAK Tokens Available`}/>
           </StyledCardHeader>
           <StyledCardActions>
             {!allowance.toNumber() ? (
               <Button
                 disabled={requestedApproval}
                 onClick={handleApprove}
-                text={`Approve SUSHI`}
+                text={`Approve STEAK`}
               />
             ) : (
               <>
                 <Button
                   disabled={tokenBalance.eq(new BigNumber(0))}
-                  text="Convert to xSUSHI"
+                  text="Convert to xSTEAK"
                   onClick={onPresentDeposit}
                 />
                 <StyledActionSpacer/>

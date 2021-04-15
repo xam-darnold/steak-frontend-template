@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
+import steak from '../../assets/img/steak_icons/steak_logo_64.png'
 
 import CardIcon from '../CardIcon'
 
@@ -11,7 +12,7 @@ const Loader: React.FC<LoaderProps> = ({ text }) => {
   return (
     <StyledLoader>
       <CardIcon>
-        <StyledSushi>🍣</StyledSushi>
+        <StyledSushi><img src={steak} /></StyledSushi>
       </CardIcon>
       {!!text && <StyledText>{text}</StyledText>}
     </StyledLoader>

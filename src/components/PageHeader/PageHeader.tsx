@@ -33,10 +33,10 @@ const StyledPageHeader = styled.div`
 
 const StyledIcon = styled.div`
   font-size: 120px;
-  height: 120px;
+  height: 256px;
   line-height: 120px;
   text-align: center;
-  width: 120px;
+  width: 256px;
 `
 
 const StyledTitle = styled.h1`

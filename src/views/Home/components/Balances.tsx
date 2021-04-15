@@ -8,7 +8,7 @@ import CardContent from '../../../components/CardContent'
 import Label from '../../../components/Label'
 import Spacer from '../../../components/Spacer'
 import Value from '../../../components/Value'
-import SushiIcon from '../../../components/SushiIcon'
+import SteakIcon from '../../../components/SteakIcon'
 import useAllEarnings from '../../../hooks/useAllEarnings'
 import useAllStakedValue from '../../../hooks/useAllStakedValue'
 import useFarms from '../../../hooks/useFarms'
@@ -91,10 +91,10 @@ const Balances: React.FC = () => {
         <CardContent>
           <StyledBalances>
             <StyledBalance>
-              <SushiIcon />
+              <SteakIcon />
               <Spacer />
               <div style={{ flex: 1 }}>
-                <Label text="Your SUSHI Balance" />
+                <Label text="Your STEAK Balance" />
                 <Value
                   value={!!account ? getBalanceNumber(sushiBalance) : 'Locked'}
                 />
@@ -105,7 +105,7 @@ const Balances: React.FC = () => {
         <Footnote>
           Pending harvest
           <FootnoteValue>
-            <PendingRewards /> SUSHI
+            <PendingRewards /> STEAK
           </FootnoteValue>
         </Footnote>
       </Card>
@@ -113,7 +113,7 @@ const Balances: React.FC = () => {
 
       <Card>
         <CardContent>
-          <Label text="Total SUSHI Supply" />
+          <Label text="Total STEAK Supply" />
           <Value
             value={totalSupply ? getBalanceNumber(totalSupply) : 'Locked'}
             decimals={0}
@@ -121,7 +121,7 @@ const Balances: React.FC = () => {
         </CardContent>
         <Footnote>
           New rewards per block
-          <FootnoteValue>50 SUSHI</FootnoteValue>
+          <FootnoteValue>50 STEAK</FootnoteValue>
         </Footnote>
       </Card>
     </StyledWrapper>

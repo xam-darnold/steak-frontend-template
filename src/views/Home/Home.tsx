@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import chef from '../../assets/img/chef.png'
+import farmer from '../../assets/img/farmer_icons/farmer_logo_256.png'
 import Button from '../../components/Button'
 import Container from '../../components/Container'
 import Page from '../../components/Page'
@@ -12,9 +12,9 @@ const Home: React.FC = () => {
   return (
     <Page>
       <PageHeader
-        icon={<img src={chef} height={120} />}
-        title="MasterChef is Ready"
-        subtitle="Stake SushiSwap LP tokens to claim your very own yummy SUSHI!"
+        icon={<img src={farmer} height={120} />}
+        title="Fire up the Grill"
+        subtitle="Stake STEAK LP tokens to claim STEAK rewards!"
       />
 
       <Container>

@@ -9,6 +9,7 @@ import Value from '../../../components/Value'
 import useEarnings from '../../../hooks/useEarnings'
 import useReward from '../../../hooks/useReward'
 import { getBalanceNumber } from '../../../utils/formatBalance'
+import steak from '../../../assets/img/steak_icons/steak_logo_64.png'
 
 interface HarvestProps {
   pid: number
@@ -24,14 +25,14 @@ const Harvest: React.FC<HarvestProps> = ({ pid }) => {
       <CardContent>
         <StyledCardContentInner>
           <StyledCardHeader>
-            <CardIcon>🍣</CardIcon>
+            <CardIcon><img src={steak} width={45} /></CardIcon>
             <Value value={getBalanceNumber(earnings)} />
-            <Label text="SUSHI Earned" />
+            <Label text="STEAK Earned" />
           </StyledCardHeader>
           <StyledCardActions>
             <Button
               disabled={!earnings.toNumber() || pendingTx}
-              text={pendingTx ? 'Collecting SUSHI' : 'Harvest'}
+              text={pendingTx ? 'Collecting STEAK' : 'Harvest'}
               onClick={async () => {
                 setPendingTx(true)
                 await onReward()
