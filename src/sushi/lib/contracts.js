@@ -1,10 +1,8 @@
 import BigNumber from 'bignumber.js/bignumber'
 import ERC20Abi from './abi/erc20.json'
-import MasterChefAbi from './abi/masterchef.json'
 import SteakHouseAbi from './abi/SteakHouse.json'
 import SteakAbi from './abi/SteakToken.json'
 import XSushiAbi from './abi/xsushi.json'
-import SushiAbi from './abi/sushi.json'
 import UNIV2PairAbi from './abi/uni_v2_lp.json'
 import WETHAbi from './abi/weth.json'
 import {
@@ -24,6 +22,7 @@ export class Contracts {
     this.defaultGas = options.defaultGas
     this.defaultGasPrice = options.defaultGasPrice
 
+    // !Add change xsushi and weth
     this.steak = new this.web3.eth.Contract(SteakAbi)
     this.steakhouse = new this.web3.eth.Contract(SteakHouseAbi)
     this.xSushiStaking = new this.web3.eth.Contract(XSushiAbi)
@@ -33,6 +32,7 @@ export class Contracts {
       Object.assign(pool, {
         lpAddress: pool.lpAddresses[networkId],
         tokenAddress: pool.tokenAddresses[networkId],
+        // !Univ2 should be using spirit swap
         lpContract: new this.web3.eth.Contract(UNIV2PairAbi),
         tokenContract: new this.web3.eth.Contract(ERC20Abi),
       }),
@@ -63,8 +63,8 @@ export class Contracts {
   }
 
   setDefaultAccount(account) {
-    this.sushi.options.from = account
-    this.masterChef.options.from = account
+    this.steak.options.from = account
+    this.steakhouse.options.from = account
   }
 
   async callContractFunction(method, options) {

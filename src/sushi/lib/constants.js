@@ -79,9 +79,11 @@ export const supportedPools = [
     pid: 12,
     lpAddresses: {
       1: '0x795065dCc9f64b5614C407a6EFDC400DA6221FB0',
+      250: ''
     },
     tokenAddresses: {
       1: '0x6b3595068778dd592e39a122f4f5a5cf09c90fe2',
+      250: ''
     },
     name: 'Ribeye!',
     symbol: 'STEAK-wFTM SLP',
@@ -92,9 +94,11 @@ export const supportedPools = [
     pid: 1,
     lpAddresses: {
       1: '0x397FF1542f962076d0BFE58eA045FfA2d347ACa0',
+      250: ''
     },
     tokenAddresses: {
       1: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
+      250: ''
     },
     name: 'Fillet!',
     symbol: 'FUSD-3Pool SLP',
