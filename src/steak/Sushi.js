@@ -37,8 +37,8 @@ export class Sushi {
       this.web3.eth.defaultAccount = options.defaultAccount
     }
     this.contracts = new Contracts(realProvider, networkId, this.web3, options)
-    this.sushiAddress = contractAddresses.steak[networkId]
-    this.masterChefAddress = contractAddresses.steakHouse[networkId]
+    this.steakAddress = contractAddresses.steak[networkId]
+    this.steakHouseAddress = contractAddresses.steakHouse[networkId]
     this.wethAddress = contractAddresses.wftm[networkId]
   }
 

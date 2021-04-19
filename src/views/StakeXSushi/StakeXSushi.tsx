@@ -8,8 +8,8 @@ import {getContract} from '../../utils/erc20'
 import UnstakeXSushi from './components/UnstakeXSushi'
 import StakeSushi from "./components/StakeSushi";
 
-import {contractAddresses} from '../../sushi/lib/constants'
-import {getXSushiSupply} from "../../sushi/utils";
+import {contractAddresses} from '../../steak/lib/constants'
+import {getXSushiSupply} from "../../steak/utils";
 import BigNumber from "bignumber.js";
 import {getBalanceNumber} from "../../utils/formatBalance";
 

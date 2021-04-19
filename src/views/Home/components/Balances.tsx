@@ -14,7 +14,7 @@ import useAllStakedValue from '../../../hooks/useAllStakedValue'
 import useFarms from '../../../hooks/useFarms'
 import useTokenBalance from '../../../hooks/useTokenBalance'
 import useSushi from '../../../hooks/useSushi'
-import { getSushiAddress, getSushiSupply } from '../../../sushi/utils'
+import { getSushiAddress, getSushiSupply } from '../../../steak/utils'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 
 const PendingRewards: React.FC = () => {

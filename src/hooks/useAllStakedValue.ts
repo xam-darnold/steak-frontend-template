@@ -10,7 +10,7 @@ import {
   getWethContract,
   getFarms,
   getTotalLPWethValue,
-} from '../sushi/utils'
+} from '../steak/utils'
 import useSushi from './useSushi'
 import useBlock from './useBlock'
 
@@ -26,6 +26,7 @@ const useAllStakedValue = () => {
   const [balances, setBalance] = useState([] as Array<StakedValue>)
   const { account }: { account: string; ethereum: provider } = useWallet()
   const sushi = useSushi()
+  console.log(sushi)
   const farms = getFarms(sushi)
   const masterChefContract = getMasterChefContract(sushi)
   const wethContact = getWethContract(sushi)

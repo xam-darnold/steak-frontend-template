@@ -7,7 +7,7 @@ import { provider } from 'web3-core'
 import { getBalance } from '../utils/erc20'
 import useBlock from './useBlock'
 
-import { contractAddresses } from '../sushi/lib/constants'
+import { contractAddresses } from '../steak/lib/constants'
 
 const useMasterChefBalance = (tokenAddress: string) => {
   const [balance, setBalance] = useState(new BigNumber(0))

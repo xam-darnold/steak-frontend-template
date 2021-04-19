@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useState } from 'react'
 
 import { useWallet } from 'use-wallet'
 
-import { Sushi } from '../../sushi'
+import { Sushi } from '../../steak'
 
 export interface SushiContext {
   sushi?: typeof Sushi
@@ -30,6 +30,7 @@ const SushiProvider: React.FC = ({ children }) => {
   useEffect(() => {
     if (ethereum) {
       const chainId = Number(ethereum.chainId)
+      console.log(`chainId: ${chainId}`)
       const sushiLib = new Sushi(ethereum, chainId, false, {
         defaultAccount: ethereum.selectedAddress,
         defaultConfirmations: 1,
