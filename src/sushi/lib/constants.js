@@ -39,16 +39,18 @@ export const addressMap = {
 }
 
 export const contractAddresses = {
-  sushi: {
+  steak: {
     1: '0x6b3595068778dd592e39a122f4f5a5cf09c90fe2',
+    250: '0x0026296407a0ebA938409575F84059ca603d33DC'
   },
-  masterChef: {
+  steakHouse: {
     1: '0xc2edad668740f1aa35e4d8f227fb8e17dca888cd',
+    250: '0x11BdbF56Ce48E7Ac91a3a894521d74Fec8214Dd6',
   },
-  weth: {
+  wftm: {
     1: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
   },
-  xSushi: {
+  xSteak: {
     1: '0x8798249c2e607446efb7ad49ec89dd1865ff4272'
   }
 }

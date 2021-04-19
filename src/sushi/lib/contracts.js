@@ -1,6 +1,8 @@
 import BigNumber from 'bignumber.js/bignumber'
 import ERC20Abi from './abi/erc20.json'
 import MasterChefAbi from './abi/masterchef.json'
+import SteakHouseAbi from './abi/SteakHouse.json'
+import SteakAbi from './abi/SteakToken.json'
 import XSushiAbi from './abi/xsushi.json'
 import SushiAbi from './abi/sushi.json'
 import UNIV2PairAbi from './abi/uni_v2_lp.json'
@@ -22,8 +24,8 @@ export class Contracts {
     this.defaultGas = options.defaultGas
     this.defaultGasPrice = options.defaultGasPrice
 
-    this.sushi = new this.web3.eth.Contract(SushiAbi)
-    this.masterChef = new this.web3.eth.Contract(MasterChefAbi)
+    this.steak = new this.web3.eth.Contract(SteakAbi)
+    this.steakhouse = new this.web3.eth.Contract(SteakHouseAbi)
     this.xSushiStaking = new this.web3.eth.Contract(XSushiAbi)
     this.weth = new this.web3.eth.Contract(WETHAbi)
 
@@ -47,10 +49,10 @@ export class Contracts {
       else console.error('Contract address not found in network', networkId)
     }
 
-    setProvider(this.sushi, contractAddresses.sushi[networkId])
-    setProvider(this.masterChef, contractAddresses.masterChef[networkId])
-    setProvider(this.xSushiStaking, contractAddresses.xSushi[networkId])
-    setProvider(this.weth, contractAddresses.weth[networkId])
+    setProvider(this.steak, contractAddresses.steak[networkId])
+    setProvider(this.steakhouse, contractAddresses.steakHouse[networkId])
+    setProvider(this.xSushiStaking, contractAddresses.xSteak[networkId])
+    setProvider(this.weth, contractAddresses.wftm[networkId])
 
     this.pools.forEach(
       ({ lpContract, lpAddress, tokenContract, tokenAddress }) => {
