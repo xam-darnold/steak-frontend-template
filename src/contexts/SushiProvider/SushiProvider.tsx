@@ -42,9 +42,12 @@ const SushiProvider: React.FC = ({ children }) => {
         ethereumNodeTimeout: 10000,
       })
       setSushi(sushiLib)
+      console.log(window.sushisauce)
       window.sushisauce = sushiLib
     }
   }, [ethereum])
+
+ 
 
   return <Context.Provider value={{ sushi }}>{children}</Context.Provider>
 }

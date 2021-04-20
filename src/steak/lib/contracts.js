@@ -2,9 +2,9 @@ import BigNumber from 'bignumber.js/bignumber'
 import ERC20Abi from './abi/erc20.json'
 import SteakHouseAbi from './abi/SteakHouse.json'
 import SteakAbi from './abi/SteakToken.json'
-import XSushiAbi from './abi/xsushi.json'
+import xSteakAbi from './abi/xSTEAK.json'
 import UNIV2PairAbi from './abi/uni_v2_lp.json'
-import WETHAbi from './abi/weth.json'
+import wFTM from './abi/wFTM.json'
 import {
   contractAddresses,
   SUBTRACT_GAS_LIMIT,
@@ -22,11 +22,10 @@ export class Contracts {
     this.defaultGas = options.defaultGas
     this.defaultGasPrice = options.defaultGasPrice
 
-    // !Add change xsushi and weth
-    this.steak = new this.web3.eth.Contract(SteakAbi)
-    this.steakhouse = new this.web3.eth.Contract(SteakHouseAbi)
-    this.xSushiStaking = new this.web3.eth.Contract(XSushiAbi)
-    this.weth = new this.web3.eth.Contract(WETHAbi)
+    this.sushi = new this.web3.eth.Contract(SteakAbi)
+    this.masterChef = new this.web3.eth.Contract(SteakHouseAbi)
+    this.xSushiStaking = new this.web3.eth.Contract(xSteakAbi)
+    this.weth = new this.web3.eth.Contract(wFTM)
 
     this.pools = supportedPools.map((pool) =>
       Object.assign(pool, {
@@ -49,8 +48,8 @@ export class Contracts {
       else console.error('Contract address not found in network', networkId)
     }
 
-    setProvider(this.steak, contractAddresses.steak[networkId])
-    setProvider(this.steakhouse, contractAddresses.steakHouse[networkId])
+    setProvider(this.sushi, contractAddresses.steak[networkId])
+    setProvider(this.masterChef, contractAddresses.steakHouse[networkId])
     setProvider(this.xSushiStaking, contractAddresses.xSteak[networkId])
     setProvider(this.weth, contractAddresses.wftm[networkId])
 
