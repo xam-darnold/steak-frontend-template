@@ -79,13 +79,14 @@ export const supportedPools = [
   // Perm Menu
   {
     pid: 12,
+    //!need to create wFTM-STEAK LP
     lpAddresses: {
       1: '0x795065dCc9f64b5614C407a6EFDC400DA6221FB0',
       250: ''
     },
     tokenAddresses: {
       1: '0x6b3595068778dd592e39a122f4f5a5cf09c90fe2',
-      250: ''
+      250: '0x0026296407a0ebA938409575F84059ca603d33DC'
     },
     name: 'Ribeye!',
     symbol: 'STEAK-wFTM SLP',
@@ -94,17 +95,19 @@ export const supportedPools = [
   },
   {
     pid: 1,
+    //!need to create FUSD-3Pool 
     lpAddresses: {
       1: '0x397FF1542f962076d0BFE58eA045FfA2d347ACa0',
       250: ''
     },
     tokenAddresses: {
       1: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
-      250: ''
+      250: '0xad84341756bf337f5a0164515b1f6f993d194e1f'
     },
     name: 'Fillet!',
     symbol: 'FUSD-3Pool SLP',
     tokenSymbol: 'FUSD',
+    //!Change to better icon
     icon: '/images/fusd.png',
   },
 ]

@@ -3,7 +3,7 @@ import { useCallback } from 'react'
 import useSushi from './useSushi'
 import { useWallet } from 'use-wallet'
 
-import { stake, getMasterChefContract } from '../steak/utils'
+import { stake, getMasterChefContract } from '../sushi/utils'
 
 const useStake = (pid: number) => {
   const { account } = useWallet()

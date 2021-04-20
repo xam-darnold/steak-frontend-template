@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useState } from 'react'
 
 import { useWallet } from 'use-wallet'
 
-import { Sushi } from '../../steak'
+import { Sushi } from '../../sushi'
 
 export interface SushiContext {
   sushi?: typeof Sushi

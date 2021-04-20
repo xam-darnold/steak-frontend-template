@@ -11,7 +11,7 @@ import useModal from '../../../hooks/useModal'
 import useTokenBalance from '../../../hooks/useTokenBalance'
 import {getBalanceNumber} from '../../../utils/formatBalance'
 import DepositModal from './DepositModal'
-import {contractAddresses} from '../../../steak/lib/constants'
+import {contractAddresses} from '../../../sushi/lib/constants'
 import useEnter from "../../../hooks/useEnter";
 import useLeave from "../../../hooks/useLeave";
 import useAllowanceStaking from "../../../hooks/useAllowanceStaking";

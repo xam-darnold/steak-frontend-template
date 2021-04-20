@@ -7,7 +7,7 @@ import {
   approve,
   getSushiContract,
   getXSushiStakingContract
-} from '../steak/utils'
+} from '../sushi/utils'
 
 const useApproveStaking = () => {
   const {account}: { account: string; ethereum: provider } = useWallet()
