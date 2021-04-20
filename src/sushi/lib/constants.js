@@ -41,19 +41,19 @@ export const addressMap = {
 export const contractAddresses = {
   steak: {
     // 1: '0x6b3595068778dd592e39a122f4f5a5cf09c90fe2',
-    1: '0x0026296407a0ebA938409575F84059ca603d33DC'
+    250: '0x0026296407a0ebA938409575F84059ca603d33DC'
   },
   steakHouse: {
     // 1: '0xc2edad668740f1aa35e4d8f227fb8e17dca888cd',
-    1: '0x11BdbF56Ce48E7Ac91a3a894521d74Fec8214Dd6',
+    250: '0x11BdbF56Ce48E7Ac91a3a894521d74Fec8214Dd6',
   },
   wftm: {
     // 1: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
-    1: '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'
+    250: '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'
   },
   xSteak: {
     // 1: '0x8798249c2e607446efb7ad49ec89dd1865ff4272',
-    1: '0x5a67aADb98571AB9D911d5847B3f5c579A804e0a'
+    250: '0x5a67aADb98571AB9D911d5847B3f5c579A804e0a'
   }
 }
 
@@ -81,11 +81,11 @@ export const supportedPools = [
     pid: 12,
     //!need to create wFTM-STEAK LP
     lpAddresses: {
-      1: '0x795065dCc9f64b5614C407a6EFDC400DA6221FB0',
-      250: ''
+      // 1: '0x795065dCc9f64b5614C407a6EFDC400DA6221FB0',
+      250: '0x5ce170f3029670B2Cc7620559F443A81A2405EbF'
     },
     tokenAddresses: {
-      1: '0x6b3595068778dd592e39a122f4f5a5cf09c90fe2',
+      // 1: '0x6b3595068778dd592e39a122f4f5a5cf09c90fe2',
       250: '0x0026296407a0ebA938409575F84059ca603d33DC'
     },
     name: 'Ribeye!',
@@ -93,21 +93,21 @@ export const supportedPools = [
     tokenSymbol: 'STEAK',
     icon: '/images/steak_logo_512.png',
   },
-  {
-    pid: 1,
-    //!need to create FUSD-3Pool 
-    lpAddresses: {
-      1: '0x397FF1542f962076d0BFE58eA045FfA2d347ACa0',
-      250: ''
-    },
-    tokenAddresses: {
-      1: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
-      250: '0xad84341756bf337f5a0164515b1f6f993d194e1f'
-    },
-    name: 'Fillet!',
-    symbol: 'FUSD-3Pool SLP',
-    tokenSymbol: 'FUSD',
-    //!Change to better icon
-    icon: '/images/fusd.png',
-  },
+  // {
+  //   pid: 1,
+  //   //!need to create FUSD-3Pool 
+  //   lpAddresses: {
+  //     1: '0x397FF1542f962076d0BFE58eA045FfA2d347ACa0',
+  //     250: ''
+  //   },
+  //   tokenAddresses: {
+  //     1: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
+  //     250: '0xad84341756bf337f5a0164515b1f6f993d194e1f'
+  //   },
+  //   name: 'Fillet!',
+  //   symbol: 'FUSD-3Pool SLP',
+  //   tokenSymbol: 'FUSD',
+  //   //!Change to better icon
+  //   icon: '/images/fusd.png',
+  // },
 ]

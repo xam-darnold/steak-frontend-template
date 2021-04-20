@@ -22,13 +22,13 @@ interface StakeProps {
 }
 
 const StakeSushi: React.FC<StakeProps> = ({}) => {
-  const tokenName = "SUSHI"
+  const tokenName = "STEAK"
   const [requestedApproval, setRequestedApproval] = useState(false)
 
   const allowance = useAllowanceStaking()
   const {onApprove} = useApproveStaking()
 
-  const tokenBalance = useTokenBalance(contractAddresses.steak[1])
+  const tokenBalance = useTokenBalance(contractAddresses.steak[250])
 
   const {onEnter} = useEnter()
   const {onLeave} = useLeave()

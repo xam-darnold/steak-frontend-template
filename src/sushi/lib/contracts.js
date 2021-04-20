@@ -3,7 +3,7 @@ import ERC20Abi from './abi/erc20.json'
 import SteakHouseAbi from './abi/SteakHouse.json'
 import SteakAbi from './abi/SteakToken.json'
 import xSteakAbi from './abi/xSTEAK.json'
-import UNIV2PairAbi from './abi/uni_v2_lp.json'
+import UNIV2PairAbi from './abi/uni_v2_lp2.json'
 import wFTM from './abi/wFTM.json'
 import {
   contractAddresses,
