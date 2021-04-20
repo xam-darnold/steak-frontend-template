@@ -1,5 +1,6 @@
 import BigNumber from 'bignumber.js'
 import { ethers } from 'ethers'
+import { sushi } from '../constants/tokenAddresses'
 
 BigNumber.config({
   EXPONENTIAL_AT: 1000,
@@ -74,7 +75,7 @@ export const getPoolWeight = async (masterChefContract, pid) => {
 }
 
 export const getEarned = async (masterChefContract, pid, account) => {
-  return masterChefContract.methods.pendingsushi(pid, account).call()
+  return masterChefContract.methods.pendingSteak(pid, account).call()
 }
 
 export const getTotalLPWethValue = async (
@@ -90,9 +91,11 @@ export const getTotalLPWethValue = async (
     .call()
   const tokenDecimals = await tokenContract.methods.decimals().call()
   // Get the share of lpContract that masterChefContract owns
+
   const balance = await lpContract.methods
     .balanceOf(masterChefContract.options.address)
     .call()
+    
   // Convert that into the portion of total lpContract = p1
   const totalSupply = await lpContract.methods.totalSupply().call()
   // Get total weth value for the lpContract = w1

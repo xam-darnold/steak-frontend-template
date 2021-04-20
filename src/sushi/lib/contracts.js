@@ -3,7 +3,7 @@ import ERC20Abi from './abi/erc20.json'
 import SteakHouseAbi from './abi/SteakHouse.json'
 import SteakAbi from './abi/SteakToken.json'
 import xSteakAbi from './abi/xSTEAK.json'
-import UNIV2PairAbi from './abi/uni_v2_lp2.json'
+import UNIV2PairAbi from './abi/uni_v2_lp.json'
 import wFTM from './abi/wFTM.json'
 import {
   contractAddresses,
@@ -24,7 +24,7 @@ export class Contracts {
 
     this.sushi = new this.web3.eth.Contract(SteakAbi.abi)
     this.masterChef = new this.web3.eth.Contract(SteakHouseAbi.abi)
-    this.xSushiStaking = new this.web3.eth.Contract(xSteakAbi.abi)
+    this.xsushiStaking = new this.web3.eth.Contract(xSteakAbi.abi)
     this.weth = new this.web3.eth.Contract(wFTM.abi)
 
     this.pools = supportedPools.map((pool) =>
@@ -32,7 +32,7 @@ export class Contracts {
         lpAddress: pool.lpAddresses[networkId],
         tokenAddress: pool.tokenAddresses[networkId],
         // !Univ2 should be using spirit swap
-        lpContract: new this.web3.eth.Contract(UNIV2PairAbi.abi),
+        lpContract: new this.web3.eth.Contract(UNIV2PairAbi),
         tokenContract: new this.web3.eth.Contract(ERC20Abi),
       }),
     )
@@ -50,7 +50,7 @@ export class Contracts {
 
     setProvider(this.sushi, contractAddresses.steak[networkId])
     setProvider(this.masterChef, contractAddresses.steakHouse[networkId])
-    setProvider(this.xSushiStaking, contractAddresses.xSteak[networkId])
+    setProvider(this.xsushiStaking, contractAddresses.xSteak[networkId])
     setProvider(this.weth, contractAddresses.wftm[networkId])
 
     this.pools.forEach(
