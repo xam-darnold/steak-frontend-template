@@ -27,7 +27,7 @@ const Farms: React.FC = () => {
             <Route exact path={path}>
               <PageHeader
                 icon={<img src={butcher} height="120" />}
-                subtitle="Earn STEAK tokens by staking FUSD."
+                subtitle="Welcome to the Steakhouse! Earn Steak with LP tokens"
                 title="Pick Your Cut of Meat"
               />
               <div

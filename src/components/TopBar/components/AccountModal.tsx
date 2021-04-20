@@ -47,8 +47,8 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
 
         <Spacer />
         <Button
-          href={`https://etherscan.io/address/${account}`}
-          text="View on Etherscan"
+          href={`https://ftmscan.com/address/${account}`}
+          text="View on FTMscan"
           variant="secondary"
         />
         <Spacer />

@@ -44,7 +44,7 @@ const UnstakeXSushi: React.FC<HarvestProps> = ({ lpContract }) => {
               <img src={steak} width={45} />
             </CardIcon>
             <Value value={getBalanceNumber(xSushiBalance)} />
-            <Label text="xSTEAK (SteakHouse) Available" />
+            <Label text="xSTEAK Tokens Available" />
           </StyledCardHeader>
           <StyledCardActions>
             <Button
