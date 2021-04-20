@@ -26,7 +26,6 @@ const useAllStakedValue = () => {
   const [balances, setBalance] = useState([] as Array<StakedValue>)
   const { account }: { account: string; ethereum: provider } = useWallet()
   const sushi = useSushi()
-  console.log(sushi)
   const farms = getFarms(sushi)
   const masterChefContract = getMasterChefContract(sushi)
   const wethContact = getWethContract(sushi)

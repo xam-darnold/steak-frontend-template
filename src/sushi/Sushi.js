@@ -26,6 +26,7 @@ export class Sushi {
       realProvider = provider
     }
 
+
     this.web3 = new Web3(realProvider)
 
     if (testing) {
@@ -36,7 +37,9 @@ export class Sushi {
     if (options.defaultAccount) {
       this.web3.eth.defaultAccount = options.defaultAccount
     }
+    
     this.contracts = new Contracts(realProvider, networkId, this.web3, options)
+    console.log(this.contracts)
     this.steakAddress = contractAddresses.steak[networkId]
     this.steakHouseAddress = contractAddresses.steakHouse[networkId]
     this.wethAddress = contractAddresses.wftm[networkId]

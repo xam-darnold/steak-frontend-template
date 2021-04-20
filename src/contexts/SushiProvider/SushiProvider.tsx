@@ -26,7 +26,6 @@ const SushiProvider: React.FC = ({ children }) => {
   window.sushi = sushi
   // @ts-ignore
 
-
   useEffect(() => {
     if (ethereum) {
       const chainId = Number(ethereum.chainId)
@@ -41,8 +40,8 @@ const SushiProvider: React.FC = ({ children }) => {
         accounts: [],
         ethereumNodeTimeout: 10000,
       })
+
       setSushi(sushiLib)
-      console.log(window.sushisauce)
       window.sushisauce = sushiLib
     }
   }, [ethereum])

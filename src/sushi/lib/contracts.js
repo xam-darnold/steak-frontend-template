@@ -22,17 +22,17 @@ export class Contracts {
     this.defaultGas = options.defaultGas
     this.defaultGasPrice = options.defaultGasPrice
 
-    this.sushi = new this.web3.eth.Contract(SteakAbi)
-    this.masterChef = new this.web3.eth.Contract(SteakHouseAbi)
-    this.xSushiStaking = new this.web3.eth.Contract(xSteakAbi)
-    this.weth = new this.web3.eth.Contract(wFTM)
+    this.sushi = new this.web3.eth.Contract(SteakAbi.abi)
+    this.masterChef = new this.web3.eth.Contract(SteakHouseAbi.abi)
+    this.xSushiStaking = new this.web3.eth.Contract(xSteakAbi.abi)
+    this.weth = new this.web3.eth.Contract(wFTM.abi)
 
     this.pools = supportedPools.map((pool) =>
       Object.assign(pool, {
         lpAddress: pool.lpAddresses[networkId],
         tokenAddress: pool.tokenAddresses[networkId],
         // !Univ2 should be using spirit swap
-        lpContract: new this.web3.eth.Contract(UNIV2PairAbi),
+        lpContract: new this.web3.eth.Contract(UNIV2PairAbi.abi),
         tokenContract: new this.web3.eth.Contract(ERC20Abi),
       }),
     )
@@ -62,8 +62,8 @@ export class Contracts {
   }
 
   setDefaultAccount(account) {
-    this.steak.options.from = account
-    this.steakhouse.options.from = account
+    this.sushi.options.from = account
+    this.masterChef.options.from = account
   }
 
   async callContractFunction(method, options) {
