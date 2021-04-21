@@ -24,6 +24,7 @@ const useAllowance = (lpContract: Contract) => {
     setAllowance(new BigNumber(allowance))
   }, [account, masterChefContract, lpContract])
 
+
   useEffect(() => {
     if (account && masterChefContract && lpContract) {
       fetchAllowance()

@@ -15,6 +15,7 @@ import Stake from './components/Stake'
 
 const Farm: React.FC = () => {
   const { farmId } = useParams()
+
   const {
     pid,
     lpToken,
@@ -33,6 +34,7 @@ const Farm: React.FC = () => {
     icon: '',
   }
 
+
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -43,6 +45,7 @@ const Farm: React.FC = () => {
   const lpContract = useMemo(() => {
     return getContract(ethereum as provider, lpTokenAddress)
   }, [ethereum, lpTokenAddress])
+
 
   const { onRedeem } = useRedeem(getMasterChefContract(sushi))
 

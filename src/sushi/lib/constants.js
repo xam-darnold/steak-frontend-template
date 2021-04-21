@@ -78,7 +78,7 @@ SLP Address on mainnet for reference
 export const supportedPools = [
   // Perm Menu
   {
-    pid: 12,
+    pid: 0,
     //!need to create wFTM-STEAK LP
     lpAddresses: {
       // 1: '0x795065dCc9f64b5614C407a6EFDC400DA6221FB0',

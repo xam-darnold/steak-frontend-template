@@ -15,10 +15,10 @@ const GAS_LIMIT = {
 }
 
 export const getMasterChefAddress = (sushi) => {
-  return sushi && sushi.masterChefAddress
+  return sushi && sushi.steakHouseAddress
 }
 export const getSushiAddress = (sushi) => {
-  return sushi && sushi.sushiAddress
+  return sushi && sushi.steakAddress
 }
 export const getWethContract = (sushi) => {
   return sushi && sushi.contracts && sushi.contracts.weth
@@ -58,7 +58,7 @@ export const getFarms = (sushi) => {
           tokenAddress,
           tokenSymbol,
           tokenContract,
-          earnToken: 'sushi',
+          earnToken: 'steak',
           earnTokenAddress: sushi.contracts.sushi.options.address,
           icon,
         }),
