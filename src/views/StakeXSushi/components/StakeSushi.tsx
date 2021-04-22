@@ -13,7 +13,6 @@ import {getBalanceNumber} from '../../../utils/formatBalance'
 import DepositModal from './DepositModal'
 import {contractAddresses} from '../../../sushi/lib/constants'
 import useEnter from "../../../hooks/useEnter";
-import useLeave from "../../../hooks/useLeave";
 import useAllowanceStaking from "../../../hooks/useAllowanceStaking";
 import useApproveStaking from "../../../hooks/useApproveStaking";
 import cow from "../../../assets/img/cow_icons/cow_64.png"
@@ -31,7 +30,6 @@ const StakeSushi: React.FC<StakeProps> = ({}) => {
   const tokenBalance = useTokenBalance(contractAddresses.steak[250])
 
   const {onEnter} = useEnter()
-  const {onLeave} = useLeave()
 
   const [onPresentDeposit] = useModal(
     <DepositModal
