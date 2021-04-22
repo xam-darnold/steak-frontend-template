@@ -20,7 +20,7 @@ import cow from "../../../assets/img/cow_icons/cow_64.png"
 interface StakeProps {
 }
 
-const StakeSushi: React.FC<StakeProps> = ({}) => {
+const StakeSushi: React.FC<StakeProps> = () => {
   const tokenName = "STEAK"
   const [requestedApproval, setRequestedApproval] = useState(false)
 
