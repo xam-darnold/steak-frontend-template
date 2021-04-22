@@ -28,7 +28,7 @@ const useAllStakedValue = () => {
   const sushi = useSushi()
   const farms = getFarms(sushi)
   const masterChefContract = getMasterChefContract(sushi)
-  const wethContact = getWethContract(sushi)
+  const wethContract = getWethContract(sushi)
   const block = useBlock()
 
   const fetchAllStakedValue = useCallback(async () => {
@@ -45,7 +45,7 @@ const useAllStakedValue = () => {
         }) =>
           getTotalLPWethValue(
             masterChefContract,
-            wethContact,
+            wethContract,
             lpContract,
             tokenContract,
             pid,
@@ -54,13 +54,13 @@ const useAllStakedValue = () => {
     )
 
     setBalance(balances)
-  }, [account, masterChefContract, sushi])
+  }, [masterChefContract, farms, wethContract])
 
   useEffect(() => {
     if (account && masterChefContract && sushi) {
       fetchAllStakedValue()
     }
-  }, [account, block, masterChefContract, setBalance, sushi])
+  }, [account, block, masterChefContract, fetchAllStakedValue, sushi])
 
   return balances
 }

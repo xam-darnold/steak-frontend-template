@@ -24,7 +24,6 @@ interface FarmWithStakedValue extends Farm, StakedValue {
 
 const FarmCards: React.FC = () => {
   const [farms] = useFarms()
-  const { account } = useWallet()
   const stakedValue = useAllStakedValue()
 
   const sushiIndex = farms.findIndex(
@@ -39,7 +38,7 @@ const FarmCards: React.FC = () => {
   const BLOCKS_PER_YEAR = new BigNumber(2372500)
   const SUSHI_PER_BLOCK = new BigNumber(50)
 
-  if (stakedValue[0] != undefined) {
+  if (stakedValue[0] !== undefined) {
     console.log(stakedValue[0].poolWeight.toString())
     console.log(stakedValue[0].totalWethValue.toString())
   }
@@ -96,7 +95,9 @@ interface FarmCardProps {
 }
 
 const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [startTime, setStartTime] = useState(0)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [harvestable, setHarvestable] = useState(0)
 
   const { account } = useWallet()
@@ -139,7 +140,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
         <CardContent>
           <StyledContent>
           <CardIcon>
-            <img src={farm.icon.toString()} width={45} />
+            <img src={farm.icon.toString()} width={45} alt="farm_icon" />
           </CardIcon>
             <StyledTitle>{farm.name}</StyledTitle>
             <StyledDetails>

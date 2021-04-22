@@ -24,7 +24,7 @@ const useStakedBalance = (pid: number) => {
     if (account && sushi) {
       fetchBalance()
     }
-  }, [account, pid, setBalance, block, sushi])
+  }, [account, pid, setBalance, block, sushi, fetchBalance])
 
   return balance
 }

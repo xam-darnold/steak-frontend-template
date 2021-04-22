@@ -6,7 +6,7 @@ import cow from '../../assets/img/cow_icons/cow_64.png'
 const Logo: React.FC = () => {
   return (
     <StyledLogo to="/">
-      <img src={cow} height="32" style={{ marginTop: -4 }} />
+      <img src={cow} height="32" style={{ marginTop: -4 }} alt="cow_image" />
       <StyledText>
         Stake{' '}
         <span>

@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from 'react'
-import { provider } from 'web3-core'
 
 import BigNumber from 'bignumber.js'
 import { useWallet } from 'use-wallet'
@@ -20,13 +19,13 @@ const useEarnings = (pid: number) => {
   const fetchBalance = useCallback(async () => {
     const balance = await getEarned(masterChefContract, pid, account)
     setBalance(new BigNumber(balance))
-  }, [account, masterChefContract, sushi])
+  }, [account, masterChefContract, pid])
 
   useEffect(() => {
     if (account && masterChefContract && sushi) {
       fetchBalance()
     }
-  }, [account, block, masterChefContract, setBalance, sushi])
+  }, [account, block, masterChefContract, setBalance, sushi, fetchBalance])
 
   return balance
 }

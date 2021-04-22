@@ -2,7 +2,6 @@ import React, { useCallback, useState, useMemo } from 'react'
 import styled from 'styled-components'
 
 import Button from '../Button'
-import CardIcon from '../CardIcon'
 import Modal, { ModalProps } from '..//Modal'
 import ModalActions from '..//ModalActions'
 import ModalContent from '../ModalContent'

@@ -40,7 +40,7 @@ const UnstakeXSushi: React.FC<HarvestProps> = ({ lpContract }) => {
         <StyledCardContentInner>
           <StyledCardHeader>
             <CardIcon>
-              <img src={steak} width={45} />
+              <img src={steak} width={45} alt="steak_logo_64" />
             </CardIcon>
             <Value value={getBalanceNumber(xSushiBalance)} />
             <Label text="xSTEAK Tokens Available" />
@@ -74,10 +74,10 @@ const StyledCardActions = styled.div`
   width: 100%;
 `
 
-const StyledSpacer = styled.div`
-  height: ${(props) => props.theme.spacing[4]}px;
-  width: ${(props) => props.theme.spacing[4]}px;
-`
+// const StyledSpacer = styled.div`
+//   height: ${(props) => props.theme.spacing[4]}px;
+//   width: ${(props) => props.theme.spacing[4]}px;
+// `
 
 const StyledCardContentInner = styled.div`
   align-items: center;

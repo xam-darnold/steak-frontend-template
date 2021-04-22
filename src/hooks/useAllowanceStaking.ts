@@ -4,10 +4,9 @@ import BigNumber from 'bignumber.js'
 import useSushi from './useSushi'
 import {useWallet} from 'use-wallet'
 import {provider} from 'web3-core'
-import {Contract} from 'web3-eth-contract'
 
 import {getAllowance} from '../utils/erc20'
-import {getMasterChefContract, getSushiContract, getXSushiStakingContract} from '../sushi/utils'
+import { getSushiContract, getXSushiStakingContract} from '../sushi/utils'
 
 const useAllowanceStaking = () => {
   const [allowance, setAllowance] = useState(new BigNumber(0))
@@ -31,7 +30,7 @@ const useAllowanceStaking = () => {
     }
     let refreshInterval = setInterval(fetchAllowance, 10000)
     return () => clearInterval(refreshInterval)
-  }, [account, stakingContract, lpContract])
+  }, [account, stakingContract, lpContract, fetchAllowance])
 
   return allowance
 }

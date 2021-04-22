@@ -27,6 +27,7 @@ const Modals: React.FC = ({ children }) => {
   const handleDismiss = useCallback(() => {
     setContent(undefined)
     setIsOpen(false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setContent, setIsOpen, modalKey])
 
   return (
