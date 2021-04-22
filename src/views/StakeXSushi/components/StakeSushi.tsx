@@ -57,7 +57,7 @@ const StakeSushi: React.FC<StakeProps> = ({}) => {
       <CardContent>
         <StyledCardContentInner>
           <StyledCardHeader>
-            <CardIcon><img src={cow} width={45}/></CardIcon>
+            <CardIcon><img src={cow} width={45} alt="cow_logo" /></CardIcon>
             <Value value={getBalanceNumber(tokenBalance)}/>
             <Label text={`STEAK Tokens Available`}/>
           </StyledCardHeader>

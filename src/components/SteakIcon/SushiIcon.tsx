@@ -16,7 +16,7 @@ const SteakIcon: React.FC<SteakIconProps> = ({ size = 36, v1, v2, v3 }) => (
       filter: v1 ? 'saturate(0.5)' : undefined,
     }}
   >
-    <img src={steak} width={50}/>
+    <img src={steak} width={50} alt="steak_logo"/>
   </span>
 )
 

@@ -23,7 +23,7 @@ const Staking: React.FC = () => {
           <>
             <Route exact path={path}>
               <PageHeader
-                icon={<img src={steakhouse} height="120"/>}
+                icon={<img src={steakhouse} height="120" alt="steakhouse_image" />}
                 subtitle="Stake STEAK to earn xSTEAK."
                 title="Chow Down!"
               />

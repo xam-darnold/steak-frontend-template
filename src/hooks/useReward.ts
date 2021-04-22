@@ -10,11 +10,12 @@ const useReward = (pid: number) => {
   const sushi = useSushi()
   const masterChefContract = getMasterChefContract(sushi)
 
+  //! Changed dependenciees from sushi to masteerChefContract
   const handleReward = useCallback(async () => {
     const txHash = await harvest(masterChefContract, pid, account)
     console.log(txHash)
     return txHash
-  }, [account, pid, sushi])
+  }, [account, pid, masterChefContract])
 
   return { onReward: handleReward }
 }

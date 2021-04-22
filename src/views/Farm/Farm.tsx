@@ -20,7 +20,6 @@ const Farm: React.FC = () => {
     pid,
     lpToken,
     lpTokenAddress,
-    tokenAddress,
     earnToken,
     name,
     icon,

@@ -12,8 +12,7 @@ const useEarnings = (pid: number) => {
   const [balance, setBalance] = useState(new BigNumber(0))
   const {
     account,
-    ethereum,
-  }: { account: string; ethereum: provider } = useWallet()
+  }: { account: string } = useWallet()
   const sushi = useSushi()
   const masterChefContract = getMasterChefContract(sushi)
   const block = useBlock()

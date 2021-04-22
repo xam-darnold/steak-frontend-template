@@ -7,7 +7,7 @@ import { getFarms } from '../../sushi/utils'
 import Context from './context'
 
 const Farms: React.FC = ({ children }) => {
-  //!update unharvested?
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [unharvested, setUnharvested] = useState(0)
 
   const sushi = useSushi()

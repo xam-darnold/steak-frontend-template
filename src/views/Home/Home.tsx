@@ -12,7 +12,7 @@ const Home: React.FC = () => {
   return (
     <Page>
       <PageHeader
-        icon={<img src={farmer} height={120} />}
+        icon={<img src={farmer} height={120} alt="farmer_logo" />}
         title="Fire up the Grill"
         subtitle="Stake STEAK LP tokens to claim STEAK rewards!"
       />
