@@ -14,7 +14,7 @@ const Home: React.FC = () => {
       <PageHeader
         icon={<img src={farmer} height={120} alt="farmer_logo" />}
         title="Fire up the Grill"
-        subtitle="Stake STEAK LP tokens to claim STEAK rewards!"
+        subtitle="Earn yield on iFUSD and FUSD-PAIR LP Tokens!"
       />
 
       <Container>

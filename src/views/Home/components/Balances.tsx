@@ -71,6 +71,7 @@ const PendingRewards: React.FC = () => {
 
 const Balances: React.FC = () => {
   const [totalSupply, setTotalSupply] = useState<BigNumber>()
+  const [price, setPrice] = useState<BigNumber>()
   const sushi = useSushi()
   console.log(sushi)
   const sushiBalance = useTokenBalance(getSushiAddress(sushi))
@@ -121,7 +122,7 @@ const Balances: React.FC = () => {
           />
         </CardContent>
         <Footnote>
-          New rewards per block
+          New rewards per second
           <FootnoteValue>50 STEAK</FootnoteValue>
         </Footnote>
       </Card>
@@ -130,17 +131,19 @@ const Balances: React.FC = () => {
 }
 
 const Footnote = styled.div`
+  font-family: 'Krona One', monospace;
   font-size: 14px;
   padding: 8px 20px;
   color: ${(props) => props.theme.color.grey[400]};
   border-top: solid 1px ${(props) => props.theme.color.grey[300]};
 `
 const FootnoteValue = styled.div`
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'Krona One', monospace;
   float: right;
 `
 
 const StyledWrapper = styled.div`
+  font-family: 'Krona One', monospace;
   align-items: center;
   display: flex;
   @media (max-width: 768px) {
@@ -151,10 +154,12 @@ const StyledWrapper = styled.div`
 `
 
 const StyledBalances = styled.div`
+  font-family: 'Krona One', monospace;
   display: flex;
 `
 
 const StyledBalance = styled.div`
+  font-family: 'Krona One', monospace;
   align-items: center;
   display: flex;
   flex: 1;

@@ -13,6 +13,7 @@ import theme from './theme'
 import Farms from './views/Farms'
 import Home from './views/Home'
 import Staking from './views/Staking'
+import StakingFUSD from './views/StakingFUSD'
 
 const App: React.FC = () => {
   const [mobileMenu, setMobileMenu] = useState(false)
@@ -39,6 +40,9 @@ const App: React.FC = () => {
           </Route>
           <Route path="/staking">
             <Staking />
+          </Route>
+          <Route path="/staking-fusd">
+            <StakingFUSD />
           </Route>
         </Switch>
       </Router>

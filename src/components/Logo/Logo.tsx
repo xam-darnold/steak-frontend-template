@@ -30,9 +30,9 @@ const StyledLogo = styled(Link)`
 
 const StyledText = styled.span`
   color: ${(props) => props.theme.color.grey[600]};
-  font-family: 'Reem Kufi', sans-serif;
-  font-size: 20px;
-  font-weight: 700;
+  font-family: 'Krona One', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
   letter-spacing: 0.03em;
   margin-left: ${(props) => props.theme.spacing[2]}px;
   @media (max-width: 400px) {
@@ -41,7 +41,9 @@ const StyledText = styled.span`
 `
 
 const MasterChefText = styled.span`
-  font-family: 'Kaushan Script', sans-serif;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
 `
 
 export default Logo

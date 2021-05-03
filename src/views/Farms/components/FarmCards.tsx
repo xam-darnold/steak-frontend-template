@@ -264,6 +264,7 @@ const StyledCardWrapper = styled.div`
 
 const StyledTitle = styled.h4`
   color: ${(props) => props.theme.color.grey[600]};
+  font-family: 'Orbitron', monospace;
   font-size: 24px;
   font-weight: 700;
   margin: ${(props) => props.theme.spacing[2]}px 0 0;
@@ -287,7 +288,7 @@ const StyledDetails = styled.div`
 `
 
 const StyledDetail = styled.div`
-  color: ${(props) => props.theme.color.grey[500]};
+  color: ${(props) => props.theme.color.grey[400]};
 `
 
 const StyledInsight = styled.div`

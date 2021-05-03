@@ -14,6 +14,9 @@ const Nav: React.FC = () => {
       <StyledLink exact activeClassName="active" to="/staking">
         xSteak
       </StyledLink>
+      <StyledLink exact activeClassName="active" to="/staking-fusd">
+        iFUSD
+      </StyledLink>
     </StyledNav>
   )
 }

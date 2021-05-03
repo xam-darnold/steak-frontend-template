@@ -1,5 +1,5 @@
 import React from 'react'
-import steak from '../../assets/img/steak_icons/steak_logo_64.png'
+import steak from '../../assets/img/steak_icons/steak_orange.png'
 
 interface SteakIconProps {
   size?: number
