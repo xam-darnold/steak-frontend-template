@@ -9,7 +9,7 @@ import Value from '../../../components/Value'
 import useEarnings from '../../../hooks/useEarnings'
 import useReward from '../../../hooks/useReward'
 import { getBalanceNumber } from '../../../utils/formatBalance'
-import steak from '../../../assets/img/steak_icons/steak_logo_64.png'
+import steak from '../../../assets/img/steak_icons/steak_orange.png'
 
 interface HarvestProps {
   pid: number

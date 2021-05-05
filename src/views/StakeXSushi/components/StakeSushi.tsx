@@ -15,7 +15,7 @@ import {contractAddresses} from '../../../sushi/lib/constants'
 import useEnter from "../../../hooks/useEnter";
 import useAllowanceStaking from "../../../hooks/useAllowanceStaking";
 import useApproveStaking from "../../../hooks/useApproveStaking";
-import cow from "../../../assets/img/cow_icons/cow_64.png"
+import cow from "../../../assets/img/cow_icons/cow64.png"
 
 interface StakeProps {
 }

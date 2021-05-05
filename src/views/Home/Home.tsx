@@ -1,6 +1,6 @@
 import React from 'react'
 // import styled from 'styled-components'
-import farmer from '../../assets/img/farmer_icons/farmer_logo_256.png'
+import farmer from '../../assets/img/farmer_icons/farmer_purple.png'
 import Button from '../../components/Button'
 import Container from '../../components/Container'
 import Page from '../../components/Page'
@@ -14,7 +14,7 @@ const Home: React.FC = () => {
       <PageHeader
         icon={<img src={farmer} height={120} alt="farmer_logo" />}
         title="Fire up the Grill"
-        subtitle="Earn yield on iFUSD and FUSD-PAIR LP Tokens!"
+        subtitle="Earn yield on iFUSD and FUSD-PAIR LP"
       />
 
       <Container>

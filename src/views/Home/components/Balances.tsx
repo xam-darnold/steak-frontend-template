@@ -8,13 +8,13 @@ import CardContent from '../../../components/CardContent'
 import Label from '../../../components/Label'
 import Spacer from '../../../components/Spacer'
 import Value from '../../../components/Value'
-import SteakIcon from '../../../components/SteakIcon'
+// import SteakIcon from '../../../components/SteakIcon'
 import useAllEarnings from '../../../hooks/useAllEarnings'
 // import useAllStakedValue from '../../../hooks/useAllStakedValue'
 // import useFarms from '../../../hooks/useFarms'
 import useTokenBalance from '../../../hooks/useTokenBalance'
 import useSushi from '../../../hooks/useSushi'
-import { getSushiAddress, getSushiSupply } from '../../../sushi/utils'
+import { getSushiAddress, getSushiSupply, getFusdPrice, getSteakPrice } from '../../../sushi/utils'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 
 const PendingRewards: React.FC = () => {
@@ -71,10 +71,13 @@ const PendingRewards: React.FC = () => {
 
 const Balances: React.FC = () => {
   const [totalSupply, setTotalSupply] = useState<BigNumber>()
-  const [price, setPrice] = useState<BigNumber>()
+  const [fusdPrice, setFusdPrice] = useState<string>()
+  const [steakPrice, setSteakPrice] = useState<string>()
+  const [marketCap, setMarketCap] = useState<BigNumber>()
   const sushi = useSushi()
   console.log(sushi)
   const sushiBalance = useTokenBalance(getSushiAddress(sushi))
+  const ifusdBalance = useTokenBalance('0x3A2AFeFc89b9356c1040E97588b587d7386c6302')
   const { account }: { account: any } = useWallet()
 
   useEffect(() => {
@@ -87,18 +90,44 @@ const Balances: React.FC = () => {
     }
   }, [sushi, setTotalSupply])
 
+  useEffect(() => {
+    async function fetchPrices() {
+      const fusd = await getFusdPrice(sushi)
+      const steak = await getSteakPrice(sushi)
+      setFusdPrice(fusd)
+      setSteakPrice(steak)
+    }
+    if (sushi) {
+      fetchPrices()
+    }
+  }, [sushi, setFusdPrice, setSteakPrice])
+
+  useEffect(() => {
+    async function getMarketCap() {
+      const market = (new BigNumber(steakPrice)).times(totalSupply)
+      setMarketCap(market)
+    }
+    if (sushi) {
+      getMarketCap()
+    }
+  }, [sushi, steakPrice, totalSupply])
+
   return (
     <StyledWrapper>
       <Card>
         <CardContent>
           <StyledBalances>
             <StyledBalance>
-              <SteakIcon />
-              <Spacer />
               <div style={{ flex: 1 }}>
                 <Label text="Your STEAK Balance" />
                 <Value
                   value={!!account ? getBalanceNumber(sushiBalance) : 'Locked'}
+                  decimals={2}
+                />
+                <Label text="STEAK Price" />
+                <Value
+                  value={steakPrice ? '$' + steakPrice : 'Locked'}
+                  decimals={2}
                 />
               </div>
             </StyledBalance>
@@ -112,13 +141,45 @@ const Balances: React.FC = () => {
         </Footnote>
       </Card>
       <Spacer />
-
+      <Card>
+        <CardContent>
+          <StyledBalances>
+            <StyledBalance>
+              <div style={{ flex: 1 }}>
+                <Label text="Your iFUSD Balance" />
+                <Value
+                  value={!!account ? getBalanceNumber(ifusdBalance) : 'Locked'}
+                  decimals={2}
+                />
+                <Label text="FUSD Price" />
+                <Value 
+                value={fusdPrice ? '$' + fusdPrice : 'Locked'}
+               decimals={0}
+               />
+              </div>
+            </StyledBalance>
+          </StyledBalances>
+        </CardContent>
+        <Footnote>
+          FUSD per iFUSD
+          <FootnoteValue>
+            <PendingRewards /> iFUSD
+          </FootnoteValue>
+        </Footnote>
+      </Card>
+      <Spacer />
       <Card>
         <CardContent>
           <Label text="Total STEAK Supply" />
           <Value
             value={totalSupply ? getBalanceNumber(totalSupply) : 'Locked'}
             decimals={0}
+          />
+          <Label text="Market Cap" />
+          <Value 
+            value={marketCap ?  getBalanceNumber(marketCap) : 'Locked'}
+            decimals={0}
+            prefix='$'
           />
         </CardContent>
         <Footnote>
@@ -132,7 +193,7 @@ const Balances: React.FC = () => {
 
 const Footnote = styled.div`
   font-family: 'Krona One', monospace;
-  font-size: 14px;
+  font-size: 12px;
   padding: 8px 20px;
   color: ${(props) => props.theme.color.grey[400]};
   border-top: solid 1px ${(props) => props.theme.color.grey[300]};
@@ -140,6 +201,7 @@ const Footnote = styled.div`
 const FootnoteValue = styled.div`
   font-family: 'Krona One', monospace;
   float: right;
+  font-size: 10px;
 `
 
 const StyledWrapper = styled.div`

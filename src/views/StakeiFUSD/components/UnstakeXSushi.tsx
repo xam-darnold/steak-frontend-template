@@ -12,7 +12,7 @@ import { Contract } from 'web3-eth-contract'
 import useModal from '../../../hooks/useModal'
 import WithdrawModal from './WithdrawModal'
 import useLeave from '../../../hooks/useLeave'
-import steak from '../../../assets/img/steak_icons/steak_logo_64.png'
+import steak from '../../../assets/img/steak_icons/steak_purple.png'
 
 interface HarvestProps {
   lpContract: Contract

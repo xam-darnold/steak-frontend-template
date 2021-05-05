@@ -4,6 +4,7 @@ import SteakHouseAbi from './abi/SteakHouse.json'
 import SteakAbi from './abi/SteakToken.json'
 import xSteakAbi from './abi/xSTEAK.json'
 import UNIV2PairAbi from './abi/uni_v2_lp.json'
+import UNIV2Router from './abi/UniV2Router.json'
 import wFTM from './abi/wFTM.json'
 import {
   contractAddresses,
@@ -26,6 +27,7 @@ export class Contracts {
     this.masterChef = new this.web3.eth.Contract(SteakHouseAbi.abi)
     this.xsushiStaking = new this.web3.eth.Contract(xSteakAbi.abi)
     this.weth = new this.web3.eth.Contract(wFTM.abi)
+    this.router= new this.web3.eth.Contract(UNIV2Router)
 
     this.pools = supportedPools.map((pool) =>
       Object.assign(pool, {
@@ -52,6 +54,7 @@ export class Contracts {
     setProvider(this.masterChef, contractAddresses.steakHouse[networkId])
     setProvider(this.xsushiStaking, contractAddresses.xSteak[networkId])
     setProvider(this.weth, contractAddresses.wftm[networkId])
+    setProvider(this.router, contractAddresses.router[networkId])
 
     this.pools.forEach(
       ({ lpContract, lpAddress, tokenContract, tokenAddress }) => {

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
-import steak from '../../assets/img/steak_icons/steak_logo_64.png'
+import steak from '../../assets/img/steak_icons/steak_orange.png'
 
 import CardIcon from '../CardIcon'
 

@@ -27,16 +27,17 @@ const FarmCards: React.FC = () => {
   const stakedValue = useAllStakedValue()
 
   const sushiIndex = farms.findIndex(
-    ({ tokenSymbol }) => tokenSymbol === 'SUSHI',
+    ({ tokenSymbol }) => tokenSymbol === 'STEAK',
   )
 
   const sushiPrice =
     sushiIndex >= 0 && stakedValue[sushiIndex]
       ? stakedValue[sushiIndex].tokenPriceInWeth
       : new BigNumber(0)
-
-  const BLOCKS_PER_YEAR = new BigNumber(2372500)
-  const SUSHI_PER_BLOCK = new BigNumber(50)
+  const SECONDS_PER_YEAR = new BigNumber(31536000)
+  //! Change Sushi per second 
+  const SUSHI_PER_SECOND = new BigNumber(50)
+  console.log(sushiPrice.toString())
 
   if (stakedValue[0] !== undefined) {
     console.log(stakedValue[0].poolWeight.toString())
@@ -50,8 +51,8 @@ const FarmCards: React.FC = () => {
         ...stakedValue[i],
         apy: stakedValue[i]
           ? sushiPrice
-              .times(SUSHI_PER_BLOCK)
-              .times(BLOCKS_PER_YEAR)
+              .times(SUSHI_PER_SECOND)
+              .times(SECONDS_PER_YEAR)
               .times(stakedValue[i].poolWeight)
               .times(3)
               .div(stakedValue[i].totalWethValue)

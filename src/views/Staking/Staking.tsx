@@ -2,7 +2,7 @@ import React from 'react'
 import {Route, Switch, useRouteMatch} from 'react-router-dom'
 import {useWallet} from 'use-wallet'
 
-import steakhouse from '../../assets/img//steakhouse_icons/steakhouse_icon_256.png'
+import steakhouse from '../../assets/img//steakhouse_icons/steakhouse_purple.png'
 
 import Button from '../../components/Button'
 import Page from '../../components/Page'

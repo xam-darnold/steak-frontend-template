@@ -14,7 +14,7 @@ import ModalContent from '../../ModalContent'
 import ModalTitle from '../../ModalTitle'
 import Spacer from '../../Spacer'
 import Value from '../../Value'
-import steak from '../../../assets/img/steak_icons/steak_logo_64.png'
+import steak from '../../../assets/img/steak_icons/steak_orange.png'
 
 const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
   const { account, reset } = useWallet()

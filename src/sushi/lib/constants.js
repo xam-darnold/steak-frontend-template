@@ -50,7 +50,10 @@ export const contractAddresses = {
   },
   xSteak: {
     250: '0x5a67aADb98571AB9D911d5847B3f5c579A804e0a'
-  }
+  },
+  router: {
+    250: '0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506'
+  },
 }
 
 
@@ -68,7 +71,7 @@ export const supportedPools = [
     name: 'Ribeye!',
     symbol: 'STEAK-wFTM SLP',
     tokenSymbol: 'STEAK',
-    icon: '/images/steak_logo_512.png',
+    icon: '/images/steak_orange.png',
   },
   // {
   //   pid: 1,

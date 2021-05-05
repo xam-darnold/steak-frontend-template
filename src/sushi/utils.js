@@ -34,6 +34,14 @@ export const getXSushiStakingContract = (sushi) => {
   return sushi && sushi.contracts && sushi.contracts.xsushiStaking
 }
 
+export const getRouterContract = (sushi) => {
+  return sushi && sushi.contracts && sushi.contracts.router
+}
+
+// export const getiFUSDContract = (sushi) => {
+//   return sushi && sushi.contracts && sushi.contracts.xsushiStaking
+// }
+
 export const getFarms = (sushi) => {
   return sushi
     ? sushi.contracts.pools.map(
@@ -75,6 +83,24 @@ export const getPoolWeight = async (masterChefContract, pid) => {
 
 export const getEarned = async (masterChefContract, pid, account) => {
   return masterChefContract.methods.pendingSteak(pid, account).call()
+}
+
+export const getFusdPrice = async (sushi) => {
+  const fusdAddress = '0xad84341756bf337f5a0164515b1f6f993d194e1f'
+  const wftmAddress = '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'
+  const usdcAddress = '0x04068da6c83afcfa0e13ba15a6696662335d5b75'
+  const fusd = await sushi.contracts.router.methods.getAmountsOut('1000000000000000000', [fusdAddress, wftmAddress, usdcAddress]).call()
+  let fusdPrice = (new BigNumber(fusd[2])).div(new BigNumber(10).pow(6)).toFormat(2)
+  return fusdPrice
+}
+
+export const getSteakPrice = async (sushi) => {
+  const steakAddress = '0x0026296407a0ebA938409575F84059ca603d33DC'
+  const wftmAddress = '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'
+  const usdcAddress = '0x04068da6c83afcfa0e13ba15a6696662335d5b75'
+  const steak = await sushi.contracts.router.methods.getAmountsOut('1000000000000000000', [steakAddress, wftmAddress, usdcAddress]).call()
+  let steakPrice = (new BigNumber(steak[2])).div(new BigNumber(10).pow(6)).toFormat(2)
+  return steakPrice
 }
 
 export const getTotalLPWethValue = async (
