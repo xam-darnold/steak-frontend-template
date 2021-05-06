@@ -15,7 +15,7 @@ import useAllStakedValue, {
 } from '../../../hooks/useAllStakedValue'
 import useFarms from '../../../hooks/useFarms'
 import useSushi from '../../../hooks/useSushi'
-import { getEarned, getMasterChefContract } from '../../../sushi/utils'
+import { getEarned, getMasterChefContract, getSteakPrice } from '../../../sushi/utils'
 import { bnToDec } from '../../../utils'
 
 interface FarmWithStakedValue extends Farm, StakedValue {
@@ -25,19 +25,21 @@ interface FarmWithStakedValue extends Farm, StakedValue {
 const FarmCards: React.FC = () => {
   const [farms] = useFarms()
   const stakedValue = useAllStakedValue()
+  const sushi = useSushi()
+  const [sushiPrice, setSushiPrice] = useState<BigNumber>()
 
-  const sushiIndex = farms.findIndex(
-    ({ tokenSymbol }) => tokenSymbol === 'STEAK',
-  )
+  useEffect(() => {async function fetchSushiPrice() {
+    const price = new BigNumber(await getSteakPrice(sushi))
+    setSushiPrice(price)
+  }
+  if (sushi) {
+    fetchSushiPrice()
+    }
+  }, [sushi, setSushiPrice])
 
-  const sushiPrice =
-    sushiIndex >= 0 && stakedValue[sushiIndex]
-      ? stakedValue[sushiIndex].tokenPriceInWeth
-      : new BigNumber(0)
   const SECONDS_PER_YEAR = new BigNumber(31536000)
   //! Change Sushi per second 
-  const SUSHI_PER_SECOND = new BigNumber(50)
-  console.log(sushiPrice.toString())
+  const SUSHI_PER_SECOND = new BigNumber(100)
 
   if (stakedValue[0] !== undefined) {
     console.log(stakedValue[0].poolWeight.toString())

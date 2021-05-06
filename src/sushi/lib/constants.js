@@ -43,7 +43,7 @@ export const contractAddresses = {
     250: '0x0026296407a0ebA938409575F84059ca603d33DC'
   },
   steakHouse: {
-    250: '0x3e0f342d68A823D471C8f26F621c93aD730Cb3b1',
+    250: '0x18D2C39C6815A3Ab863d26D32533a6dFea4a9765',
   },
   wftm: {
     250: '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'
@@ -61,7 +61,6 @@ export const supportedPools = [
   // Perm Menu
   {
     pid: 0,
-    //!need to create wFTM-STEAK LP
     lpAddresses: {
       250: '0x5ce170f3029670B2Cc7620559F443A81A2405EbF'
     },
