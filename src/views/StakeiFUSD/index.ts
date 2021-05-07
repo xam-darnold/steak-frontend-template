@@ -1,1 +1,1 @@
-export { default } from './StakeXSushi'
+export { default } from './StakeiFUSD'

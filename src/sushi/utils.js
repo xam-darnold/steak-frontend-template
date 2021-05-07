@@ -34,6 +34,10 @@ export const getXSushiStakingContract = (sushi) => {
   return sushi && sushi.contracts && sushi.contracts.xsushiStaking
 }
 
+export const getiFUSDContract = (sushi) => {
+  return sushi && sushi.contracts && sushi.contracts.ifusd
+}
+
 export const getRouterContract = (sushi) => {
   return sushi && sushi.contracts && sushi.contracts.router
 }
@@ -164,6 +168,10 @@ export const getSushiSupply = async (sushi) => {
 
 export const getXSushiSupply = async (sushi) => {
   return new BigNumber(await sushi.contracts.xsushiStaking.methods.totalSupply().call())
+}
+
+export const getiFUSDSupply = async (sushi) => {
+  return new BigNumber(await sushi.contracts.ifusd.methods.totalSupply().call())
 }
 
 export const getiFUSDShareValue = async (sushi) => {

@@ -10,7 +10,7 @@ import PageHeader from '../../components/PageHeader'
 import WalletProviderModal from '../../components/WalletProviderModal'
 
 import useModal from '../../hooks/useModal'
-import StakeXSushi from "../StakeXSushi";
+import StakeiFUSD from "../StakeiFUSD";
 
 const Staking: React.FC = () => {
   const {path} = useRouteMatch()
@@ -24,11 +24,11 @@ const Staking: React.FC = () => {
             <Route exact path={path}>
               <PageHeader
                 icon={<img src={steakhouse} height="120" alt="steakhouse_image" />}
-                subtitle="Stake STEAK to earn xSTEAK."
-                title="Chow Down!"
+                subtitle="Deposit FUSD for iFUSD."
+                title="Interest-bearing FUSD!"
               />
             </Route>
-            <StakeXSushi/>
+            <StakeiFUSD/>
           </>
         ) : (
           <div

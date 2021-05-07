@@ -5,19 +5,19 @@ import {provider} from 'web3-core'
 import Spacer from '../../components/Spacer'
 import useSushi from '../../hooks/useSushi'
 import {getContract} from '../../utils/erc20'
-import UnstakeXSushi from './components/UnstakeXSushi'
-import StakeSushi from "./components/StakeSushi";
+import UnstakeiFUSD from './components/UnstakeiFUSD'
+import StakeFUSD from "./components/StakeFUSD";
 
 import {contractAddresses} from '../../sushi/lib/constants'
-import {getXSushiSupply} from "../../sushi/utils";
+import {getiFUSDSupply} from "../../sushi/utils";
 import BigNumber from "bignumber.js";
 import {getBalanceNumber} from "../../utils/formatBalance";
 
-const StakeXSushi: React.FC = () => {
+const StakeiFUSD: React.FC = () => {
   const {
     tokenAddress,
   } = {
-    tokenAddress: contractAddresses.xSteak[250],
+    tokenAddress: contractAddresses.ifusd[250],
   }
 
   const [totalSupply, setTotalSupply] = useState<BigNumber>()
@@ -31,7 +31,7 @@ const StakeXSushi: React.FC = () => {
 
   useEffect(() => {
     async function fetchTotalSupply() {
-      const supply = await getXSushiSupply(sushi)
+      const supply = await getiFUSDSupply(sushi)
       setTotalSupply(supply)
     }
     if (sushi) {
@@ -51,13 +51,13 @@ const StakeXSushi: React.FC = () => {
       <StyledFarm>
         <StyledCardsWrapper>
           <StyledCardWrapper>
-            <UnstakeXSushi
+            <UnstakeiFUSD
               lpContract={lpContract}
             />
           </StyledCardWrapper>
           <Spacer/>
           <StyledCardWrapper>
-            <StakeSushi
+            <StakeFUSD
             />
           </StyledCardWrapper>
         </StyledCardsWrapper>
@@ -66,9 +66,9 @@ const StakeXSushi: React.FC = () => {
           <StyledCardWrapper>
             <StyledInfo>
               <span role="img" aria-label="information">ℹ️️ </span>You will earn a portion of the swaps fees based on the amount
-              of xSTEAK held relative the weight of the staking. xSTEAK can be minted
-              by staking STEAK. To redeem Sushi staked plus swap fees convert xSTEAK
-              back to STEAK. {totalSupply ? `There are currently ${getBalanceNumber(totalSupply)} xSTEAK in existence.` : '' }
+              of iFUSD held relative the weight of the staking. iFUSD can be minted
+              by staking FUSD. To redeem FUSD staked plus swap fees convert iFUSD
+              back to FUSD. {totalSupply ? `There are currently ${getBalanceNumber(totalSupply)} iFUSD in existence.` : '' }
             </StyledInfo>
           </StyledCardWrapper>
         </StyledCardsWrapper>
@@ -115,4 +115,4 @@ const StyledInfo = styled.h3`
   text-align: center;
 `
 
-export default StakeXSushi
+export default StakeiFUSD

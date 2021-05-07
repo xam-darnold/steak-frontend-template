@@ -11,24 +11,24 @@ import useTokenBalance from '../../../hooks/useTokenBalance'
 import { Contract } from 'web3-eth-contract'
 import useModal from '../../../hooks/useModal'
 import WithdrawModal from './WithdrawModal'
-import useLeave from '../../../hooks/useLeave'
+import useLeaveFUSD from '../../../hooks/useLeaveFUSD'
 import steak from '../../../assets/img/steak_icons/steak_purple.png'
 
 interface HarvestProps {
   lpContract: Contract
 }
 
-const UnstakeXSushi: React.FC<HarvestProps> = ({ lpContract }) => {
-  const xSushiBalance = useTokenBalance(lpContract.options.address)
+const UnstakeiFUSD: React.FC<HarvestProps> = ({ lpContract }) => {
+  const iFUSDBalance = useTokenBalance(lpContract.options.address)
   const [pendingTx, setPendingTx] = useState(false)
 
-  const { onLeave } = useLeave()
+  const { onLeave } = useLeaveFUSD()
 
-  const tokenName = 'xSTEAK'
+  const tokenName = 'iFUSD'
 
   const [onPresentLeave] = useModal(
     <WithdrawModal
-      max={xSushiBalance}
+      max={iFUSDBalance}
       onConfirm={onLeave}
       tokenName={tokenName}
     />,
@@ -42,13 +42,13 @@ const UnstakeXSushi: React.FC<HarvestProps> = ({ lpContract }) => {
             <CardIcon>
               <img src={steak} width={45} alt="steak_logo_64" />
             </CardIcon>
-            <Value value={getBalanceNumber(xSushiBalance)} />
-            <Label text="xSTEAK Tokens Available" />
+            <Value value={getBalanceNumber(iFUSDBalance)} />
+            <Label text="iFUSD Tokens Available" />
           </StyledCardHeader>
           <StyledCardActions>
             <Button
-              disabled={!xSushiBalance.toNumber() || pendingTx}
-              text={pendingTx ? 'Converting to STEAK' : 'Convert to STEAK'}
+              disabled={!iFUSDBalance.toNumber() || pendingTx}
+              text={pendingTx ? 'Converting to FUSD' : 'Convert to FUSD'}
               onClick={async () => {
                 setPendingTx(true)
                 await onPresentLeave()
@@ -87,4 +87,4 @@ const StyledCardContentInner = styled.div`
   justify-content: space-between;
 `
 
-export default UnstakeXSushi
+export default UnstakeiFUSD

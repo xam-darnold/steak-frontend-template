@@ -12,24 +12,24 @@ import useTokenBalance from '../../../hooks/useTokenBalance'
 import {getBalanceNumber} from '../../../utils/formatBalance'
 import DepositModal from './DepositModal'
 import {contractAddresses} from '../../../sushi/lib/constants'
-import useEnter from "../../../hooks/useEnter";
-import useAllowanceStaking from "../../../hooks/useAllowanceStaking";
-import useApproveStaking from "../../../hooks/useApproveStaking";
+import useEnterFUSD from "../../../hooks/useEnterFUSD";
+import useAllowanceFUSD from "../../../hooks/useAllowanceFUSD";
+import useApproveFUSD from "../../../hooks/useApproveFUSD";
 import cow from "../../../assets/img/cow_icons/cow64.png"
 
 interface StakeProps {
 }
 
-const StakeSushi: React.FC<StakeProps> = () => {
-  const tokenName = "STEAK"
+const StakeFUSD: React.FC<StakeProps> = () => {
+  const tokenName = "FUSD"
   const [requestedApproval, setRequestedApproval] = useState(false)
 
-  const allowance = useAllowanceStaking()
-  const {onApprove} = useApproveStaking()
+  const allowance = useAllowanceFUSD()
+  const {onApprove} = useApproveFUSD()
 
-  const tokenBalance = useTokenBalance(contractAddresses.steak[250])
+  const tokenBalance = useTokenBalance(contractAddresses.wftm[250])
 
-  const {onEnter} = useEnter()
+  const {onEnter} = useEnterFUSD()
 
   const [onPresentDeposit] = useModal(
     <DepositModal
@@ -59,20 +59,20 @@ const StakeSushi: React.FC<StakeProps> = () => {
           <StyledCardHeader>
             <CardIcon><img src={cow} width={45} alt="cow_logo" /></CardIcon>
             <Value value={getBalanceNumber(tokenBalance)}/>
-            <Label text={`STEAK Tokens Available`}/>
+            <Label text={`FUSD Tokens Available`}/>
           </StyledCardHeader>
           <StyledCardActions>
             {!allowance.toNumber() ? (
               <Button
                 disabled={requestedApproval}
                 onClick={handleApprove}
-                text={`Approve STEAK`}
+                text={`Approve FUSD`}
               />
             ) : (
               <>
                 <Button
                   disabled={tokenBalance.eq(new BigNumber(0))}
-                  text="Convert to xSTEAK"
+                  text="Convert to iFUSD"
                   onClick={onPresentDeposit}
                 />
                 <StyledActionSpacer/>
@@ -110,4 +110,4 @@ const StyledCardContentInner = styled.div`
   justify-content: space-between;
 `
 
-export default StakeSushi
+export default StakeFUSD
