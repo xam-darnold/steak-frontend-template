@@ -14,10 +14,11 @@ import useAllEarnings from '../../../hooks/useAllEarnings'
 // import useFarms from '../../../hooks/useFarms'
 import useTokenBalance from '../../../hooks/useTokenBalance'
 import useSushi from '../../../hooks/useSushi'
-import { getSushiAddress, getSushiSupply, getFusdPrice, getSteakPrice } from '../../../sushi/utils'
+import { getSushiAddress, getSushiSupply, getFusdPrice, getSteakPrice, getiFUSDShareValue } from '../../../sushi/utils'
 import { getBalanceNumber } from '../../../utils/formatBalance'
+import { contractAddresses } from '../../../sushi/lib/constants'
 
-const PendingRewards: React.FC = () => {
+const PendingRewards: React.FC = (sushi) => {
   const [start, setStart] = useState(0)
   const [end, setEnd] = useState(0)
   const [scale, setScale] = useState(1)
@@ -74,15 +75,18 @@ const Balances: React.FC = () => {
   const [fusdPrice, setFusdPrice] = useState<string>()
   const [steakPrice, setSteakPrice] = useState<string>()
   const [marketCap, setMarketCap] = useState<BigNumber>()
+  const [ifusdShareValue, setifusdShareValue] = useState<BigNumber>()
   const sushi = useSushi()
   console.log(sushi)
   const sushiBalance = useTokenBalance(getSushiAddress(sushi))
-  const ifusdBalance = useTokenBalance('0x3A2AFeFc89b9356c1040E97588b587d7386c6302')
+  const ifusdBalance = useTokenBalance(contractAddresses.ifusd[250])
   const { account }: { account: any } = useWallet()
 
   useEffect(() => {
     async function fetchTotalSupply() {
-      const supply = await getSushiSupply(sushi)
+      const totalSteakHouseSupply = (new BigNumber(4000000)).times(new BigNumber(10).pow(18)) //Initial Tokens sent to SteakHouse
+      let supply = await getSushiSupply(sushi)
+      supply = totalSteakHouseSupply.minus(supply)
       setTotalSupply(supply)
     }
     if (sushi) {
@@ -94,8 +98,10 @@ const Balances: React.FC = () => {
     async function fetchPrices() {
       const fusd = await getFusdPrice(sushi)
       const steak = await getSteakPrice(sushi)
+      const ifusdShare = await getiFUSDShareValue(sushi)
       setFusdPrice(fusd)
       setSteakPrice(steak)
+      setifusdShareValue(ifusdShare)
     }
     if (sushi) {
       fetchPrices()
@@ -161,9 +167,9 @@ const Balances: React.FC = () => {
           </StyledBalances>
         </CardContent>
         <Footnote>
-          FUSD per iFUSD
+          Rate
           <FootnoteValue>
-            <PendingRewards /> iFUSD
+            {ifusdShareValue ? `${getBalanceNumber(ifusdShareValue)} FUSD per iFUSD` : 'Locked'}
           </FootnoteValue>
         </Footnote>
       </Card>

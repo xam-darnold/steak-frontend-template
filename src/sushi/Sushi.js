@@ -43,6 +43,7 @@ export class Sushi {
     this.steakHouseAddress = contractAddresses.steakHouse[networkId]
     this.wethAddress = contractAddresses.wftm[networkId]
     this.UNIV2RouterAddress = contractAddresses.router[networkId]
+    this.iFUSDAddress = contractAddresses.ifusd[networkId]
   }
 
   async resetEVM() {

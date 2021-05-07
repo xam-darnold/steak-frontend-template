@@ -116,11 +116,9 @@ export const getTotalLPWethValue = async (
     .call()
   const tokenDecimals = await tokenContract.methods.decimals().call()
   // Get the share of lpContract that masterChefContract owns
-
   const balance = await lpContract.methods
     .balanceOf(masterChefContract.options.address)
-    .call()
-    
+    .call()    
   // Convert that into the portion of total lpContract = p1
   const totalSupply = await lpContract.methods.totalSupply().call()
   // Get total weth value for the lpContract = w1
@@ -161,11 +159,15 @@ export const approveAddress = async (lpContract, address, account) => {
 }
 
 export const getSushiSupply = async (sushi) => {
-  return new BigNumber(await sushi.contracts.sushi.methods.totalSupply().call())
+  return new BigNumber(await sushi.contracts.sushi.methods.balanceOf(sushi.steakHouseAddress).call())
 }
 
 export const getXSushiSupply = async (sushi) => {
   return new BigNumber(await sushi.contracts.xsushiStaking.methods.totalSupply().call())
+}
+
+export const getiFUSDShareValue = async (sushi) => {
+  return new BigNumber(await sushi.contracts.ifusd.methods.getShareValue().call())
 }
 
 export const stake = async (masterChefContract, pid, amount, account) => {

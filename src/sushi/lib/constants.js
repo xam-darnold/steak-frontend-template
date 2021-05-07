@@ -54,6 +54,9 @@ export const contractAddresses = {
   router: {
     250: '0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506'
   },
+  ifusd: {
+    250: '0x3A2AFeFc89b9356c1040E97588b587d7386c6302'
+  }
 }
 
 
