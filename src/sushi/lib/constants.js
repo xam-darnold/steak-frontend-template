@@ -63,29 +63,16 @@ export const contractAddresses = {
 export const supportedPools = [
   // Perm Menu
   {
-    pid: 0,
+    pid: 1,
     lpAddresses: {
-      250: '0x5ce170f3029670B2Cc7620559F443A81A2405EbF'
+      250: '0x69571c0ad27af3d46eebe4749c0aa6dc4a362520'
     },
     tokenAddresses: {
       250: '0x0026296407a0ebA938409575F84059ca603d33DC'
     },
-    name: 'Ribeye!',
-    symbol: 'STEAK-wFTM SLP',
+    name: 'Fillet!',
+    symbol: 'STEAK-FUSD SLP',
     tokenSymbol: 'STEAK',
     icon: '/images/steak_orange.png',
   },
-  // {
-  //   pid: 1,
-  //   lpAddresses: {
-  //     250: '0x69571c0ad27af3d46eebe4749c0aa6dc4a362520'
-  //   },
-  //   tokenAddresses: {
-  //     250: '0x0026296407a0ebA938409575F84059ca603d33DC'
-  //   },
-  //   name: 'Fillet!',
-  //   symbol: 'STEAK-FUSD SLP',
-  //   tokenSymbol: 'STEAK',
-  //   icon: '/images/steak_orange.png',
-  // },
 ]

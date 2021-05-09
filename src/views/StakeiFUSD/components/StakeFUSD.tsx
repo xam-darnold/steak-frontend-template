@@ -15,7 +15,7 @@ import {contractAddresses} from '../../../sushi/lib/constants'
 import useEnterFUSD from "../../../hooks/useEnterFUSD";
 import useAllowanceFUSD from "../../../hooks/useAllowanceFUSD";
 import useApproveFUSD from "../../../hooks/useApproveFUSD";
-import cow from "../../../assets/img/cow_icons/cow64.png"
+import fusd from "../../../assets/img/fusd_icons/fusd.png"
 
 interface StakeProps {
 }
@@ -57,7 +57,7 @@ const StakeFUSD: React.FC<StakeProps> = () => {
       <CardContent>
         <StyledCardContentInner>
           <StyledCardHeader>
-            <CardIcon><img src={cow} width={45} alt="cow_logo" /></CardIcon>
+            <CardIcon><img src={fusd} width={45} alt="cow_logo" /></CardIcon>
             <Value value={getBalanceNumber(tokenBalance)}/>
             <Label text={`FUSD Tokens Available`}/>
           </StyledCardHeader>

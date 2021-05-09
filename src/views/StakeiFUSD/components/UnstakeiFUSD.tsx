@@ -12,7 +12,7 @@ import { Contract } from 'web3-eth-contract'
 import useModal from '../../../hooks/useModal'
 import WithdrawModal from './WithdrawModal'
 import useLeaveFUSD from '../../../hooks/useLeaveFUSD'
-import steak from '../../../assets/img/steak_icons/steak_purple.png'
+import ifusd from '../../../assets/img/fusd_icons/ifusd.png'
 
 interface HarvestProps {
   lpContract: Contract
@@ -40,7 +40,7 @@ const UnstakeiFUSD: React.FC<HarvestProps> = ({ lpContract }) => {
         <StyledCardContentInner>
           <StyledCardHeader>
             <CardIcon>
-              <img src={steak} width={45} alt="steak_logo_64" />
+              <img src={ifusd} width={45} alt="steak_logo_64" />
             </CardIcon>
             <Value value={getBalanceNumber(iFUSDBalance)} />
             <Label text="iFUSD Tokens Available" />
