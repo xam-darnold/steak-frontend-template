@@ -75,4 +75,108 @@ export const supportedPools = [
     tokenSymbol: 'STEAK',
     icon: '/images/steak_orange.png',
   },
+  {
+    pid: 1,
+    lpAddresses: {
+      250: '0x69571c0ad27af3d46eebe4749c0aa6dc4a362520'
+    },
+    tokenAddresses: {
+      250: '0x0026296407a0ebA938409575F84059ca603d33DC'
+    },
+    name: 'Fillet!',
+    symbol: 'STEAK-FUSD SLP',
+    tokenSymbol: 'STEAK',
+    icon: '/images/steak_orange.png',
+  },
+  {
+    pid: 1,
+    lpAddresses: {
+      250: '0x69571c0ad27af3d46eebe4749c0aa6dc4a362520'
+    },
+    tokenAddresses: {
+      250: '0x0026296407a0ebA938409575F84059ca603d33DC'
+    },
+    name: 'Fillet!',
+    symbol: 'STEAK-FUSD SLP',
+    tokenSymbol: 'STEAK',
+    icon: '/images/steak_orange.png',
+  },
+  {
+    pid: 1,
+    lpAddresses: {
+      250: '0x69571c0ad27af3d46eebe4749c0aa6dc4a362520'
+    },
+    tokenAddresses: {
+      250: '0x0026296407a0ebA938409575F84059ca603d33DC'
+    },
+    name: 'Fillet!',
+    symbol: 'STEAK-FUSD SLP',
+    tokenSymbol: 'STEAK',
+    icon: '/images/steak_orange.png',
+  },
+  {
+    pid: 1,
+    lpAddresses: {
+      250: '0x69571c0ad27af3d46eebe4749c0aa6dc4a362520'
+    },
+    tokenAddresses: {
+      250: '0x0026296407a0ebA938409575F84059ca603d33DC'
+    },
+    name: 'Fillet!',
+    symbol: 'STEAK-FUSD SLP',
+    tokenSymbol: 'STEAK',
+    icon: '/images/steak_orange.png',
+  },
+  {
+    pid: 1,
+    lpAddresses: {
+      250: '0x69571c0ad27af3d46eebe4749c0aa6dc4a362520'
+    },
+    tokenAddresses: {
+      250: '0x0026296407a0ebA938409575F84059ca603d33DC'
+    },
+    name: 'Fillet!',
+    symbol: 'STEAK-FUSD SLP',
+    tokenSymbol: 'STEAK',
+    icon: '/images/steak_orange.png',
+  },
+  {
+    pid: 1,
+    lpAddresses: {
+      250: '0x69571c0ad27af3d46eebe4749c0aa6dc4a362520'
+    },
+    tokenAddresses: {
+      250: '0x0026296407a0ebA938409575F84059ca603d33DC'
+    },
+    name: 'Fillet!',
+    symbol: 'STEAK-FUSD SLP',
+    tokenSymbol: 'STEAK',
+    icon: '/images/steak_orange.png',
+  },
+  {
+    pid: 1,
+    lpAddresses: {
+      250: '0x69571c0ad27af3d46eebe4749c0aa6dc4a362520'
+    },
+    tokenAddresses: {
+      250: '0x0026296407a0ebA938409575F84059ca603d33DC'
+    },
+    name: 'Fillet!',
+    symbol: 'STEAK-FUSD SLP',
+    tokenSymbol: 'STEAK',
+    icon: '/images/steak_orange.png',
+  },
+  {
+    pid: 1,
+    lpAddresses: {
+      250: '0x69571c0ad27af3d46eebe4749c0aa6dc4a362520'
+    },
+    tokenAddresses: {
+      250: '0x0026296407a0ebA938409575F84059ca603d33DC'
+    },
+    name: 'Fillet!',
+    symbol: 'STEAK-FUSD SLP',
+    tokenSymbol: 'STEAK',
+    icon: '/images/steak_orange.png',
+  },
 ]

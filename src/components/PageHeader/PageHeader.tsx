@@ -7,13 +7,22 @@ interface PageHeaderProps {
   icon: React.ReactNode
   subtitle?: string
   title?: string
+  heading?: string
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({ icon, subtitle, title }) => {
+const PageHeader: React.FC<PageHeaderProps> = ({
+  icon,
+  subtitle,
+  title,
+  heading,
+}) => {
   return (
     <Container size="sm">
       <StyledPageHeader>
-        <StyledIcon>{icon}</StyledIcon>
+        <StyledImage>
+          <StyledIcon>{icon}</StyledIcon>
+          <StyledTitle1>{heading}</StyledTitle1>
+        </StyledImage>
         <StyledTitle>{title}</StyledTitle>
         <StyledSubtitle>{subtitle}</StyledSubtitle>
       </StyledPageHeader>
@@ -34,12 +43,26 @@ const StyledPageHeader = styled.div`
 
 const StyledIcon = styled.div`
   font-size: 120px;
-  height: 200px;
   display: flex;
   line-height: 120px;
   text-align: center;
-  width: 200px;
+  width: 1000px;
   justify-content: center;
+`
+const StyledImage = styled.div`
+  position: relative;
+  text-align: center;
+`
+
+const StyledTitle1 = styled.h1`
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Orbitron', sans-serif;
+  color: ${(props) => props.theme.color.grey[500]};
+  font-weight: 900;
+  font-size: 80px;
 `
 
 const StyledTitle = styled.h1`
@@ -53,7 +76,7 @@ const StyledTitle = styled.h1`
 `
 
 const StyledSubtitle = styled.h3`
-  font-family: 'Krona One', sans-serif;  
+  font-family: 'Krona One', sans-serif;
   color: ${(props) => props.theme.color.grey[400]};
   font-size: 18px;
   font-weight: 400;

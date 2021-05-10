@@ -1,6 +1,7 @@
 body {
   background: rgb(218,222,212);
-  background-image: radial-gradient( circle 737px at 48.9% 49%,  rgba(129,104,210,1) 0%, rgba(170,239,125,1) 100.3% );
+  background-image: url("./assets/background/background.jpeg");
+  background-size: cover;
   margin: 0;
   font-family: 'Noto Sans', sans-serif;
   font-size: 16px;
