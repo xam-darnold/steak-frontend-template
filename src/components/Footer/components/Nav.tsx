@@ -1,6 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
+import footerImage from '../../../assets/background/footer.png'
 import discord from '../../../assets/background/discord_planet.png'
+import steak from '../../../assets/background/steak_planet.png'
+import ifusd from '../../../assets/background/ifusd_planet.png'
+import github from '../../../assets/background/github_planet.png'
+import medium from '../../../assets/background/medium_planet.png'
 import twitter from '../../../assets/background/twitter_planet.png'
 
 const Nav: React.FC = () => {
@@ -19,17 +24,20 @@ const Nav: React.FC = () => {
         SushiSwap SUSHI-ETH
       </StyledLink> */}
       <StyledLink target="_blank" href="https://discord.gg/GHJdA56t">
-        <img src={discord} alt="" />
+        <img src={discord} width={50} alt="" />
       </StyledLink>
       {/* <StyledLink target="_blank" href="https://github.com/sushiswap">
         Github
       </StyledLink> */}
       <StyledLink target="_blank" href="https://twitter.com/stake_steak">
-        <img src={twitter} alt="" />
+        <img src={twitter} width={100} alt="" />
       </StyledLink>
       {/* <StyledLink target="_blank" href="https://medium.com/@sushiswapchef">
         Medium
       </StyledLink> */}
+      <StyledImage>
+        <img src={footerImage} alt='' />
+      </StyledImage>
     </StyledNav>
   )
 }
@@ -37,6 +45,17 @@ const Nav: React.FC = () => {
 const StyledNav = styled.nav`
   align-items: center;
   display: flex;
+`
+const StyledImage = styled.div`
+  position: absolute;
+  align-items: center;
+  width = 1vw;
+  display: flex;
+  margin: 0 auto;
+  margin-top: 500px;
+  justify-content: center;
+  padding-top: 50px;
+  z-index: -1;
 `
 
 const StyledLink = styled.a`
