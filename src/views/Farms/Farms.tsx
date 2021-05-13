@@ -30,6 +30,7 @@ const Farms: React.FC = () => {
                 subtitle="Welcome to the Steakhouse! Earn Steak with iFUSD and LP tokens"
                 title="Pick Your Cut of Meat"
                 heading="SteakHouse"
+                variant='secondary'
               />
               <div
                 style={{

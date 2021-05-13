@@ -33,17 +33,17 @@ const FarmCards: React.FC = () => {
   sushiIndex >= 0 && stakedValue[sushiIndex]
     ? stakedValue[sushiIndex].tokenPriceInWeth
     : new BigNumber(0)
-  console.log(sushiPrice.toNumber())
+  // console.log(sushiPrice.toNumber())
 
   const SECONDS_PER_YEAR = new BigNumber(31536000)
   //! Change Sushi per second 
   const SUSHI_PER_SECOND = new BigNumber(1)
 
   if (stakedValue[0] !== undefined) {
-    console.log(stakedValue[0].poolWeight.toString())
-    console.log(stakedValue[0].totalWethValue.toString())
-    console.log(stakedValue[0].tokenAmount.toString())
-    console.log(stakedValue[0].wethAmount.toString())
+    // console.log(stakedValue[0].poolWeight.toString())
+    // console.log(stakedValue[0].totalWethValue.toString())
+    // console.log(stakedValue[0].tokenAmount.toString())
+    // console.log(stakedValue[0].wethAmount.toString())
 
   }
 

@@ -1,5 +1,5 @@
-import React from 'react'
-import styled from 'styled-components'
+import React, {useContext} from 'react'
+import styled, {ThemeContext} from 'styled-components'
 
 import Container from '../Container'
 
@@ -8,14 +8,30 @@ interface PageHeaderProps {
   subtitle?: string
   title?: string
   heading?: string
+  variant?: string
 }
+
+let subtitleColor: string
+let titleColor: string
 
 const PageHeader: React.FC<PageHeaderProps> = ({
   icon,
   subtitle,
   title,
   heading,
+  variant
 }) => {
+  const { color } = useContext(ThemeContext)
+  switch (variant) {
+    case 'secondary':
+      subtitleColor = color.grey[400]
+      titleColor = color.grey[900]
+      break
+    default:
+      subtitleColor = color.grey[800]
+      titleColor = color.grey[500]
+  }
+
   return (
     <Container size="sm">
       <StyledPageHeader>
@@ -23,8 +39,8 @@ const PageHeader: React.FC<PageHeaderProps> = ({
           <StyledIcon>{icon}</StyledIcon>
           <StyledTitle1>{heading}</StyledTitle1>
         </StyledImage>
-        <StyledTitle>{title}</StyledTitle>
-        <StyledSubtitle>{subtitle}</StyledSubtitle>
+        <StyledTitle style={{color: titleColor}}>{title}</StyledTitle>
+        <StyledSubtitle style={{color: subtitleColor}}>{subtitle}</StyledSubtitle>
       </StyledPageHeader>
     </Container>
   )
@@ -60,7 +76,7 @@ const StyledTitle1 = styled.h1`
   left: 50%;
   transform: translate(-50%, -50%);
   font-family: 'Orbitron', sans-serif;
-  color: ${(props) => props.theme.color.grey[500]};
+  color: ${(props) => props.theme.color.grey[800]};
   font-weight: 900;
   font-size: 80px;
 `
@@ -77,7 +93,7 @@ const StyledTitle = styled.h1`
 
 const StyledSubtitle = styled.h3`
   font-family: 'Krona One', sans-serif;
-  color: ${(props) => props.theme.color.grey[400]};
+  color: ${(props) => props.theme.color.grey[500]};
   font-size: 18px;
   font-weight: 400;
   margin: 0;

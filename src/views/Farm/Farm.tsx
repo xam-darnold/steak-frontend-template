@@ -52,7 +52,7 @@ const Farm: React.FC = () => {
   return (
     <>
       <PageHeader
-        icon={<img src={icon.toString()} alt="icon_image" />}
+        icon={<img src={icon.toString()} height={120} width={120} alt="icon_image" />}
         subtitle={`Deposit ${lpTokenName}  Tokens and earn ${earnTokenName}`}
         title={name}
       />

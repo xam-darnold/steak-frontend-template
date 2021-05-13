@@ -2,6 +2,7 @@ body {
   background: rgb(218,222,212);
   background-image: url("./assets/background/background.jpeg");
   background-size: cover;
+  background-repeat: no-repeat;
   margin: 0;
   font-family: 'Noto Sans', sans-serif;
   font-size: 16px;

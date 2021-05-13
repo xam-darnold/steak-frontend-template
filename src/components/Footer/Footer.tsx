@@ -2,10 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Nav from './components/Nav'
+import Image from './components/Image'
 
 const Footer: React.FC = () => (
   <StyledFooter>
     <StyledFooterInner>
+      <Image />
       <Nav />
     </StyledFooterInner>
   </StyledFooter>

@@ -29,7 +29,7 @@ const StyledLogo = styled(Link)`
 `
 
 const StyledText = styled.span`
-  color: ${(props) => props.theme.color.grey[600]};
+  color: ${(props) => props.theme.color.grey[500]};
   font-family: 'Krona One', sans-serif;
   font-size: 18px;
   font-weight: 600;

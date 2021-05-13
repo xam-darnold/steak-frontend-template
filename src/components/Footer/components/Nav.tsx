@@ -1,15 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
+import discord from '../../../assets/background/discord_planet.png'
+import twitter from '../../../assets/background/twitter_planet.png'
 
 const Nav: React.FC = () => {
   return (
     <StyledNav>
-      <StyledLink
+      {/* <StyledLink
         target="_blank"
         href="https://ftmscan.com/address/0x11BdbF56Ce48E7Ac91a3a894521d74Fec8214Dd6"
       >
         STEAK Contract
-      </StyledLink>
+      </StyledLink> */}
       {/*<StyledLink
         target="_blank"
         href="https://uniswap.info/pair/0xce84867c3c02b05dc570d0135103d3fb9cc19433"
@@ -17,13 +19,13 @@ const Nav: React.FC = () => {
         SushiSwap SUSHI-ETH
       </StyledLink> */}
       <StyledLink target="_blank" href="https://discord.gg/GHJdA56t">
-        Discord
+        <img src={discord} alt="" />
       </StyledLink>
       {/* <StyledLink target="_blank" href="https://github.com/sushiswap">
         Github
       </StyledLink> */}
       <StyledLink target="_blank" href="https://twitter.com/stake_steak">
-        Twitter
+        <img src={twitter} alt="" />
       </StyledLink>
       {/* <StyledLink target="_blank" href="https://medium.com/@sushiswapchef">
         Medium
@@ -38,10 +40,6 @@ const StyledNav = styled.nav`
 `
 
 const StyledLink = styled.a`
-  color: ${(props) => props.theme.color.grey[400]};
-  padding-left: ${(props) => props.theme.spacing[3]}px;
-  padding-right: ${(props) => props.theme.spacing[3]}px;
-  text-decoration: none;
   &:hover {
     color: ${(props) => props.theme.color.grey[500]};
   }
