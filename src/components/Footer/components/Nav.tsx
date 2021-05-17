@@ -10,35 +10,31 @@ import twitter from '../../../assets/background/twitter_planet.png'
 
 const Nav: React.FC = () => {
   return (
-    <StyledNav>
-      {/* <StyledLink
-        target="_blank"
-        href="https://ftmscan.com/address/0x11BdbF56Ce48E7Ac91a3a894521d74Fec8214Dd6"
-      >
-        STEAK Contract
-      </StyledLink> */}
-      {/*<StyledLink
-        target="_blank"
-        href="https://uniswap.info/pair/0xce84867c3c02b05dc570d0135103d3fb9cc19433"
-      >
-        SushiSwap SUSHI-ETH
-      </StyledLink> */}
-      <StyledLink target="_blank" href="https://discord.gg/GHJdA56t">
-        <img src={discord} width={50} alt="" />
-      </StyledLink>
-      {/* <StyledLink target="_blank" href="https://github.com/sushiswap">
-        Github
-      </StyledLink> */}
-      <StyledLink target="_blank" href="https://twitter.com/stake_steak">
-        <img src={twitter} width={100} alt="" />
-      </StyledLink>
-      {/* <StyledLink target="_blank" href="https://medium.com/@sushiswapchef">
-        Medium
-      </StyledLink> */}
+    <>
+      <StyledNav>
+        <StyledLink target="_blank" href="https://discord.gg/GHJdA56t" style={{top: "300px", left: "650px"}}>
+          <img src={discord} width={100} alt="" />
+        </StyledLink>
+        <StyledLink target="_blank" href="https://twitter.com/stake_steak" style={{top: "100px", right: "50px"}}>
+          <img src={twitter} width={150} alt="" />
+        </StyledLink>
+        <StyledLink target="_blank" href="https://twitter.com/stake_steak" style={{top: "40px", right: "400px"}}>
+          <img src={steak} width={200} alt="" />
+        </StyledLink>
+        <StyledLink target="_blank" href="https://twitter.com/stake_steak" style={{top: "250px", left: "350px"}}>
+          <img src={ifusd} width={200} alt="" />
+        </StyledLink>
+        <StyledLink target="_blank" href="https://twitter.com/stake_steak" style={{top: "50px", left: "200px"}}>
+          <img src={github} width={150} alt="" />
+        </StyledLink>
+        <StyledLink target="_blank" href="https://twitter.com/stake_steak" style={{top: "200px", right: "900px"}}>
+          <img src={medium} width={100} alt="" />
+        </StyledLink>
+      </StyledNav>
       <StyledImage>
-        <img src={footerImage} alt='' />
+        <img src={footerImage} alt="" />
       </StyledImage>
-    </StyledNav>
+    </>
   )
 }
 
@@ -59,9 +55,11 @@ const StyledImage = styled.div`
 `
 
 const StyledLink = styled.a`
+  position: relative;
   &:hover {
     color: ${(props) => props.theme.color.grey[500]};
   }
+  z-index: 1;
 `
 
 export default Nav
