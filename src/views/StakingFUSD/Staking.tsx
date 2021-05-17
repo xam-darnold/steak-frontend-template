@@ -2,7 +2,7 @@ import React from 'react'
 import {Route, Switch, useRouteMatch} from 'react-router-dom'
 import {useWallet} from 'use-wallet'
 
-import steakhouse from '../../assets/img//steakhouse_icons/steakhouse_purple.png'
+import fusd_ifusd from '../../assets/img/fusd-ifusd.png'
 
 import Button from '../../components/Button'
 import Page from '../../components/Page'
@@ -23,7 +23,7 @@ const Staking: React.FC = () => {
           <>
             <Route exact path={path}>
               <PageHeader
-                icon={<img src={steakhouse} height="120" width="200" alt="steakhouse_image" />}
+                icon={<img src={fusd_ifusd} height="600" width="600" alt="steakhouse_image" />}
                 subtitle="Deposit FUSD for iFUSD."
                 title="Interest-bearing FUSD!"
               />
