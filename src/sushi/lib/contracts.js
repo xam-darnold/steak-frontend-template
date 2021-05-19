@@ -4,7 +4,7 @@ import SteakHouseAbi from './abi/SteakHouse.json'
 import SteakAbi from './abi/SteakToken.json'
 import xSteakAbi from './abi/xSTEAK.json'
 import UNIV2PairAbi from './abi/uni_v2_lp.json'
-import UNIV2Router from './abi/UniV2Router.json'
+import UNIV2Router from './abi/SpiritRouter.json'
 import iFUSD from './abi/iFUSD.json'
 import FUSD from './abi/fusd.json'
 import {

@@ -99,7 +99,7 @@ export const getFusdPrice = async (sushi) => {
 }
 
 export const getSteakPrice = async (sushi) => {
-  const steakAddress = '0x0026296407a0ebA938409575F84059ca603d33DC'
+  const steakAddress = '0x05848B832E872d9eDd84AC5718D58f21fD9c9649'
   const wftmAddress = '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'
   const usdcAddress = '0x04068da6c83afcfa0e13ba15a6696662335d5b75'
   const steak = await sushi.contracts.router.methods.getAmountsOut('1000000000000000000', [steakAddress, wftmAddress, usdcAddress]).call()
@@ -176,6 +176,10 @@ export const getiFUSDSupply = async (sushi) => {
 
 export const getiFUSDShareValue = async (sushi) => {
   return new BigNumber(await sushi.contracts.ifusd.methods.getShareValue().call())
+}
+
+export const getXSteakShareValue = async (sushi) => {
+  return new BigNumber(await sushi.contracts.xsushiStaking.methods.getShareValue().call())
 }
 
 export const stake = async (masterChefContract, pid, amount, account) => {

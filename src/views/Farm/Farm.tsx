@@ -14,14 +14,9 @@ const Farm: React.FC = () => {
   //@ts-ignore
   const { farmId } = useParams()
 
-  const {
-    pid,
-    lpToken,
-    lpTokenAddress,
-    earnToken,
-    name,
-    icon,
-  } = useFarm(farmId) || {
+  const { pid, lpToken, lpTokenAddress, earnToken, name, icon } = useFarm(
+    farmId,
+  ) || {
     pid: 0,
     lpToken: '',
     lpTokenAddress: '',
@@ -52,29 +47,43 @@ const Farm: React.FC = () => {
   return (
     <>
       <PageHeader
-        icon={<img src={icon.toString()} height={120} width={120} alt="icon_image" />}
+        icon={
+          <img
+            src={icon.toString()}
+            height={120}
+            width={120}
+            alt="icon_image"
+          />
+        }
         subtitle={`Deposit ${lpTokenName}  Tokens and earn ${earnTokenName}`}
         title={name}
       />
       <StyledFarm>
         <StyledCardsWrapper>
           <StyledCardWrapper>
+            <StyledInfo>
+              20% of eligible rewards are sent back to xSTEAK holders
+            </StyledInfo>
+          </StyledCardWrapper>
+        </StyledCardsWrapper>
+        <StyledCardsWrapper>
+          <StyledCardWrapper>
             <Harvest pid={pid} />
           </StyledCardWrapper>
           <Spacer />
           <StyledCardWrapper>
-            <Stake
-              lpContract={lpContract}
-              pid={pid}
-              tokenName={lpToken}
-            />
+            <Stake lpContract={lpContract} pid={pid} tokenName={lpToken} />
           </StyledCardWrapper>
         </StyledCardsWrapper>
         <Spacer size="lg" />
-        <StyledInfo>
-          <span role="img" aria-label="star">⭐️</span> Every time you stake and unstake LP tokens, the contract will
-          automatically harvest STEAK rewards for you!
-        </StyledInfo>
+        <StyledCardsWrapper>
+          <StyledCardWrapper>
+            <StyledInfo>
+              Every time you stake and unstake LP tokens, the contract will
+              automatically harvest STEAK rewards for you!
+            </StyledInfo>
+          </StyledCardWrapper>
+        </StyledCardsWrapper>
       </StyledFarm>
     </>
   )
@@ -91,6 +100,7 @@ const StyledFarm = styled.div`
 
 const StyledCardsWrapper = styled.div`
   display: flex;
+  margin-top: 20px;
   width: 600px;
   @media (max-width: 768px) {
     width: 100%;
@@ -109,11 +119,17 @@ const StyledCardWrapper = styled.div`
 `
 
 const StyledInfo = styled.h3`
-  color: ${(props) => props.theme.color.grey[600]};
+  font-family: 'Krona One', monospace;
+  color: ${(props) => props.theme.color.grey[400]};
+  background: ${(props) => props.theme.color.grey[200]};
+  border: 1px solid ${(props) => props.theme.color.grey[300]}ff;
+  border-radius: 12px;
+  box-shadow: inset 1px 1px 0px ${(props) => props.theme.color.grey[100]};
+  color: ${(props) => props.theme.color.grey[400]};
   font-size: 16px;
   font-weight: 400;
   margin: 0;
-  padding: 0;
+  padding: 5px;
   text-align: center;
 `
 

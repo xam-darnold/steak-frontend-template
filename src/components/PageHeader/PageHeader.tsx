@@ -1,5 +1,5 @@
-import React, {useContext} from 'react'
-import styled, {ThemeContext} from 'styled-components'
+import React, { useContext } from 'react'
+import styled, { ThemeContext } from 'styled-components'
 
 import Container from '../Container'
 
@@ -19,7 +19,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({
   subtitle,
   title,
   heading,
-  variant
+  variant,
 }) => {
   const { color } = useContext(ThemeContext)
   switch (variant) {
@@ -39,8 +39,10 @@ const PageHeader: React.FC<PageHeaderProps> = ({
           <StyledIcon>{icon}</StyledIcon>
           <StyledTitle1>{heading}</StyledTitle1>
         </StyledImage>
-        <StyledTitle style={{color: titleColor}}>{title}</StyledTitle>
-        <StyledSubtitle style={{color: subtitleColor}}>{subtitle}</StyledSubtitle>
+        <StyledTitle style={{ color: titleColor }}>{title}</StyledTitle>
+        <StyledSubtitle style={{ color: subtitleColor }}>
+          {subtitle}
+        </StyledSubtitle>
       </StyledPageHeader>
     </Container>
   )
@@ -79,6 +81,16 @@ const StyledTitle1 = styled.h1`
   color: ${(props) => props.theme.color.grey[800]};
   font-weight: 900;
   font-size: 80px;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
 `
 
 const StyledTitle = styled.h1`

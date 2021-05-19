@@ -18,7 +18,7 @@ const Nav: React.FC = () => {
         <StyledLink
           target="_blank"
           href="https://discord.gg/GHJdA56t"
-          style={{ top: '300px', left: '650px' }}
+          style={{ top: '400px', left: '650px' }}
         >
           <motion.img
             whileHover={{ scale: 1.1 }}
@@ -31,7 +31,7 @@ const Nav: React.FC = () => {
         <StyledLink
           target="_blank"
           href="https://twitter.com/stake_steak"
-          style={{ top: '100px', right: '50px' }}
+          style={{ top: '200px', right: '50px' }}
         >
           <motion.img
             whileHover={{ scale: 1.1 }}
@@ -44,7 +44,7 @@ const Nav: React.FC = () => {
         <StyledLink
           target="_blank"
           href="https://stakesteak.com"
-          style={{ top: '40px', right: '400px' }}
+          style={{ top: '140px', right: '400px' }}
         >
           <motion.img
             whileHover={{ scale: 1.1 }}
@@ -57,7 +57,7 @@ const Nav: React.FC = () => {
         <StyledLink
           target="_blank"
           href="https://stakesteak.com/staking-fusd"
-          style={{ top: '250px', left: '350px' }}
+          style={{ top: '350px', left: '350px' }}
         >
           <motion.img
             whileHover={{ scale: 1.1 }}
@@ -70,7 +70,7 @@ const Nav: React.FC = () => {
         <StyledLink
           target="_blank"
           href="https://twitter.com/stake_steak"
-          style={{ top: '50px', left: '200px' }}
+          style={{ top: '150px', left: '200px' }}
         >
           <motion.img
             whileHover={{ scale: 1.1 }}
@@ -83,7 +83,7 @@ const Nav: React.FC = () => {
         <StyledLink
           target="_blank"
           href="https://stakesteak.medium.com"
-          style={{ top: '200px', right: '900px' }}
+          style={{ top: '300px', right: '900px' }}
         >
           <motion.img
             whileHover={{ scale: 1.1 }}
@@ -111,7 +111,7 @@ const StyledImage = styled.div`
   width = 1vw;
   display: flex;
   margin: 0 auto;
-  margin-top: 500px;
+  margin-top: 600px;
   justify-content: center;
   padding-top: 50px;
   z-index: -1;
@@ -122,7 +122,6 @@ const StyledLink = styled.a`
   &:hover {
     color: ${(props) => props.theme.color.grey[500]};
   }
-  z-index: 1;
 `
 
 export default Nav

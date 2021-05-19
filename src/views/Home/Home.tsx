@@ -1,6 +1,6 @@
 import React from 'react'
 // import styled from 'styled-components'
-import farmer from '../../assets/img/farmer_icons/farmer_purple.png'
+import header from '../../assets/background/header.png'
 import Button from '../../components/Button'
 import Container from '../../components/Container'
 import Page from '../../components/Page'
@@ -12,9 +12,11 @@ const Home: React.FC = () => {
   return (
     <Page>
       <PageHeader
-        icon={<img src={farmer} height={120} alt="farmer_logo" />}
-        title="Fire up the Grill"
-        subtitle="Earn yield on iFUSD and FUSD-PAIR LP"
+        icon={<img src={header} height={120} alt="farmer_logo" />}
+        title="Earn yield on iFUSD and FUSD-PAIR LP"
+        subtitle='"The key to success is to find a way to stand out - to be the purple cow in a field of monochrome Holsteins" -Seth Godin'
+        heading="StakeSteak"
+        variant="secondary"
       />
 
       <Container>

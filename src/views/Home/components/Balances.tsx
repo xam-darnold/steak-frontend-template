@@ -84,7 +84,7 @@ const Balances: React.FC = () => {
 
   useEffect(() => {
     async function fetchTotalSupply() {
-      const totalSteakHouseSupply = (new BigNumber(4000000)).times(new BigNumber(10).pow(18)) //Initial Tokens sent to SteakHouse
+      const totalSteakHouseSupply = (new BigNumber(3400000)).times(new BigNumber(10).pow(18)) //Initial Tokens sent to SteakHouse
       let supply = await getSushiSupply(sushi)
       supply = totalSteakHouseSupply.minus(supply)
       setTotalSupply(supply)
@@ -190,7 +190,7 @@ const Balances: React.FC = () => {
         </CardContent>
         <Footnote>
           New rewards per second
-          <FootnoteValue>50 STEAK</FootnoteValue>
+          <FootnoteValue>0.033 STEAK</FootnoteValue>
         </Footnote>
       </Card>
     </StyledWrapper>
