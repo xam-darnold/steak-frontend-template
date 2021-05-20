@@ -1,7 +1,6 @@
 import React from 'react'
 // import styled from 'styled-components'
 import header from '../../assets/background/header.png'
-import Button from '../../components/Button'
 import Container from '../../components/Container'
 import Page from '../../components/Page'
 import PageHeader from '../../components/PageHeader'

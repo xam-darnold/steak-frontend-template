@@ -77,9 +77,9 @@ const StakeiFUSD: React.FC = () => {
         <StyledCardsWrapper>
           <StyledCardWrapper>
             <StyledInfo style={{ color: grey[900] }}>
-              -xSTEAK holders earn 20% of ALL farming rewards -You will earn a
-              portion of the fees based on the amount of iFUSD held relative the
-              weight of the staking. <br />
+              -iFUSD holders earn 0.5% of ALL deposits into farms <br />
+              -You will earn a portion of the fees based on the amount of iFUSD
+              held relative the weight of the staking. <br />
               -iFUSD can be minted by staking FUSD.
               <br />
               -To redeem FUSD staked plus fees convert iFUSD back to FUSD.{' '}
