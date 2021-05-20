@@ -69,7 +69,7 @@ const Nav: React.FC = () => {
         </StyledLink>
         <StyledLink
           target="_blank"
-          href="https://twitter.com/stake_steak"
+          href="https://app.gitbook.com/@xamcrypto/s/stak/"
           style={{ top: '150px', left: '200px' }}
         >
           <motion.img

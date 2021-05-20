@@ -24,6 +24,7 @@ interface FarmWithStakedValue extends Farm, StakedValue {
 
 const FarmCards: React.FC = () => {
   const [farms] = useFarms()
+
   const stakedValue = useAllStakedValue()
   const sushiIndex = farms.findIndex(
     ({ tokenSymbol }) => tokenSymbol === 'STEAK',
@@ -37,7 +38,7 @@ const FarmCards: React.FC = () => {
 
   const SECONDS_PER_YEAR = new BigNumber(31536000)
   //! Change Sushi per second 
-  const SUSHI_PER_SECOND = new BigNumber(0.033)
+  const SUSHI_PER_SECOND = new BigNumber(0.496031746031746)
 
   if (stakedValue[0] !== undefined) {
     // console.log(stakedValue[0].poolWeight.toString())

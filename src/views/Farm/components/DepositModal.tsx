@@ -19,7 +19,7 @@ const DepositModal: React.FC<DepositModalProps> = ({
   onDismiss,
   tokenName = '',
 }) => {
-  const [val, setVal] = useState('')
+  const [val, setVal] = useState('0')
   const [pendingTx, setPendingTx] = useState(false)
 
   const fullBalance = useMemo(() => {

@@ -7,6 +7,8 @@ import Page from '../../components/Page'
 import PageHeader from '../../components/PageHeader'
 import Spacer from '../../components/Spacer'
 import Balances from './components/Balances'
+import Harvest from './components/Harvest'
+import AddToken from './components/AddToken'
 
 const Home: React.FC = () => {
   return (
@@ -28,8 +30,11 @@ const Home: React.FC = () => {
           margin: '0 auto',
         }}
       >
-        <Button text="🔪 See the Menu" to="/farms" variant="secondary" />
+      <Harvest />
+      <Spacer size="lg" />
+      <AddToken />
       </div>
+      <Spacer size="lg" />
     </Page>
   )
 }
