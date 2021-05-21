@@ -8,8 +8,10 @@ import { Contract } from 'web3-eth-contract'
 import {
   getMasterChefContract,
   getWethContract,
+  getiFUSDContract,
   getFarms,
   getTotalLPWethValue,
+  getTotalIFUSDValue
 } from '../sushi/utils'
 import useSushi from './useSushi'
 import useBlock from './useBlock'
@@ -29,10 +31,11 @@ const useAllStakedValue = () => {
   const farms = getFarms(sushi)
   const masterChefContract = getMasterChefContract(sushi)
   const wethContract = getWethContract(sushi)
+  const iFUSDContract = getiFUSDContract(sushi)
   const block = useBlock()
 
   const fetchAllStakedValue = useCallback(async () => {
-    const balances: Array<StakedValue> = await Promise.all(
+    let balances: Array<StakedValue> = await Promise.all(
       farms.map(
         ({
           pid,
@@ -51,10 +54,14 @@ const useAllStakedValue = () => {
             pid,
           ),
       ),
+
     )
 
+    const iFUSDBalance = await getTotalIFUSDValue(iFUSDContract, masterChefContract)
+    balances[0] = iFUSDBalance
+
     setBalance(balances)
-  }, [masterChefContract, farms, wethContract])
+  }, [masterChefContract, farms, wethContract, iFUSDContract])
 
   useEffect(() => {
     if (account && masterChefContract && sushi) {

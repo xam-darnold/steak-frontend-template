@@ -10,13 +10,14 @@ import Spacer from '../../../components/Spacer'
 import Value from '../../../components/Value'
 // import SteakIcon from '../../../components/SteakIcon'
 import useAllEarnings from '../../../hooks/useAllEarnings'
-// import useAllStakedValue from '../../../hooks/useAllStakedValue'
+import useAllStakedValue from '../../../hooks/useAllStakedValue'
 // import useFarms from '../../../hooks/useFarms'
 import useTokenBalance from '../../../hooks/useTokenBalance'
 import useSushi from '../../../hooks/useSushi'
-import { getSushiAddress, getSushiSupply, getFusdPrice, getSteakPrice, getiFUSDShareValue } from '../../../sushi/utils'
+import { getSushiAddress, getSushiSupply, getFUSDPrice, getSteakPrice, getTotalXSteakValue, getSushiContract, getXSushiStakingContract} from '../../../sushi/utils'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import { contractAddresses } from '../../../sushi/lib/constants'
+
 
 const PendingRewards: React.FC = (sushi) => {
   const [start, setStart] = useState(0)
@@ -72,19 +73,32 @@ const PendingRewards: React.FC = (sushi) => {
 
 const Balances: React.FC = () => {
   const [totalSupply, setTotalSupply] = useState<BigNumber>()
-  const [fusdPrice, setFusdPrice] = useState<string>()
-  const [steakPrice, setSteakPrice] = useState<string>()
+  const [fusdPrice, setFusdPrice] = useState<BigNumber>()
+  const [steakPrice, setSteakPrice] = useState<BigNumber>()
+  const [xSteakValue, setxSteakValue] = useState<BigNumber>()
   const [marketCap, setMarketCap] = useState<BigNumber>()
-  const [ifusdShareValue, setifusdShareValue] = useState<BigNumber>()
   const sushi = useSushi()
-  console.log(sushi)
+  // console.log(sushi)
   const sushiBalance = useTokenBalance(getSushiAddress(sushi))
   const ifusdBalance = useTokenBalance(contractAddresses.ifusd[250])
+  const steakContract = getSushiContract(sushi)
+  const xsteakContract = getXSushiStakingContract(sushi)
   const { account }: { account: any } = useWallet()
+  let fusdValue: number = 0
+
+  const stakedValue = useAllStakedValue()
+
+  if(stakedValue[0] !== undefined) {
+    for (let i = 0; i < stakedValue.length; i++) {
+      fusdValue += stakedValue[i].totalWethValue.toNumber()
+    }
+  }
+
+
 
   useEffect(() => {
     async function fetchTotalSupply() {
-      const totalSteakHouseSupply = (new BigNumber(3250000)).times(new BigNumber(10).pow(18)) //Initial Tokens sent to SteakHouse
+      const totalSteakHouseSupply = (new BigNumber(3300000)).times(new BigNumber(10).pow(18)) //Initial Tokens sent to SteakHouse
       let supply = await getSushiSupply(sushi)
       supply = totalSteakHouseSupply.minus(supply)
       setTotalSupply(supply)
@@ -96,17 +110,18 @@ const Balances: React.FC = () => {
 
   useEffect(() => {
     async function fetchPrices() {
-      const fusd = await getFusdPrice(sushi)
+      const fusd = await getFUSDPrice(sushi)
       const steak = await getSteakPrice(sushi)
-      const ifusdShare = await getiFUSDShareValue(sushi)
-      setFusdPrice(fusd)
-      setSteakPrice(steak)
-      setifusdShareValue(ifusdShare)
+      const xsteak = await getTotalXSteakValue(xsteakContract, steakContract)
+      console.log(xsteak.toNumber())
+      setFusdPrice(new BigNumber(fusd))
+      setSteakPrice(new BigNumber(steak))
+      setxSteakValue(new BigNumber(xsteak))
     }
     if (sushi) {
       fetchPrices()
     }
-  }, [sushi, setFusdPrice, setSteakPrice])
+  }, [sushi, setFusdPrice, setSteakPrice, setxSteakValue, steakContract, xsteakContract])
 
   useEffect(() => {
     async function getMarketCap() {
@@ -167,9 +182,9 @@ const Balances: React.FC = () => {
           </StyledBalances>
         </CardContent>
         <Footnote>
-          Rate
+          TVL:
           <FootnoteValue>
-            {ifusdShareValue ? `${getBalanceNumber(ifusdShareValue)} FUSD per iFUSD` : 'Locked'}
+              {fusdValue && xSteakValue && fusdPrice && steakPrice ? `$${(fusdValue * fusdPrice.toNumber() + xSteakValue.toNumber() * steakPrice.toNumber()).toLocaleString('en-US').slice(0, -1)}` : "Pending ..."}
           </FootnoteValue>
         </Footnote>
       </Card>

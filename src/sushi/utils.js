@@ -89,7 +89,7 @@ export const getEarned = async (masterChefContract, pid, account) => {
   return masterChefContract.methods.pendingSteak(pid, account).call()
 }
 
-export const getFusdPrice = async (sushi) => {
+export const getFUSDPrice = async (sushi) => {
   const fusdAddress = '0xad84341756bf337f5a0164515b1f6f993d194e1f'
   const usdcAddress = '0x04068da6c83afcfa0e13ba15a6696662335d5b75'
   const fusd = await sushi.contracts.router.methods
@@ -161,6 +161,35 @@ export const getTotalLPWethValue = async (
     tokenPriceInWeth: wethAmount.div(tokenAmount),
     poolWeight: await getPoolWeight(masterChefContract, pid),
   }
+}
+
+export const getTotalIFUSDValue = async (ifusdContract, masterChefContract) => {
+    // Get ifusd steakhouse
+    const ifusdAmount = new BigNumber(await ifusdContract.methods
+    .balanceOf(masterChefContract.options.address)
+    .call()).div(new BigNumber(10).pow(18))
+
+    const ifusdShareValue = new BigNumber(await ifusdContract.methods.getShareValue().call()).div(new BigNumber(10).pow(18))
+
+    const fusdAmount = ifusdAmount.times(ifusdShareValue)
+
+    return {
+      tokenAmount: ifusdAmount,
+      wethAmount: fusdAmount,
+      totalWethValue: fusdAmount,
+      tokenPriceInWeth: fusdAmount,
+      poolWeight: await getPoolWeight(masterChefContract, 0)
+    }
+}
+
+export const getTotalXSteakValue = async (xSteakContract, steakContract) => {
+  // Get ifusd steakhouse
+  const steakAmount = new BigNumber(await steakContract.methods
+  .balanceOf(xSteakContract.options.address)
+  .call()).div(new BigNumber(10).pow(18))
+
+  return steakAmount
+
 }
 
 export const approve = async (lpContract, masterChefContract, account) => {

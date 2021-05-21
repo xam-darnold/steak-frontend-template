@@ -15,26 +15,43 @@ import useAllStakedValue, {
 } from '../../../hooks/useAllStakedValue'
 import useFarms from '../../../hooks/useFarms'
 import useSushi from '../../../hooks/useSushi'
-import { getEarned, getMasterChefContract } from '../../../sushi/utils'
+import { getEarned, getMasterChefContract, getFUSDPrice } from '../../../sushi/utils'
 import { bnToDec } from '../../../utils'
 
 interface FarmWithStakedValue extends Farm, StakedValue {
   apy: BigNumber
+  tvl: BigNumber
 }
 
 const FarmCards: React.FC = () => {
+
+  const [fusdPrice, setFusdPrice] = useState<BigNumber>()
   const [farms] = useFarms()
 
   const stakedValue = useAllStakedValue()
+
   const sushiIndex = farms.findIndex(
     ({ tokenSymbol }) => tokenSymbol === 'STEAK',
   )
+
+  const sushi = useSushi()
 
   const sushiPrice =
   sushiIndex >= 0 && stakedValue[sushiIndex]
     ? stakedValue[sushiIndex].tokenPriceInWeth
     : new BigNumber(0)
-  // console.log(sushiPrice.toNumber())
+  
+
+    useEffect(() => {
+      async function fetchPrices() {
+        const fusd = await getFUSDPrice(sushi)
+
+        setFusdPrice(new BigNumber(fusd))
+      }
+      if (sushi) {
+        fetchPrices()
+      }
+    }, [sushi, setFusdPrice])
 
   const SECONDS_PER_YEAR = new BigNumber(31536000)
   //! Change Sushi per second 
@@ -43,6 +60,8 @@ const FarmCards: React.FC = () => {
   if (stakedValue[0] !== undefined) {
     // console.log(stakedValue[0].poolWeight.toString())
     // console.log(stakedValue[0].totalWethValue.toString())
+    // console.log(stakedValue[1].totalWethValue.toString())
+
     // console.log(stakedValue[0].tokenAmount.toString())
     // console.log(stakedValue[0].wethAmount.toString())
 
@@ -61,6 +80,9 @@ const FarmCards: React.FC = () => {
               .times(3)
               .div(stakedValue[i].totalWethValue)
           : null,
+        tvl: stakedValue[i] && sushi
+        ? fusdPrice.times(stakedValue[i].totalWethValue)
+        : null,
       }
       const newFarmRows = [...farmRows]
       if (newFarmRows[newFarmRows.length - 1].length === 3) {
@@ -72,6 +94,15 @@ const FarmCards: React.FC = () => {
     },
     [[]],
   )
+
+
+  // if (rows[0][0]) {
+  //   if (rows[0][0] && sushi) {
+
+  //     console.log(rows[0][0].tvl.toNumber())
+  //   }
+  // }
+ 
 
   return (
     <StyledCards>
@@ -166,7 +197,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
               )}
             </Button>
             <StyledInsight>
-              <span>APY</span>
+              <span>APY:</span>
               <span>
                 {farm.apy
                   ? `${farm.apy
@@ -174,6 +205,15 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
                       .toNumber()
                       .toLocaleString('en-US')
                       .slice(0, -1)}%`
+                  : 'Loading ...'}
+              </span>
+              <span>TVL:</span>
+              <span>
+                {farm.tvl
+                  ? `$${farm.tvl
+                        .toNumber()
+                        .toLocaleString('en-US')
+                        .slice(0, -1)}`
                   : 'Loading ...'}
               </span>
               {/* <span>

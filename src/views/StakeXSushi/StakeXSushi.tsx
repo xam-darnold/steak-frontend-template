@@ -76,6 +76,7 @@ const StakeXSushi: React.FC = () => {
         <StyledCardsWrapper>
           <StyledCardWrapper>
             <StyledInfo>
+               -xSTEAK holders earn 20% of all STEAK rewards from farms <br />
               -You will earn a portion of the fees based on the amount of
               xSTEAK held relative the weight of the staking. <br />
               -xSTEAK can be minted by staking STEAK. <br />
