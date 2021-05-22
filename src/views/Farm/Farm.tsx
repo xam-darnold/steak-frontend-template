@@ -62,7 +62,7 @@ const Farm: React.FC = () => {
         <StyledCardsWrapper>
           <StyledCardWrapper>
             <StyledInfo>
-              20% of eligible rewards are sent back to xSTEAK holders
+              10% of eligible rewards are sent back to xSTEAK holders
             </StyledInfo>
           </StyledCardWrapper>
         </StyledCardsWrapper>

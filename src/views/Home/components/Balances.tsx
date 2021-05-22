@@ -113,7 +113,6 @@ const Balances: React.FC = () => {
       const fusd = await getFUSDPrice(sushi)
       const steak = await getSteakPrice(sushi)
       const xsteak = await getTotalXSteakValue(xsteakContract, steakContract)
-      console.log(xsteak.toNumber())
       setFusdPrice(new BigNumber(fusd))
       setSteakPrice(new BigNumber(steak))
       setxSteakValue(new BigNumber(xsteak))
@@ -205,7 +204,7 @@ const Balances: React.FC = () => {
         </CardContent>
         <Footnote>
           New rewards per second
-          <FootnoteValue>0.496 STEAK</FootnoteValue>
+          <FootnoteValue>0.248 STEAK</FootnoteValue>
         </Footnote>
       </Card>
     </StyledWrapper>

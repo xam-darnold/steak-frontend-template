@@ -55,7 +55,7 @@ const FarmCards: React.FC = () => {
 
   const SECONDS_PER_YEAR = new BigNumber(31536000)
   //! Change Sushi per second 
-  const SUSHI_PER_SECOND = new BigNumber(0.496031746031746)
+  const SUSHI_PER_SECOND = new BigNumber(0.248)
 
   if (stakedValue[0] !== undefined) {
     // console.log(stakedValue[0].poolWeight.toString())

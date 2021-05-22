@@ -28,6 +28,21 @@ const StakeiFUSD: React.FC = () => {
   const sushi = useSushi()
   const { ethereum } = useWallet()
 
+  const calcAPY = () => {
+    if (iFusdShareValue) {
+      const difference = +new Date() - +new Date(`May 19, 2021 21:00:00`)
+      const twelveHoursSinceLaunch = Math.floor(
+        difference / (1000 * 60 * 60 * 12),
+      )
+      const xSteakApy: number =
+        ((iFusdShareValue.toNumber() / 1000000000000000000 - 1) * 730 * 100) /
+        twelveHoursSinceLaunch
+      return xSteakApy
+    }
+  }
+
+  console.log(calcAPY())
+
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -52,6 +67,7 @@ const StakeiFUSD: React.FC = () => {
   return (
     <>
       <StyledFarm>
+      <StyledWrapper>
         <StyledLink
           target="_blank"
           href={`https://swap.spiritswap.finance/#/swap?inputCurrency=${steakAddress}&outputCurrency=${fusdAddress}`}
@@ -59,6 +75,12 @@ const StakeiFUSD: React.FC = () => {
           {' '}
           <Button text="Buy FUSD" />
         </StyledLink>
+        <StyledInfo style={{ color: grey[900] }}>
+              {iFusdShareValue
+                ? `APY: ${calcAPY().toLocaleString('en-US').slice(0, -1)}%`
+                : 'Pending ...'}
+            </StyledInfo>
+        </StyledWrapper>
         <StyledCardsWrapper>
           <StyledCardWrapper>
             <UnstakeiFUSD lpContract={lpContract} />
@@ -97,6 +119,11 @@ const StakeiFUSD: React.FC = () => {
     </>
   )
 }
+
+const StyledWrapper = styled.div`
+  justify-content: space-evenly;
+  disply: flex;
+`
 
 const StyledFarm = styled.div`
   align-items: center;
@@ -143,7 +170,7 @@ const StyledInfo = styled.h3`
   box-shadow: inset 1px 1px 0px ${(props) => props.theme.color.grey[100]};
   font-size: 16px;
   font-weight: 400;
-  margin: 0;
+  margin-top: 20px;
   padding: 10px;
   text-align: left;
 `

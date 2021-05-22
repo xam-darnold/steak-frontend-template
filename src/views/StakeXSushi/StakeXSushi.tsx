@@ -8,11 +8,11 @@ import { getContract } from '../../utils/erc20'
 import UnstakeXSushi from './components/UnstakeXSushi'
 import StakeSushi from './components/StakeSushi'
 import { contractAddresses } from '../../sushi/lib/constants'
-import { getXSushiSupply, getXSteakShareValue} from '../../sushi/utils'
+import { getXSushiSupply, getXSteakShareValue } from '../../sushi/utils'
 import BigNumber from 'bignumber.js'
 import { getBalanceNumber } from '../../utils/formatBalance'
-import { grey } from "../../theme/colors"
-import Button from "../../components/Button"
+import { grey } from '../../theme/colors'
+import Button from '../../components/Button'
 
 const StakeXSushi: React.FC = () => {
   const { tokenAddress, steakAddress, fusdAddress } = {
@@ -26,6 +26,19 @@ const StakeXSushi: React.FC = () => {
 
   const sushi = useSushi()
   const { ethereum } = useWallet()
+
+  const calcAPY = () => {
+    if (xSteakShareValue) {
+      const difference = +new Date() - +new Date(`May 19, 2021 21:00:00`)
+      const twelveHoursSinceLaunch = Math.floor(
+        difference / (1000 * 60 * 60 * 12),
+      )
+      const xSteakApy: number =
+        ((xSteakShareValue.toNumber() / 1000000000000000000 - 1) * 730 * 100) /
+        twelveHoursSinceLaunch
+      return xSteakApy
+    }
+  }
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -51,15 +64,20 @@ const StakeXSushi: React.FC = () => {
   return (
     <>
       <StyledFarm>
-      <StyledLink
-                target="_blank"
-                href={`https://swap.spiritswap.finance/#/swap?inputCurrency=${fusdAddress}&outputCurrency=${steakAddress}`}
-              >
-                {' '}
-                <Button
-                  text="Buy STEAK"
-                />
-              </StyledLink>
+        <StyledWrapper>
+          <StyledLink
+            target="_blank"
+            href={`https://swap.spiritswap.finance/#/swap?inputCurrency=${fusdAddress}&outputCurrency=${steakAddress}`}
+          >
+            {' '}
+            <Button text="Buy STEAK" />
+            <StyledInfo style={{ color: grey[900] }}>
+              {xSteakShareValue
+                ? `APY: ${calcAPY().toLocaleString('en-US').slice(0, -1)}%`
+                : 'Pending ...'}
+            </StyledInfo>
+          </StyledLink>
+        </StyledWrapper>
         <StyledCardsWrapper>
           <StyledCardWrapper>
             <UnstakeXSushi lpContract={lpContract} />
@@ -70,18 +88,20 @@ const StakeXSushi: React.FC = () => {
           </StyledCardWrapper>
         </StyledCardsWrapper>
         <Spacer size="lg" />
-        <StyledInfo style={{color: grey[900]}}>
-        {xSteakShareValue ? `${getBalanceNumber(xSteakShareValue)} STEAK per xSTEAK` : 'Locked'} 
+        <StyledInfo style={{ color: grey[900] }}>
+          {xSteakShareValue
+            ? `${getBalanceNumber(xSteakShareValue)} STEAK per xSTEAK`
+            : 'Pending ...'}
         </StyledInfo>
         <StyledCardsWrapper>
           <StyledCardWrapper>
             <StyledInfo>
-               -xSTEAK holders earn 20% of all STEAK rewards from farms <br />
-              -You will earn a portion of the fees based on the amount of
-              xSTEAK held relative the weight of the staking. <br />
+              -xSTEAK holders earn 10% of all STEAK rewards from farms <br />
+              -You will earn a portion of the fees based on the amount of xSTEAK
+              held relative the weight of the staking. <br />
               -xSTEAK can be minted by staking STEAK. <br />
-              To redeem STEAK staked plus fees convert xSTEAK back to STEAK. <br/>
-              {' '}
+              To redeem STEAK staked plus fees convert xSTEAK back to STEAK.{' '}
+              <br />{' '}
               {totalSupply
                 ? `-There are currently ${getBalanceNumber(
                     totalSupply,
@@ -95,6 +115,11 @@ const StakeXSushi: React.FC = () => {
     </>
   )
 }
+
+const StyledWrapper = styled.div`
+  justify-content: space-evenly;
+  disply: flex;
+`
 
 const StyledFarm = styled.div`
   align-items: center;
@@ -143,7 +168,7 @@ const StyledInfo = styled.h3`
   color: ${(props) => props.theme.color.grey[400]};
   font-size: 16px;
   font-weight: 400;
-  margin: 0;
+  margin-top: 20px;
   padding: 10px;
   text-align: left;
 `
