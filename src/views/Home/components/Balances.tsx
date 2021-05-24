@@ -204,7 +204,7 @@ const Balances: React.FC = () => {
         </CardContent>
         <Footnote>
           New rewards per second
-          <FootnoteValue>0.248 STEAK</FootnoteValue>
+          <FootnoteValue>0.124 STEAK</FootnoteValue>
         </Footnote>
       </Card>
     </StyledWrapper>

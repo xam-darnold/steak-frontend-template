@@ -41,8 +41,6 @@ const StakeiFUSD: React.FC = () => {
     }
   }
 
-  console.log(calcAPY())
-
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
