@@ -14,6 +14,10 @@ import { getBalanceNumber } from '../../utils/formatBalance'
 import { grey } from '../../theme/colors'
 import Button from '../../components/Button'
 
+function numberWithCommas(x: any) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 const StakeXSushi: React.FC = () => {
   const { tokenAddress, steakAddress, fusdAddress } = {
     tokenAddress: contractAddresses.xSteak[250],
@@ -103,9 +107,9 @@ const StakeXSushi: React.FC = () => {
               To redeem STEAK staked plus fees convert xSTEAK back to STEAK.{' '}
               <br />{' '}
               {totalSupply
-                ? `-There are currently ${getBalanceNumber(
-                    totalSupply,
-                  )} xSTEAK in existence.`
+                ? `-There are currently ${numberWithCommas(getBalanceNumber(
+                    totalSupply
+                  ).toLocaleString('en-US').slice(0, -1))} xSTEAK in existence.`
                 : ''}
             </StyledInfo>
           </StyledCardWrapper>

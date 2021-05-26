@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useState } from 'react'
-import { provider } from 'web3-core'
-
 import BigNumber from 'bignumber.js'
-import { useWallet } from 'use-wallet'
 import { Contract } from 'web3-eth-contract'
+import Web3 from 'web3'
+
 
 import {
   getMasterChefContract,
@@ -26,7 +25,7 @@ export interface StakedValue {
 
 const useAllStakedValue = () => {
   const [balances, setBalance] = useState([] as Array<StakedValue>)
-  const { account }: { account: string; ethereum: provider } = useWallet()
+  const defaultProvider = new Web3('https://rpc.fantom.network/')
   const sushi = useSushi()
   const farms = getFarms(sushi)
   const masterChefContract = getMasterChefContract(sushi)
@@ -64,10 +63,10 @@ const useAllStakedValue = () => {
   }, [masterChefContract, farms, wethContract, iFUSDContract])
 
   useEffect(() => {
-    if (account && masterChefContract && sushi) {
+    if (defaultProvider && masterChefContract && sushi) {
       fetchAllStakedValue()
     }
-  }, [account, block, masterChefContract, fetchAllStakedValue, sushi])
+  }, [defaultProvider, block, masterChefContract, fetchAllStakedValue, sushi])
 
   return balances
 }

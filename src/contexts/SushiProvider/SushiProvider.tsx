@@ -4,6 +4,8 @@ import { useWallet } from 'use-wallet'
 
 import { Sushi } from '../../sushi'
 
+import Web3 from 'web3'
+
 export interface SushiContext {
   sushi?: typeof Sushi
 }
@@ -17,6 +19,8 @@ declare global {
     sushisauce: any
   }
 }
+
+const defaultProvider = new Web3('https://rpc.fantom.network/')
 
 const SushiProvider: React.FC = ({ children }) => {
   const { ethereum }: { ethereum: any } = useWallet()
@@ -43,10 +47,24 @@ const SushiProvider: React.FC = ({ children }) => {
 
       setSushi(sushiLib)
       window.sushisauce = sushiLib
+    } else {
+      // const chainId = Number(defaultProvider._network.chainId)
+      // console.log(`chainId: ${chainId}`)
+      const sushiLib = new Sushi(defaultProvider, 250, false, {
+        defaultAccount: '0x0000000000000000000000000000000000000000',
+        defaultConfirmations: 1,
+        autoGasMultiplier: 1.5,
+        testing: false,
+        defaultGas: '6000000',
+        defaultGasPrice: '1000000000000',
+        accounts: [],
+        ethereumNodeTimeout: 10000,
+      })
+
+      setSushi(sushiLib)
+      window.sushisauce = sushiLib
     }
   }, [ethereum])
-
- 
 
   return <Context.Provider value={{ sushi }}>{children}</Context.Provider>
 }

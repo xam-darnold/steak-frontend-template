@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import CountUp from 'react-countup'
 import styled from 'styled-components'
 import { useWallet } from 'use-wallet'
-import Card from '../../../components/Card'
 import CardContent from '../../../components/CardContent'
 import Label from '../../../components/Label'
 import Spacer from '../../../components/Spacer'
@@ -14,10 +13,17 @@ import useAllStakedValue from '../../../hooks/useAllStakedValue'
 // import useFarms from '../../../hooks/useFarms'
 import useTokenBalance from '../../../hooks/useTokenBalance'
 import useSushi from '../../../hooks/useSushi'
-import { getSushiAddress, getSushiSupply, getFUSDPrice, getSteakPrice, getTotalXSteakValue, getSushiContract, getXSushiStakingContract} from '../../../sushi/utils'
+import {
+  getSushiAddress,
+  getSushiSupply,
+  getFUSDPrice,
+  getSteakPrice,
+  getTotalXSteakValue,
+  getSushiContract,
+  getXSushiStakingContract,
+} from '../../../sushi/utils'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import { contractAddresses } from '../../../sushi/lib/constants'
-
 
 const PendingRewards: React.FC = (sushi) => {
   const [start, setStart] = useState(0)
@@ -88,17 +94,17 @@ const Balances: React.FC = () => {
 
   const stakedValue = useAllStakedValue()
 
-  if(stakedValue[0] !== undefined) {
+  if (stakedValue[0] !== undefined) {
     for (let i = 0; i < stakedValue.length; i++) {
       fusdValue += stakedValue[i].totalWethValue.toNumber()
     }
   }
 
-
-
   useEffect(() => {
     async function fetchTotalSupply() {
-      const totalSteakHouseSupply = (new BigNumber(3300000)).times(new BigNumber(10).pow(18)) //Initial Tokens sent to SteakHouse
+      const totalSteakHouseSupply = new BigNumber(3300000).times(
+        new BigNumber(10).pow(18),
+      ) //Initial Tokens sent to SteakHouse
       let supply = await getSushiSupply(sushi)
       supply = totalSteakHouseSupply.minus(supply)
       setTotalSupply(supply)
@@ -120,11 +126,18 @@ const Balances: React.FC = () => {
     if (sushi) {
       fetchPrices()
     }
-  }, [sushi, setFusdPrice, setSteakPrice, setxSteakValue, steakContract, xsteakContract])
+  }, [
+    sushi,
+    setFusdPrice,
+    setSteakPrice,
+    setxSteakValue,
+    steakContract,
+    xsteakContract,
+  ])
 
   useEffect(() => {
     async function getMarketCap() {
-      const market = (new BigNumber(steakPrice)).times(totalSupply)
+      const market = new BigNumber(steakPrice).times(totalSupply)
       setMarketCap(market)
     }
     if (sushi) {
@@ -134,7 +147,7 @@ const Balances: React.FC = () => {
 
   return (
     <StyledWrapper>
-      <Card>
+      <StyledCard>
         <CardContent>
           <StyledBalances>
             <StyledBalance>
@@ -144,9 +157,9 @@ const Balances: React.FC = () => {
                   value={!!account ? getBalanceNumber(sushiBalance) : 'Locked'}
                   decimals={2}
                 />
-                <Label text="STEAK Price" />
+                <Label text="Your iFUSD Balance" />
                 <Value
-                  value={steakPrice ? '$' + steakPrice : 'Locked'}
+                  value={!!account ? getBalanceNumber(ifusdBalance) : 'Locked'}
                   decimals={2}
                 />
               </div>
@@ -159,23 +172,24 @@ const Balances: React.FC = () => {
             <PendingRewards /> STEAK
           </FootnoteValue>
         </Footnote>
-      </Card>
+      </StyledCard>
       <Spacer />
-      <Card>
+      <StyledCard>
         <CardContent>
           <StyledBalances>
             <StyledBalance>
               <div style={{ flex: 1 }}>
-                <Label text="Your iFUSD Balance" />
+                <Label text="STEAK Price" />
                 <Value
-                  value={!!account ? getBalanceNumber(ifusdBalance) : 'Locked'}
+                  value={steakPrice ? '$' + steakPrice : 'Locked'}
                   decimals={2}
                 />
+                        <Spacer size="md" />
                 <Label text="FUSD Price" />
-                <Value 
-                value={fusdPrice ? '$' + fusdPrice : 'Locked'}
-               decimals={0}
-               />
+                <Value
+                  value={fusdPrice ? '$' + fusdPrice : 'Locked'}
+                  decimals={0}
+                />
               </div>
             </StyledBalance>
           </StyledBalances>
@@ -183,12 +197,19 @@ const Balances: React.FC = () => {
         <Footnote>
           TVL:
           <FootnoteValue>
-              {fusdValue && xSteakValue && fusdPrice && steakPrice ? `$${(fusdValue * fusdPrice.toNumber() + xSteakValue.toNumber() * steakPrice.toNumber()).toLocaleString('en-US').slice(0, -1)}` : "Pending ..."}
+            {fusdValue && xSteakValue && fusdPrice && steakPrice
+              ? `$${(
+                  fusdValue * fusdPrice.toNumber() +
+                  xSteakValue.toNumber() * steakPrice.toNumber()
+                )
+                  .toLocaleString('en-US')
+                  .slice(0, -1)}`
+              : 'Locked'}
           </FootnoteValue>
         </Footnote>
-      </Card>
+      </StyledCard>
       <Spacer />
-      <Card>
+      <StyledCard>
         <CardContent>
           <Label text="Total STEAK Supply" />
           <Value
@@ -196,17 +217,17 @@ const Balances: React.FC = () => {
             decimals={0}
           />
           <Label text="Market Cap" />
-          <Value 
-            value={marketCap ?  getBalanceNumber(marketCap) : 'Locked'}
+          <Value
+            value={marketCap ? getBalanceNumber(marketCap) : 'Locked'}
             decimals={0}
-            prefix='$'
+            prefix="$"
           />
         </CardContent>
         <Footnote>
           New rewards per second
-          <FootnoteValue>0.124 STEAK</FootnoteValue>
+          <FootnoteValue>0.062 STEAK</FootnoteValue>
         </Footnote>
-      </Card>
+      </StyledCard>
     </StyledWrapper>
   )
 }
@@ -222,6 +243,16 @@ const FootnoteValue = styled.div`
   font-family: 'Krona One', monospace;
   float: right;
   font-size: 10px;
+`
+const StyledCard = styled.div`
+  background: ${(props) => props.theme.color.grey[200]};
+  border: 1px solid ${(props) => props.theme.color.grey[300]}ff;
+  border-radius: 12px;
+  box-shadow: inset 1px 1px 0px ${(props) => props.theme.color.grey[100]};
+  display: flex;
+  flex: 1;
+  height: 252px;
+  flex-direction: column;
 `
 
 const StyledWrapper = styled.div`

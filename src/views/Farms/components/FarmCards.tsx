@@ -15,16 +15,19 @@ import useAllStakedValue, {
 } from '../../../hooks/useAllStakedValue'
 import useFarms from '../../../hooks/useFarms'
 import useSushi from '../../../hooks/useSushi'
-import { getEarned, getMasterChefContract, getFUSDPrice } from '../../../sushi/utils'
+import {
+  getEarned,
+  getMasterChefContract,
+  getFUSDPrice,
+} from '../../../sushi/utils'
 import { bnToDec } from '../../../utils'
 
 interface FarmWithStakedValue extends Farm, StakedValue {
-  apy: BigNumber
+  apr: BigNumber
   tvl: BigNumber
 }
 
 const FarmCards: React.FC = () => {
-
   const [fusdPrice, setFusdPrice] = useState<BigNumber>()
   const [farms] = useFarms()
 
@@ -37,34 +40,31 @@ const FarmCards: React.FC = () => {
   const sushi = useSushi()
 
   const sushiPrice =
-  sushiIndex >= 0 && stakedValue[sushiIndex]
-    ? stakedValue[sushiIndex].tokenPriceInWeth
-    : new BigNumber(0)
-  
+    sushiIndex >= 0 && stakedValue[sushiIndex]
+      ? stakedValue[sushiIndex].tokenPriceInWeth
+      : new BigNumber(0)
 
-    useEffect(() => {
-      async function fetchPrices() {
-        const fusd = await getFUSDPrice(sushi)
+  useEffect(() => {
+    async function fetchPrices() {
+      const fusd = await getFUSDPrice(sushi)
 
-        setFusdPrice(new BigNumber(fusd))
-      }
-      if (sushi) {
-        fetchPrices()
-      }
-    }, [sushi, setFusdPrice])
+      setFusdPrice(new BigNumber(fusd))
+    }
+    if (sushi) {
+      fetchPrices()
+    }
+  }, [sushi, setFusdPrice])
 
   const SECONDS_PER_YEAR = new BigNumber(31536000)
-  //! Change Sushi per second 
-  const SUSHI_PER_SECOND = new BigNumber(0.124)
+  //! Change Sushi per second
+  const SUSHI_PER_SECOND = new BigNumber(0.062)
 
   if (stakedValue[0] !== undefined) {
     // console.log(stakedValue[0].poolWeight.toString())
     // console.log(stakedValue[0].totalWethValue.toString())
     // console.log(stakedValue[1].totalWethValue.toString())
-
     // console.log(stakedValue[0].tokenAmount.toString())
     // console.log(stakedValue[0].wethAmount.toString())
-
   }
 
   const rows = farms.reduce<FarmWithStakedValue[][]>(
@@ -72,17 +72,17 @@ const FarmCards: React.FC = () => {
       const farmWithStakedValue = {
         ...farm,
         ...stakedValue[i],
-        apy: stakedValue[i]
+        apr: stakedValue[i]
           ? sushiPrice
               .times(SUSHI_PER_SECOND)
               .times(SECONDS_PER_YEAR)
               .times(stakedValue[i].poolWeight)
-              .times(3)
               .div(stakedValue[i].totalWethValue)
           : null,
-        tvl: stakedValue[i] && sushi
-        ? fusdPrice.times(stakedValue[i].totalWethValue)
-        : null,
+        tvl:
+          stakedValue[i] && sushi
+            ? fusdPrice.times(stakedValue[i].totalWethValue)
+            : null,
       }
       const newFarmRows = [...farmRows]
       if (newFarmRows[newFarmRows.length - 1].length === 3) {
@@ -95,14 +95,12 @@ const FarmCards: React.FC = () => {
     [[]],
   )
 
-
   // if (rows[0][0]) {
   //   if (rows[0][0] && sushi) {
 
   //     console.log(rows[0][0].tvl.toNumber())
   //   }
   // }
- 
 
   return (
     <StyledCards>
@@ -169,15 +167,14 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
 
   const poolActive = true // startTime * 1000 - Date.now() <= 0
   return (
-    
     <StyledCardWrapper>
       {farm.tokenSymbol === 'STEAK' && <StyledCardAccent />}
       <Card>
         <CardContent>
           <StyledContent>
-          <CardIcon>
-            <img src={farm.icon.toString()} width={45} alt="farm_icon" />
-          </CardIcon>
+            <CardIcon>
+              <img src={farm.icon.toString()} width={45} alt="farm_icon" />
+            </CardIcon>
             <StyledTitle>{farm.name}</StyledTitle>
             <StyledDetails>
               <StyledDetail>Deposit {farm.lpToken}</StyledDetail>
@@ -197,23 +194,25 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
               )}
             </Button>
             <StyledInsight>
-              <span>APY:</span>
+              <span>APR:</span>
               <span>
-                {farm.apy
-                  ? `${farm.apy
+                {farm.apr && farm.apr.toNumber() !== 0
+                  ? `${farm.apr
                       .times(new BigNumber(100))
                       .toNumber()
                       .toLocaleString('en-US')
                       .slice(0, -1)}%`
+                  : farm.apr
+                  ? 'Not Incentivized'
                   : 'Loading ...'}
               </span>
               <span>TVL:</span>
               <span>
                 {farm.tvl
                   ? `$${farm.tvl
-                        .toNumber()
-                        .toLocaleString('en-US')
-                        .slice(0, -1)}`
+                      .toNumber()
+                      .toLocaleString('en-US')
+                      .slice(0, -1)}`
                   : 'Loading ...'}
               </span>
               {/* <span>

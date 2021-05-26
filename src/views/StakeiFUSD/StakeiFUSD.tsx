@@ -15,6 +15,10 @@ import { getBalanceNumber } from '../../utils/formatBalance'
 import { grey } from '../../theme/colors'
 import Button from '../../components/Button'
 
+function numberWithCommas(x: any) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 const StakeiFUSD: React.FC = () => {
   const { tokenAddress, steakAddress, fusdAddress } = {
     tokenAddress: contractAddresses.ifusd[250],
@@ -28,7 +32,7 @@ const StakeiFUSD: React.FC = () => {
   const sushi = useSushi()
   const { ethereum } = useWallet()
 
-  const calcAPY = () => {
+  const calcAPR = () => {
     if (iFusdShareValue) {
       const difference = +new Date() - +new Date(`May 19, 2021 21:00:00`)
       const twelveHoursSinceLaunch = Math.floor(
@@ -75,7 +79,7 @@ const StakeiFUSD: React.FC = () => {
         </StyledLink>
         <StyledInfo style={{ color: grey[900] }}>
               {iFusdShareValue
-                ? `APY: ${calcAPY().toLocaleString('en-US').slice(0, -1)}%`
+                ? `APR: ${calcAPR().toLocaleString('en-US').slice(0, -1)}%`
                 : 'Pending ...'}
             </StyledInfo>
         </StyledWrapper>
@@ -105,9 +109,9 @@ const StakeiFUSD: React.FC = () => {
               -To redeem FUSD staked plus fees convert iFUSD back to FUSD.{' '}
               <br />
               {totalSupply
-                ? `-There are currently ${getBalanceNumber(
-                    totalSupply,
-                  )} iFUSD in existence.`
+                ? `-There are currently ${numberWithCommas(getBalanceNumber(
+                  totalSupply
+                ).toLocaleString('en-US').slice(0, -1))} iFUSD in existence.`
                 : ''}
             </StyledInfo>
           </StyledCardWrapper>

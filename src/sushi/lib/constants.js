@@ -105,6 +105,19 @@ export const supportedPools = [
     icon: '/images/usdc.png',
   },
   {
+    pid: 5,
+    lpAddresses: {
+      250: '0xBaf1B2fD16f7294ca158B3F1065e5f27F9c72b61'
+    },
+    tokenAddresses: {
+      250: '0x05848B832E872d9eDd84AC5718D58f21fD9c9649'
+    },
+    name: 'Porterhouse!',
+    symbol: 'FTM-FUSD spLP',
+    tokenSymbol: 'FTM',
+    icon: '/images/ftm.png',
+  },
+  {
     pid: 3,
     lpAddresses: {
       250: '0x98c8cc0E444CE7490926A6C58484B937CF60E117'
@@ -129,19 +142,6 @@ export const supportedPools = [
     symbol: 'FUSDT-FUSD spLP',
     tokenSymbol: 'FUSDT',
     icon: '/images/usdt.png',
-  },
-  {
-    pid: 5,
-    lpAddresses: {
-      250: '0xBaf1B2fD16f7294ca158B3F1065e5f27F9c72b61'
-    },
-    tokenAddresses: {
-      250: '0x05848B832E872d9eDd84AC5718D58f21fD9c9649'
-    },
-    name: 'Porterhouse!',
-    symbol: 'FTM-FUSD spLP',
-    tokenSymbol: 'FTM',
-    icon: '/images/ftm.png',
   },
   {
     pid: 6,
