@@ -87,7 +87,7 @@ export const supportedPools = [
       250: '0x05848B832E872d9eDd84AC5718D58f21fD9c9649'
     },
     name: 'Ribeye!',
-    symbol: 'STEAK-FUSD spLP',
+    symbol: 'STEAK-fUSD spLP',
     tokenSymbol: 'STEAK',
     icon: '/images/steak_orange.png',
   },
@@ -100,7 +100,7 @@ export const supportedPools = [
       250: '0x05848B832E872d9eDd84AC5718D58f21fD9c9649'
     },
     name: 'New York Strip!',
-    symbol: 'USDC-FUSD spLP',
+    symbol: 'USDC-fUSD spLP',
     tokenSymbol: 'USDC',
     icon: '/images/usdc.png',
   },
@@ -113,7 +113,7 @@ export const supportedPools = [
       250: '0x05848B832E872d9eDd84AC5718D58f21fD9c9649'
     },
     name: 'Porterhouse!',
-    symbol: 'FTM-FUSD spLP',
+    symbol: 'FTM-fUSD spLP',
     tokenSymbol: 'FTM',
     icon: '/images/ftm.png',
   },
@@ -126,7 +126,7 @@ export const supportedPools = [
       250: '0x05848B832E872d9eDd84AC5718D58f21fD9c9649'
     },
     name: 'Sirloin!',
-    symbol: 'DAI-FUSD spLP',
+    symbol: 'DAI-fUSD spLP',
     tokenSymbol: 'DAI',
     icon: '/images/dai.png',
   },
@@ -139,7 +139,7 @@ export const supportedPools = [
       250: '0x05848B832E872d9eDd84AC5718D58f21fD9c9649'
     },
     name: 'T-Bone!',
-    symbol: 'FUSDT-FUSD spLP',
+    symbol: 'FUSDT-fUSD spLP',
     tokenSymbol: 'FUSDT',
     icon: '/images/usdt.png',
   },
@@ -152,7 +152,7 @@ export const supportedPools = [
       250: '0x05848B832E872d9eDd84AC5718D58f21fD9c9649'
     },
     name: 'Flank!',
-    symbol: 'SPIRIT-FUSD spLP',
+    symbol: 'SPIRIT-fUSD spLP',
     tokenSymbol: 'SPIRIT',
     icon: '/images/spirit.png',
   },
@@ -165,7 +165,7 @@ export const supportedPools = [
       250: '0x05848B832E872d9eDd84AC5718D58f21fD9c9649'
     },
     name: 'Denver Cut!',
-    symbol: 'WBTC-FUSD spLP',
+    symbol: 'WBTC-fUSD spLP',
     tokenSymbol: 'WBTC',
     icon: '/images/wbtc.png',
   },
@@ -178,7 +178,7 @@ export const supportedPools = [
       250: '0x05848B832E872d9eDd84AC5718D58f21fD9c9649'
     },
     name: 'Skirt!',
-    symbol: 'WETH-FUSD spLP',
+    symbol: 'WETH-fUSD spLP',
     tokenSymbol: 'WETH',
     icon: '/images/weth.png',
   },
@@ -191,7 +191,7 @@ export const supportedPools = [
       250: '0x05848B832E872d9eDd84AC5718D58f21fD9c9649'
     },
     name: 'Tomahawk!',
-    symbol: 'BNB-FUSD spLP',
+    symbol: 'BNB-fUSD spLP',
     tokenSymbol: 'BNB',
     icon: '/images/bnb.png',
   },

@@ -98,6 +98,7 @@ export const getFUSDPrice = async (sushi) => {
   let fusdPrice = new BigNumber(fusd[1])
     .div(new BigNumber(10).pow(6))
     .toFormat(2)
+    console.log(fusdPrice)
   return fusdPrice
 }
 

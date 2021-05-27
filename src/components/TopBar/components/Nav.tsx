@@ -6,24 +6,33 @@ const Nav: React.FC = () => {
   return (
     <StyledNav>
       <StyledLink exact activeClassName="active" to="/">
-        Home
-      </StyledLink>
-      <StyledLink exact activeClassName="active" to="/farms">
-        SteakHouse
-      </StyledLink>
-      <StyledLink exact activeClassName="active" to="/staking">
-        xSteak
-      </StyledLink>
-      <StyledLink exact activeClassName="active" to="/staking-fusd">
-        iFUSD
-      </StyledLink>
+            Home
+          </StyledLink>
+          <StyledLink exact activeClassName="active" to="/farms">
+            SteakHouse
+          </StyledLink>
+          <StyledLink exact activeClassName="active" to="/staking">
+            xSteak
+          </StyledLink>
+          <StyledAbsoluteLink
+            href="/StakeSteak_Product_Paper.pdf"
+            target="_blank"
+          >
+            Product Paper
+          </StyledAbsoluteLink>
+          <StyledAbsoluteLink
+            href="https://app.gitbook.com/@stakesteak-1/s/stak/"
+            target="_blank"
+          >
+            Docs
+          </StyledAbsoluteLink>
     </StyledNav>
   )
 }
 
 const StyledNav = styled.nav`
-  align-items: center;
-  display: flex;
+align-items: center;
+display: flex;
 `
 
 const StyledLink = styled(NavLink)`
@@ -44,22 +53,22 @@ const StyledLink = styled(NavLink)`
   }
 `
 
-// const StyledAbsoluteLink = styled.a`
-//   color: ${(props) => props.theme.color.grey[400]};
-//   font-weight: 700;
-//   padding-left: ${(props) => props.theme.spacing[3]}px;
-//   padding-right: ${(props) => props.theme.spacing[3]}px;
-//   text-decoration: none;
-//   &:hover {
-//     color: ${(props) => props.theme.color.grey[500]};
-//   }
-//   &.active {
-//     color: ${(props) => props.theme.color.primary.main};
-//   }
-//   @media (max-width: 400px) {
-//     padding-left: ${(props) => props.theme.spacing[2]}px;
-//     padding-right: ${(props) => props.theme.spacing[2]}px;
-//   }
-// `
+const StyledAbsoluteLink = styled.a`
+  color: ${(props) => props.theme.color.grey[400]};
+  font-weight: 700;
+  padding-left: ${(props) => props.theme.spacing[3]}px;
+  padding-right: ${(props) => props.theme.spacing[3]}px;
+  text-decoration: none;
+  &:hover {
+    color: ${(props) => props.theme.color.grey[500]};
+  }
+  &.active {
+    color: ${(props) => props.theme.color.primary.main};
+  }
+  @media (max-width: 400px) {
+    padding-left: ${(props) => props.theme.spacing[2]}px;
+    padding-right: ${(props) => props.theme.spacing[2]}px;
+  }
+`
 
 export default Nav

@@ -18,7 +18,7 @@ const Home: React.FC = () => {
       <StyledTitle>StakeSteak</StyledTitle>
       <Spacer size="lg" />
       <StyledImage>
-      <img src={ufo} height={200} width={200} alt="farmer_logo" />
+      <img src={tokens} height={200} width={200} alt="farmer_logo" />
       </StyledImage>
       <StyledSubtitle>Our Mission: Build lasting infrastructure to peg FUSD to $1.00</StyledSubtitle>
       <Spacer size="lg" />
@@ -36,7 +36,7 @@ const Home: React.FC = () => {
         <AddToken />
       </div>
       <PageHeader
-        icon={<img src={tokens} height={500} width={500} alt="farmer_logo" />}
+        icon={<img src={ufo} height={500} width={500} alt="farmer_logo" />}
         title="Earn yield on iFUSD and FUSD-PAIR LP"
         subtitle='"The key to success is to find a way to stand out - to be the purple cow in a field of monochrome Holsteins" -Seth Godin'
         variant='secondary'
@@ -76,7 +76,7 @@ const StyledImage = styled.div`
 const StyledSubtitle = styled.h2`
 text-align: center;
 font-family: 'Orbitron', sans-serif;
-color: ${(props) => props.theme.color.grey[800]};
+color: ${(props) => props.theme.color.grey[500]};
 margin: 10px;
 font-weight: 400;
 font-size: 20px;

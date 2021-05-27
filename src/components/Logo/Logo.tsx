@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import cow from '../../assets/img/cow_icons/steak_logo_new.png'
+import cow from '../../assets/img/cow_icons/steak_logo_green.png'
 
 const Logo: React.FC = () => {
   return (
@@ -22,6 +22,10 @@ const StyledLogo = styled(Link)`
   min-width: 44px;
   padding: 0;
   text-decoration: none;
+  @media (max-width: 768px) {
+    height: 100px;
+    width: 100px;
+  }
 `
 
 // const StyledText = styled.span`

@@ -101,30 +101,25 @@ const Balances: React.FC = () => {
   }
 
   useEffect(() => {
-    async function fetchTotalSupply() {
+    async function fetchData() {
       const totalSteakHouseSupply = new BigNumber(3300000).times(
         new BigNumber(10).pow(18),
       ) //Initial Tokens sent to SteakHouse
-      let supply = await getSushiSupply(sushi)
-      supply = totalSteakHouseSupply.minus(supply)
-      setTotalSupply(supply)
+      const balances = await Promise.all([
+        getSushiSupply(sushi),
+        getFUSDPrice(sushi),
+        getSteakPrice(sushi),
+        getTotalXSteakValue(xsteakContract, steakContract)
+      ])
+      console.log(balances)
+      const totalSupply = totalSteakHouseSupply.minus(balances[0])
+      setTotalSupply(totalSupply)
+      setFusdPrice(new BigNumber(balances[1]))
+      setSteakPrice(new BigNumber(balances[2]))
+      setxSteakValue(balances[3])
     }
     if (sushi) {
-      fetchTotalSupply()
-    }
-  }, [sushi, setTotalSupply])
-
-  useEffect(() => {
-    async function fetchPrices() {
-      const fusd = await getFUSDPrice(sushi)
-      const steak = await getSteakPrice(sushi)
-      const xsteak = await getTotalXSteakValue(xsteakContract, steakContract)
-      setFusdPrice(new BigNumber(fusd))
-      setSteakPrice(new BigNumber(steak))
-      setxSteakValue(new BigNumber(xsteak))
-    }
-    if (sushi) {
-      fetchPrices()
+      fetchData()
     }
   }, [
     sushi,
@@ -137,8 +132,10 @@ const Balances: React.FC = () => {
 
   useEffect(() => {
     async function getMarketCap() {
-      const market = new BigNumber(steakPrice).times(totalSupply)
-      setMarketCap(market)
+      if (steakPrice) {
+        const market = new BigNumber(steakPrice).times(totalSupply)
+        setMarketCap(market)
+      }
     }
     if (sushi) {
       getMarketCap()
@@ -184,8 +181,8 @@ const Balances: React.FC = () => {
                   value={steakPrice ? '$' + steakPrice : 'Locked'}
                   decimals={2}
                 />
-                        <Spacer size="md" />
-                <Label text="FUSD Price" />
+                <Spacer size="md" />
+                <Label text="fUSD Price" />
                 <Value
                   value={fusdPrice ? '$' + fusdPrice : 'Locked'}
                   decimals={0}
@@ -218,9 +215,14 @@ const Balances: React.FC = () => {
           />
           <Label text="Market Cap" />
           <Value
-            value={marketCap ? getBalanceNumber(marketCap) : 'Locked'}
+            value={
+              marketCap
+                ? `$${getBalanceNumber(marketCap)
+                    .toLocaleString('en-US')
+                    .slice(0, -4)}`
+                : 'Locked'
+            }
             decimals={0}
-            prefix="$"
           />
         </CardContent>
         <Footnote>
