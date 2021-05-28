@@ -17,7 +17,7 @@ const Nav: React.FC = () => {
       <StyledNav>
         <StyledLink
           target="_blank"
-          href="https://discord.gg/GHJdA56t"
+          href="https://discord.gg/aDmKM7E7SY"
           style={{ top: '400px', left: '650px' }}
         >
           <motion.img

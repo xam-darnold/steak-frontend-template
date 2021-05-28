@@ -48,8 +48,6 @@ const SushiProvider: React.FC = ({ children }) => {
       setSushi(sushiLib)
       window.sushisauce = sushiLib
     } else {
-      // const chainId = Number(defaultProvider._network.chainId)
-      // console.log(`chainId: ${chainId}`)
       const sushiLib = new Sushi(defaultProvider, 250, false, {
         defaultAccount: '0x0000000000000000000000000000000000000000',
         defaultConfirmations: 1,
