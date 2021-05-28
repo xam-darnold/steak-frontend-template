@@ -6,7 +6,7 @@ import cow from '../../assets/img/cow_icons/steak_logo_green.png'
 const Logo: React.FC = () => {
   return (
     <StyledLogo to="/">
-      <img src={cow} height={400} width={400} style={{ marginTop: 50 }} alt="cow_image" />
+      <img src={cow} alt="cow_image" />
     </StyledLogo>
   )
 }
@@ -16,16 +16,10 @@ const StyledLogo = styled(Link)`
   display: flex;
   justify-content: center;
   margin: 0;
-  height: 150px;
-  width: 150px;
   min-height: 44px;
   min-width: 44px;
   padding: 0;
   text-decoration: none;
-  @media (max-width: 768px) {
-    height: 100px;
-    width: 100px;
-  }
 `
 
 // const StyledText = styled.span`

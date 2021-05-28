@@ -44,6 +44,13 @@ const App: React.FC = () => {
           <Route path="/staking-fusd">
             <StakingFUSD />
           </Route>
+          <Route
+            path="/docs"
+            component={(): any => {
+              window.location.href = 'https://app.gitbook.com/@stakesteak-1/s/stak/'
+              return null
+            }}
+          />
         </Switch>
       </Router>
     </Providers>

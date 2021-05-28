@@ -66,6 +66,9 @@ const StyledIcon = styled.div`
   text-align: center;
   width: 1000px;
   justify-content: center;
+  @media (max-width: 768px) {
+    width: 200px;
+  }
 `
 const StyledImage = styled.div`
   position: relative;

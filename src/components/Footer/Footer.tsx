@@ -1,15 +1,30 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import styled from 'styled-components'
 
 import Nav from './components/Nav'
 
-const Footer: React.FC = () => (
+const Footer: React.FC = () => {
+  const [nav, setNav] = useState<Boolean>(false);
+  const showNav = () => {
+    if (window.innerWidth <= 960) {
+      setNav(false);
+    } else {
+      setNav(true);
+    }
+  };
+
+  useEffect(() => {
+    showNav();
+  }, []);
+
+  window.addEventListener("resize", showNav);
+  return (
   <StyledFooter>
     <StyledFooterInner>
-      <Nav />
+    {nav && <Nav />}
     </StyledFooterInner>
   </StyledFooter>
-)
+)}
 
 const StyledFooter = styled.footer`
   align-items: center;

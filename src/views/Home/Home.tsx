@@ -20,7 +20,7 @@ const Home: React.FC = () => {
       <StyledImage>
       <img src={tokens} height={200} width={200} alt="farmer_logo" />
       </StyledImage>
-      <StyledSubtitle>Our Mission: Build lasting infrastructure to peg FUSD to $1.00</StyledSubtitle>
+      <StyledSubtitle>Our Mission: Build lasting infrastructure to stabilize fUSD at $1.00</StyledSubtitle>
       <Spacer size="lg" />
       <Container>
         <Balances />
