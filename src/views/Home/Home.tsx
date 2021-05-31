@@ -7,7 +7,7 @@ import Spacer from '../../components/Spacer'
 import Balances from './components/Balances'
 import Harvest from './components/Harvest'
 import AddToken from './components/AddToken'
-import ufo from '../../assets/background/ufo.png'
+import ufo from '../../assets/background/ufo_new.png'
 import tokens from '../../assets/background/tokens.png'
 
 
@@ -18,7 +18,7 @@ const Home: React.FC = () => {
       <StyledTitle>StakeSteak</StyledTitle>
       <Spacer size="lg" />
       <StyledImage>
-      <img src={tokens} height={200} width={200} alt="farmer_logo" />
+      <img src={ufo} height={200} width={200} alt="farmer_logo" />
       </StyledImage>
       <StyledSubtitle>Our Mission: Build lasting infrastructure to stabilize fUSD at $1.00</StyledSubtitle>
       <Spacer size="lg" />
@@ -36,7 +36,7 @@ const Home: React.FC = () => {
         <AddToken />
       </div>
       <PageHeader
-        icon={<img src={ufo} height={500} width={500} alt="farmer_logo" />}
+        icon={<img src={tokens} height={500} width={500} alt="farmer_logo" />}
         title="Earn yield on iFUSD and FUSD-PAIR LP"
         subtitle='"The key to success is to find a way to stand out - to be the purple cow in a field of monochrome Holsteins" -Seth Godin'
         variant='secondary'
@@ -71,6 +71,7 @@ const StyledTitle = styled.h1`
 const StyledImage = styled.div`
   position: relative;
   text-align: center;
+  margin-top: 10px;
 `
 
 const StyledSubtitle = styled.h2`

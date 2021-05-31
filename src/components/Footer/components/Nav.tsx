@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
-import footerImage from '../../../assets/background/footer.png'
+import footerImage from '../../../assets/background/footer_new.png'
 import discord from '../../../assets/background/discord_planet.png'
 import steak from '../../../assets/background/steak_planet.png'
 import ifusd from '../../../assets/background/ifusd_planet.png'
@@ -111,7 +111,7 @@ const StyledImage = styled.div`
   width = 1vw;
   display: flex;
   margin: 0 auto;
-  margin-top: 600px;
+  margin-top: 700px;
   justify-content: center;
   padding-top: 50px;
   z-index: -1;
