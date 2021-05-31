@@ -14,6 +14,7 @@ import {
 } from '../sushi/utils'
 import useSushi from './useSushi'
 import useBlock from './useBlock'
+import useIntervalTrigger from './useIntervalTrigger'
 
 export interface StakedValue {
   tokenAmount: BigNumber
@@ -25,6 +26,7 @@ export interface StakedValue {
 
 const useAllStakedValue = () => {
   const [balances, setBalance] = useState([] as Array<StakedValue>)
+  const [updateQueued, setUpdateQueued] = useState(true as boolean)
   const defaultProvider = new Web3('https://rpc.fantom.network/')
   const sushi = useSushi()
   const farms = getFarms(sushi)
@@ -32,6 +34,7 @@ const useAllStakedValue = () => {
   const wethContract = getWethContract(sushi)
   const iFUSDContract = getiFUSDContract(sushi)
   const block = useBlock()
+  const trigger = useIntervalTrigger(5000)
 
   const fetchAllStakedValue = useCallback(async () => {
     let balances: Array<StakedValue> = await Promise.all(
@@ -63,10 +66,15 @@ const useAllStakedValue = () => {
   }, [masterChefContract, farms, wethContract, iFUSDContract])
 
   useEffect(() => {
-    if (defaultProvider && masterChefContract && sushi) {
+    setUpdateQueued(true)
+  }, [trigger])
+
+  useEffect(() => {
+    if (defaultProvider && masterChefContract && sushi && updateQueued) {
       fetchAllStakedValue()
+      setUpdateQueued(false)
     }
-  }, [defaultProvider, block, masterChefContract, fetchAllStakedValue, sushi])
+  }, [defaultProvider, block, masterChefContract, fetchAllStakedValue, sushi, updateQueued])
 
   return balances
 }
