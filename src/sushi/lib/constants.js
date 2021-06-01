@@ -157,19 +157,6 @@ export const supportedPools = [
     icon: '/images/spirit.png',
   },
   {
-    pid: 7,
-    lpAddresses: {
-      250: '0xD5FD7B691FCe916E4Fa920f126c2B5Ddb620d019'
-    },
-    tokenAddresses: {
-      250: '0x05848B832E872d9eDd84AC5718D58f21fD9c9649'
-    },
-    name: 'Denver Cut!',
-    symbol: 'WBTC-fUSD spLP',
-    tokenSymbol: 'WBTC',
-    icon: '/images/wbtc.png',
-  },
-  {
     pid: 8,
     lpAddresses: {
       250: '0x91FA829538Ae3678b7EFDeffaf1198e03613d52A'

@@ -2,12 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
 import footerImage from '../../../assets/background/footer_new.png'
-import discord from '../../../assets/background/discord_planet.png'
-import steak from '../../../assets/background/steak_planet.png'
-import ifusd from '../../../assets/background/ifusd_planet.png'
-import github from '../../../assets/background/github_planet.png'
-import medium from '../../../assets/background/medium_planet.png'
-import twitter from '../../../assets/background/twitter_planet.png'
+import discord from '../../../assets/background/discord_label.png'
+import steak from '../../../assets/background/steak_label.png'
+import ifusd from '../../../assets/background/ifusd_label.png'
+import github from '../../../assets/background/github_label.png'
+import medium from '../../../assets/background/medium_label.png'
+import twitter from '../../../assets/background/twitter_label.png'
 
 const transition = { duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] }
 
@@ -57,7 +57,7 @@ const Nav: React.FC = () => {
         <StyledLink
           target="_blank"
           href="https://stakesteak.com/staking-fusd"
-          style={{ top: '350px', left: '350px' }}
+          style={{ top: '375px', left: '350px' }}
         >
           <motion.img
             whileHover={{ scale: 1.1 }}
@@ -83,7 +83,7 @@ const Nav: React.FC = () => {
         <StyledLink
           target="_blank"
           href="https://stakesteak.medium.com"
-          style={{ top: '300px', right: '900px' }}
+          style={{ top: '325px', right: '900px' }}
         >
           <motion.img
             whileHover={{ scale: 1.1 }}
