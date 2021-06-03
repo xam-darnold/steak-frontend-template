@@ -7,7 +7,7 @@ import Spacer from '../../components/Spacer'
 import Balances from './components/Balances'
 import Harvest from './components/Harvest'
 import AddToken from './components/AddToken'
-import ufo from '../../assets/background/ufo_new.png'
+import ufo from '../../assets/background/ufo_wide.png'
 import tokens from '../../assets/background/tokens.png'
 
 
@@ -65,6 +65,9 @@ const StyledTitle = styled.h1`
     50% {
       opacity: 0.5;
     }
+  }
+  @media only screen and (max-width: 768px) {
+    font-size: 40px;
   }
 `
 

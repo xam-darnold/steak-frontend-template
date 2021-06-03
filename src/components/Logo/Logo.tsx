@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import cow from '../../assets/img/cow_icons/steak_logo_green.png'
+import cow from '../../assets/img/cow_icons/steak_logo_purple.png'
 
 const Logo: React.FC = () => {
   return (

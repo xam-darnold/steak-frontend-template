@@ -15,7 +15,8 @@ import {contractAddresses} from '../../../sushi/lib/constants'
 import useEnter from "../../../hooks/useEnter";
 import useAllowanceStaking from "../../../hooks/useAllowanceStaking";
 import useApproveStaking from "../../../hooks/useApproveStaking";
-import cow from "../../../assets/img/cow_icons/cow64.png"
+import steak from "../../../assets/img/steak_icons/steak_orange.png"
+
 
 interface StakeProps {
 }
@@ -57,7 +58,7 @@ const StakeSushi: React.FC<StakeProps> = () => {
       <CardContent>
         <StyledCardContentInner>
           <StyledCardHeader>
-            <CardIcon><img src={cow} width={45} alt="cow_logo" /></CardIcon>
+            <CardIcon><img src={steak} width={45} alt="cow_logo" /></CardIcon>
             <Value value={getBalanceNumber(tokenBalance)}/>
             <Label text={`STEAK Tokens Available`}/>
           </StyledCardHeader>
