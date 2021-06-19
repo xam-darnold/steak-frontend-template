@@ -13,7 +13,7 @@ const Staking: React.FC = () => {
           <>
             <Route exact path={path}>
               <PageHeader
-                icon={<img src={fusd_ifusd} height="600" width="600" alt="steakhouse_image" />}
+                icon={<img src={fusd_ifusd} height="250" width="250" alt="steakhouse_image" />}
                 subtitle="Deposit FUSD for iFUSD."
                 title="Interest-bearing FUSD!"
               />
