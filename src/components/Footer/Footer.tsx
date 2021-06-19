@@ -1,17 +1,3 @@
-// import React from 'react';
-// import { FooterContainer } from './containers/footer'
-
-// function App() {
-//   return(
-//     <>
-//       <FooterContainer/>
-//     </>
-//   )
-// }
-
-// export default App;
-
-
 import React, {useState, useEffect} from 'react'
 import styled from 'styled-components'
 

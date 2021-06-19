@@ -15,28 +15,28 @@ const SidebarData = [
 
     {
         title: 'Steakhouse',
-        path: '/steakhouse',
+        path: '/farms',
         icon: <GiIcons.GiKnifeFork/>,
         cName: 'nav-text'
     },
 
     {
-        title: 'XSteak',
-        path: '/xSteak',
+        title: 'xSTEAK',
+        path: '/staking',
         icon: <GiIcons.GiSteak/>,
         cName: 'nav-text'
     },
 
     {
-        title: 'iFusd',
-        path: '/iFusd',
+        title: 'iFUSD',
+        path: '/staking-fusd',
         icon: <RiIcons.RiCoinsLine/>,
         cName: 'nav-text'
     },
 
     {
         title: 'Product Paper',
-        path: '/productPaper',
+        path: '/StakeSteak_Product_Paper.pdf',
         icon: <FaIcons.FaNewspaper/>,
         cName: 'nav-text'
     },

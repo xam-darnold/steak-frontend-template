@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import { Link } from 'react-router-dom';
-import SidebarData from './sidebarData';
-import './Navbar.css';
+import SidebarData from './components/sidebarData';
+import './components/Navbar.css';
 import { IconContext } from 'react-icons';
 
-function Navbar() {
+const NavBar: React.FC = () => {
     const [sidebar, setSidebar] = useState(false);
 
     const showSidebar = () => setSidebar(!sidebar);
@@ -44,4 +44,4 @@ function Navbar() {
     )
 }
 
-export default Navbar
+export default NavBar
