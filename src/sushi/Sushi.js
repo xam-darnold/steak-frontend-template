@@ -41,6 +41,7 @@ export class Sushi {
     this.contracts = new Contracts(realProvider, networkId, this.web3, options)
     this.steakAddress = contractAddresses.steak[networkId]
     this.steakHouseAddress = contractAddresses.steakHouse[networkId]
+    this.steakHouseV2Address = contractAddresses.steakHouseV2[networkId]
     this.wethAddress = contractAddresses.wftm[networkId]
     this.UNIV2RouterAddress = contractAddresses.router[networkId]
     this.iFUSDAddress = contractAddresses.ifusd[networkId]

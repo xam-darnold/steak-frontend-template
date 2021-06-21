@@ -8,7 +8,7 @@ import Button from '../../components/Button'
 import Page from '../../components/Page'
 import PageHeader from '../../components/PageHeader'
 
-import Farm from '../Farm'
+import Farm from '../Farm1'
 
 import FarmCards from './components/FarmCards'
 

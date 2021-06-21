@@ -1,6 +1,7 @@
 import BigNumber from 'bignumber.js/bignumber'
 import ERC20Abi from './abi/erc20.json'
 import SteakHouseAbi from './abi/SteakHouse.json'
+import SteakHouseV2Abi from './abi/SteakHouseV2.json'
 import SteakAbi from './abi/SteakToken.json'
 import xSteakAbi from './abi/xSTEAK.json'
 import UNIV2PairAbi from './abi/uni_v2_lp.json'
@@ -8,10 +9,13 @@ import UNIV2Router from './abi/SpiritRouter.json'
 import iFUSD from './abi/iFUSD.json'
 import FUSD from './abi/fusd.json'
 import {
-  contractAddresses,
-  SUBTRACT_GAS_LIMIT,
   supportedPools,
 } from './constants.js'
+import {
+  contractAddresses,
+  SUBTRACT_GAS_LIMIT,
+  supportedPools2,
+} from './constants2.js'
 import * as Types from './types.js'
 
 export class Contracts {
@@ -26,6 +30,7 @@ export class Contracts {
 
     this.sushi = new this.web3.eth.Contract(SteakAbi.abi)
     this.masterChef = new this.web3.eth.Contract(SteakHouseAbi.abi)
+    this.steakHouse = new this.web3.eth.Contract(SteakHouseV2Abi.abi)
     this.xsushiStaking = new this.web3.eth.Contract(xSteakAbi.abi)
     this.weth = new this.web3.eth.Contract(FUSD)
     this.ifusd = new this.web3.eth.Contract(iFUSD.abi)
@@ -35,11 +40,19 @@ export class Contracts {
       Object.assign(pool, {
         lpAddress: pool.lpAddresses[networkId],
         tokenAddress: pool.tokenAddresses[networkId],
-        // !Univ2 should be using spirit swap
         lpContract: new this.web3.eth.Contract(UNIV2PairAbi),
         tokenContract: new this.web3.eth.Contract(ERC20Abi),
       }),
     )
+
+    this.pools2 = supportedPools2.map((pool) =>
+    Object.assign(pool, {
+      lpAddress: pool.lpAddresses[networkId],
+      tokenAddress: pool.tokenAddresses[networkId],
+      lpContract: new this.web3.eth.Contract(UNIV2PairAbi),
+      tokenContract: new this.web3.eth.Contract(ERC20Abi),
+    }),
+  )
 
     this.setProvider(provider, networkId)
     this.setDefaultAccount(this.web3.eth.defaultAccount)
@@ -54,6 +67,7 @@ export class Contracts {
 
     setProvider(this.sushi, contractAddresses.steak[networkId])
     setProvider(this.masterChef, contractAddresses.steakHouse[networkId])
+    setProvider(this.steakHouse, contractAddresses.steakHouseV2[networkId])
     setProvider(this.xsushiStaking, contractAddresses.xSteak[networkId])
     setProvider(this.weth, contractAddresses.wftm[networkId])
     setProvider(this.ifusd, contractAddresses.ifusd[networkId])

@@ -14,8 +14,15 @@ const SidebarData = [
     },
 
     {
-        title: 'Steakhouse',
+        title: 'SteakHouse',
         path: '/farms',
+        icon: <GiIcons.GiKnifeFork/>,
+        cName: 'nav-text'
+    },
+
+    {
+        title: 'SteakHouseV2',
+        path: '/farms2',
         icon: <GiIcons.GiKnifeFork/>,
         cName: 'nav-text'
     },

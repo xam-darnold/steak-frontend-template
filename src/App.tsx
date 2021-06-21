@@ -10,7 +10,8 @@ import ModalsProvider from './contexts/Modals'
 import TransactionProvider from './contexts/Transactions'
 import SushiProvider from './contexts/SushiProvider'
 import theme from './theme'
-import Farms from './views/Farms'
+import Farms from './views/Farms1'
+import Farms2 from './views/Farms2'
 import Home from './views/Home'
 import Staking from './views/Staking'
 import StakingFUSD from './views/StakingFUSD'
@@ -37,6 +38,9 @@ const App: React.FC = () => {
           </Route>
           <Route path="/farms">
             <Farms />
+          </Route>
+          <Route path="/farms2">
+            <Farms2 />
           </Route>
           <Route path="/staking">
             <Staking />

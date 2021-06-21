@@ -16,9 +16,15 @@ BigNumber.config({
 export const getMasterChefAddress = (sushi) => {
   return sushi && sushi.steakHouseAddress
 }
+
+export const getSteakHouseAddress = (sushi) => {
+  return sushi && sushi.steakHouseV2Address
+}
+
 export const getSushiAddress = (sushi) => {
   return sushi && sushi.steakAddress
 }
+
 export const getWethContract = (sushi) => {
   return sushi && sushi.contracts && sushi.contracts.weth
 }
@@ -26,6 +32,11 @@ export const getWethContract = (sushi) => {
 export const getMasterChefContract = (sushi) => {
   return sushi && sushi.contracts && sushi.contracts.masterChef
 }
+
+export const getSteakHouseContract = (sushi) => {
+  return sushi && sushi.contracts && sushi.contracts.steakHouse
+}
+
 export const getSushiContract = (sushi) => {
   return sushi && sushi.contracts && sushi.contracts.sushi
 }
@@ -42,13 +53,40 @@ export const getRouterContract = (sushi) => {
   return sushi && sushi.contracts && sushi.contracts.router
 }
 
-// export const getiFUSDContract = (sushi) => {
-//   return sushi && sushi.contracts && sushi.contracts.xsushiStaking
-// }
-
 export const getFarms = (sushi) => {
   return sushi
     ? sushi.contracts.pools.map(
+        ({
+          pid,
+          name,
+          symbol,
+          icon,
+          tokenAddress,
+          tokenSymbol,
+          tokenContract,
+          lpAddress,
+          lpContract,
+        }) => ({
+          pid,
+          id: symbol,
+          name,
+          lpToken: symbol,
+          lpTokenAddress: lpAddress,
+          lpContract,
+          tokenAddress,
+          tokenSymbol,
+          tokenContract,
+          earnToken: 'steak',
+          earnTokenAddress: sushi.contracts.sushi.options.address,
+          icon,
+        }),
+      )
+    : []
+}
+
+export const getFarms2 = (sushi) => {
+  return sushi
+    ? sushi.contracts.pools2.map(
         ({
           pid,
           name,
@@ -85,8 +123,20 @@ export const getPoolWeight = async (masterChefContract, pid) => {
   return new BigNumber(allocPoint).div(new BigNumber(totalAllocPoint))
 }
 
+export const getPoolWeight2 = async (masterChefContract, pid) => {
+  const { allocPoint } = await masterChefContract.methods.poolInfo(pid).call()
+  const totalAllocPoint = await masterChefContract.methods
+    .totalAllocPoint()
+    .call()
+  return new BigNumber(allocPoint).div(new BigNumber(totalAllocPoint))
+}
+
 export const getEarned = async (masterChefContract, pid, account) => {
   return masterChefContract.methods.pendingSteak(pid, account).call()
+}
+
+export const getEarned2 = async (masterChefContract, pid, account) => {
+  return masterChefContract.methods.pendingRewards(pid, account).call()
 }
 
 export const getFUSDPrice = async (sushi) => {
@@ -287,6 +337,17 @@ export const harvestAll = async (masterChefContract, pools, account) => {
 }
 
 export const getStaked = async (masterChefContract, pid, account) => {
+  try {
+    const { amount } = await masterChefContract.methods
+      .userInfo(pid, account)
+      .call()
+    return new BigNumber(amount)
+  } catch {
+    return new BigNumber(0)
+  }
+}
+
+export const getStaked2 = async (masterChefContract, pid, account) => {
   try {
     const { amount } = await masterChefContract.methods
       .userInfo(pid, account)
