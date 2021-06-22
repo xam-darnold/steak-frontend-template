@@ -3,16 +3,16 @@ import { useCallback } from 'react'
 import useSushi from './useSushi'
 import { useWallet } from 'use-wallet'
 
-import { stake, getMasterChefContract } from '../sushi/utils'
+import { stake, getSteakHouseContract } from '../sushi/utils'
 
-const useStake = (pid: number) => {
+const useStake2 = (pid: number) => {
   const { account } = useWallet()
   const sushi = useSushi()
 
   const handleStake = useCallback(
     async (amount: string) => {
       const txHash = await stake(
-        getMasterChefContract(sushi),
+        getSteakHouseContract(sushi),
         pid,
         amount,
         account,
@@ -25,4 +25,4 @@ const useStake = (pid: number) => {
   return { onStake: handleStake }
 }
 
-export default useStake
+export default useStake2

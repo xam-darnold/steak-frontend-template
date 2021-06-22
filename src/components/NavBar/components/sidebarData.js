@@ -23,7 +23,7 @@ const SidebarData = [
     {
         title: 'SteakHouseV2',
         path: '/farms2',
-        icon: <GiIcons.GiKnifeFork/>,
+        icon: <GiIcons.GiForkKnifeSpoon/>,
         cName: 'nav-text'
     },
 

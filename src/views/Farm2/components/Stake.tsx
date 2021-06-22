@@ -10,13 +10,13 @@ import IconButton from '../../../components/IconButton'
 import { AddIcon } from '../../../components/icons'
 import Label from '../../../components/Label'
 import Value from '../../../components/Value'
-import useAllowance from '../../../hooks/useAllowance2'
-import useApprove from '../../../hooks/useApprove2'
+import useAllowance2 from '../../../hooks/useAllowance2'
+import useApprove2 from '../../../hooks/useApprove2'
 import useModal from '../../../hooks/useModal'
-import useStake from '../../../hooks/useStake2'
-import useStakedBalance from '../../../hooks/useStakedBalance2'
+import useStake2 from '../../../hooks/useStake2'
+import useStakedBalance2 from '../../../hooks/useStakedBalance2'
 import useTokenBalance from '../../../hooks/useTokenBalance'
-import useUnstake from '../../../hooks/useUnstake2'
+import useUnstake2 from '../../../hooks/useUnstake2'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import DepositModal from './DepositModal'
 import WithdrawModal from './WithdrawModal'
@@ -31,20 +31,20 @@ interface StakeProps {
 const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName }) => {
   const [requestedApproval, setRequestedApproval] = useState(false)
 
-  const allowance = useAllowance(lpContract)
-  const { onApprove } = useApprove(lpContract)
+  const allowance = useAllowance2(lpContract)
+  const { onApprove } = useApprove2(lpContract)
 
 
   const tokenBalance = useTokenBalance(lpContract.options.address)
-  const stakedBalance = useStakedBalance(pid)
+  const stakedBalance = useStakedBalance2(pid)
   //const masterChefBalance = useMasterChefBalance(lpContract.options.address)
 
   // TODO: Figure out a good way to display percentageOfPool for a user, possibily introduce a hover addition when hovering over stakedBalance
   //const percentageOfStake = (getBalanceNumber(stakedBalance) / getBalanceNumber(masterChefBalance)) * 100
   //console.log(percentageOfStake)
 
-  const { onStake } = useStake(pid)
-  const { onUnstake } = useUnstake(pid)
+  const { onStake } = useStake2(pid)
+  const { onUnstake } = useUnstake2(pid)
 
   const [onPresentDeposit] = useModal(
     <DepositModal

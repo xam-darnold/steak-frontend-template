@@ -79,6 +79,13 @@ export class Contracts {
         setProvider(tokenContract, tokenAddress)
       },
     )
+
+    this.pools2.forEach(
+      ({ lpContract, lpAddress, tokenContract, tokenAddress }) => {
+        setProvider(lpContract, lpAddress)
+        setProvider(tokenContract, tokenAddress)
+      },
+    )
   }
 
   setDefaultAccount(account) {

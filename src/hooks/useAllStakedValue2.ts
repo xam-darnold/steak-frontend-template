@@ -5,12 +5,10 @@ import Web3 from 'web3'
 
 
 import {
-  getMasterChefContract,
-  getWethContract,
+  getSteakHouseContract,
   getiFUSDContract,
-  getFarms,
-  getTotalLPWethValue,
-  getTotalIFUSDValue
+  getFarms2,
+  getTotalLPWethValue2
 } from '../sushi/utils'
 import useSushi from './useSushi'
 import useBlock from './useBlock'
@@ -21,17 +19,16 @@ export interface StakedValue {
   wethAmount: BigNumber
   totalWethValue: BigNumber
   tokenPriceInWeth: BigNumber
-  poolWeight: BigNumber
+  poolWeight: BigNumber[]
 }
 
-const useAllStakedValue = () => {
+const useAllStakedValue2 = () => {
   const [balances, setBalance] = useState([] as Array<StakedValue>)
   const [updateQueued, setUpdateQueued] = useState(true as boolean)
   const defaultProvider = new Web3('https://rpc.fantom.network/')
   const sushi = useSushi()
-  const farms = getFarms(sushi)
-  const masterChefContract = getMasterChefContract(sushi)
-  const wethContract = getWethContract(sushi)
+  const farms = getFarms2(sushi)
+  const steakHouseContract = getSteakHouseContract(sushi)
   const iFUSDContract = getiFUSDContract(sushi)
   const block = useBlock()
   const trigger = useIntervalTrigger(5000)
@@ -48,9 +45,9 @@ const useAllStakedValue = () => {
           lpContract: Contract
           tokenContract: Contract
         }) =>
-          getTotalLPWethValue(
-            masterChefContract,
-            wethContract,
+          getTotalLPWethValue2(
+            steakHouseContract,
+            iFUSDContract,
             lpContract,
             tokenContract,
             pid,
@@ -59,24 +56,21 @@ const useAllStakedValue = () => {
 
     )
 
-    const iFUSDBalance = await getTotalIFUSDValue(iFUSDContract, masterChefContract)
-    balances[0] = iFUSDBalance
-
     setBalance(balances)
-  }, [masterChefContract, farms, wethContract, iFUSDContract])
+  }, [steakHouseContract, farms, iFUSDContract])
 
   useEffect(() => {
     setUpdateQueued(true)
   }, [trigger])
 
   useEffect(() => {
-    if (defaultProvider && masterChefContract && sushi && updateQueued) {
+    if (defaultProvider && steakHouseContract && sushi && updateQueued) {
       fetchAllStakedValue()
       setUpdateQueued(false)
     }
-  }, [defaultProvider, block, masterChefContract, fetchAllStakedValue, sushi, updateQueued])
+  }, [defaultProvider, block, steakHouseContract, fetchAllStakedValue, sushi, updateQueued])
 
   return balances
 }
 
-export default useAllStakedValue
+export default useAllStakedValue2

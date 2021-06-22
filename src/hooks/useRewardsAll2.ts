@@ -3,22 +3,21 @@ import { useCallback } from 'react'
 import useSushi from './useSushi'
 import { useWallet } from 'use-wallet'
 
-import { harvestAll, getMasterChefContract, getFarms } from '../sushi/utils'
+import { harvestAll, getSteakHouseContract, getFarms2 } from '../sushi/utils'
 
-const useRewardsAll = () => {
+const useRewardsAll2 = () => {
   const { account } = useWallet()
   const sushi = useSushi()
-  const masterChefContract = getMasterChefContract(sushi)
-  const farms = getFarms(sushi)
+  const steakHouseContract = getSteakHouseContract(sushi)
+  const farms = getFarms2(sushi)
 
-  //! Changed dependenciees from sushi to masteerChefContract
   const handleReward = useCallback(async () => {
-    await harvestAll(masterChefContract, farms, account)
+    await harvestAll(steakHouseContract, farms, account)
     // console.log(txHash)
     // return txHash
-  }, [account, farms, masterChefContract])
+  }, [account, farms, steakHouseContract])
 
   return { onReward: handleReward }
 }
 
-export default useRewardsAll
+export default useRewardsAll2

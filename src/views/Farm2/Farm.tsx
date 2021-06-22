@@ -5,7 +5,7 @@ import { useWallet } from 'use-wallet'
 import { provider } from 'web3-core'
 import PageHeader from '../../components/PageHeader'
 import Spacer from '../../components/Spacer'
-import useFarm from '../../hooks/useFarm2'
+import useFarm2 from '../../hooks/useFarm2'
 import { getContract } from '../../utils/erc20'
 import Harvest from './components/Harvest'
 import Stake from './components/Stake'
@@ -14,14 +14,14 @@ const Farm: React.FC = () => {
   //@ts-ignore
   const { farmId } = useParams()
 
-  const { pid, lpToken, lpTokenAddress, earnToken, name, icon } = useFarm(
+  const { pid, lpToken, lpTokenAddress, earnToken, name, icon } = useFarm2(
     farmId,
   ) || {
     pid: 0,
     lpToken: '',
     lpTokenAddress: '',
     tokenAddress: '',
-    earnToken: '',
+    earnToken: ['', '', '', '', ''],
     name: '',
     icon: '',
   }
@@ -41,7 +41,7 @@ const Farm: React.FC = () => {
   }, [lpToken])
 
   const earnTokenName = useMemo(() => {
-    return earnToken.toUpperCase()
+    return earnToken
   }, [earnToken])
 
   return (
@@ -55,7 +55,7 @@ const Farm: React.FC = () => {
             alt="icon_image"
           />
         }
-        subtitle={`Deposit ${lpTokenName}  Tokens and earn ${earnTokenName}`}
+        subtitle={`Deposit ${lpTokenName}  Tokens and earn ${earnTokenName[2]}`}
         title={name}
       />
       <StyledFarm>

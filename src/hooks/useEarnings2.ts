@@ -3,31 +3,31 @@ import { useCallback, useEffect, useState } from 'react'
 import BigNumber from 'bignumber.js'
 import { useWallet } from 'use-wallet'
 
-import { getEarned, getMasterChefContract } from '../sushi/utils'
+import { getEarned2, getSteakHouseContract } from '../sushi/utils'
 import useSushi from './useSushi'
 import useBlock from './useBlock'
 
-const useEarnings = (pid: number) => {
+const useEarnings2 = (pid: number) => {
   const [balance, setBalance] = useState(new BigNumber(0))
   const {
     account,
   }: { account: string } = useWallet()
   const sushi = useSushi()
-  const masterChefContract = getMasterChefContract(sushi)
+  const steakHouseContract = getSteakHouseContract(sushi)
   const block = useBlock()
 
   const fetchBalance = useCallback(async () => {
-    const balance = await getEarned(masterChefContract, pid, account)
+    const balance = await getEarned2(steakHouseContract, pid, account)
     setBalance(new BigNumber(balance))
-  }, [account, masterChefContract, pid])
+  }, [account, steakHouseContract, pid])
 
   useEffect(() => {
-    if (account && masterChefContract && sushi) {
+    if (account && steakHouseContract && sushi) {
       fetchBalance()
     }
-  }, [account, block, masterChefContract, setBalance, sushi, fetchBalance])
+  }, [account, block, steakHouseContract, setBalance, sushi, fetchBalance])
 
   return balance
 }
 
-export default useEarnings
+export default useEarnings2

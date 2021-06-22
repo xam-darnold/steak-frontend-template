@@ -9,11 +9,11 @@ import CardContent from '../../../components/CardContent'
 import CardIcon from '../../../components/CardIcon'
 import Loader from '../../../components/Loader'
 import Spacer from '../../../components/Spacer'
-import { Farm } from '../../../contexts/Farms'
+import { Farm2 } from '../../../contexts/Farms2'
 import useAllStakedValue, {
   StakedValue,
 } from '../../../hooks/useAllStakedValue2'
-import useFarms from '../../../hooks/useFarms2'
+import useFarms2 from '../../../hooks/useFarms2'
 import useSushi from '../../../hooks/useSushi'
 import {
   getEarned,
@@ -22,14 +22,19 @@ import {
 } from '../../../sushi/utils'
 import { bnToDec } from '../../../utils'
 
-interface FarmWithStakedValue extends Farm, StakedValue {
-  apr: BigNumber
+interface FarmWithStakedValue extends Farm2, StakedValue {
+  apr0: BigNumber
+  apr1: BigNumber
+  apr2: BigNumber
+  apr3: BigNumber
+  apr4: BigNumber
   tvl: BigNumber
 }
 
 const FarmCards: React.FC = () => {
   const [fusdPrice, setFusdPrice] = useState<BigNumber>()
-  const [farms] = useFarms()
+  const [farms] = useFarms2()
+  // console.log(farms)
 
   const stakedValue = useAllStakedValue()
 
@@ -57,6 +62,10 @@ const FarmCards: React.FC = () => {
 
   const SECONDS_PER_YEAR = new BigNumber(31536000)
   const SUSHI_PER_SECOND = new BigNumber(0.031)
+  const REWARD1_PER_SECOND = new BigNumber(0.031)
+  const REWARD2_PER_SECOND = new BigNumber(0.031)
+  const REWARD3_PER_SECOND = new BigNumber(0.031)
+  const REWARD4_PER_SECOND = new BigNumber(0.031)
 
   if (stakedValue[0] !== undefined) {
     // console.log(stakedValue[0].poolWeight.toString())
@@ -71,11 +80,39 @@ const FarmCards: React.FC = () => {
       const farmWithStakedValue = {
         ...farm,
         ...stakedValue[i],
-        apr: stakedValue[i]
+        apr0: stakedValue[i]
           ? sushiPrice
               .times(SUSHI_PER_SECOND)
               .times(SECONDS_PER_YEAR)
-              .times(stakedValue[i].poolWeight)
+              .times(stakedValue[i].poolWeight[0])
+              .div(stakedValue[i].totalWethValue)
+          : null,
+        apr1: stakedValue[i]
+          ? sushiPrice
+              .times(REWARD1_PER_SECOND)
+              .times(SECONDS_PER_YEAR)
+              .times(stakedValue[i].poolWeight[1])
+              .div(stakedValue[i].totalWethValue)
+          : null,
+        apr2: stakedValue[i]
+          ? sushiPrice
+              .times(REWARD2_PER_SECOND)
+              .times(SECONDS_PER_YEAR)
+              .times(stakedValue[i].poolWeight[2])
+              .div(stakedValue[i].totalWethValue)
+          : null,
+        apr3: stakedValue[i]
+          ? sushiPrice
+              .times(REWARD3_PER_SECOND)
+              .times(SECONDS_PER_YEAR)
+              .times(stakedValue[i].poolWeight[3])
+              .div(stakedValue[i].totalWethValue)
+          : null,
+        apr4: stakedValue[i]
+          ? sushiPrice
+              .times(REWARD4_PER_SECOND)
+              .times(SECONDS_PER_YEAR)
+              .times(stakedValue[i].poolWeight[4])
               .div(stakedValue[i].totalWethValue)
           : null,
         tvl:
@@ -93,6 +130,9 @@ const FarmCards: React.FC = () => {
     },
     [[]],
   )
+  // if (rows) {
+  //   console.log(rows)
+  // }
 
   // if (rows[0][0]) {
   //   if (rows[0][0] && sushi) {
@@ -177,7 +217,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
             <StyledTitle>{farm.name}</StyledTitle>
             <StyledDetails>
               <StyledDetail>Deposit {farm.lpToken}</StyledDetail>
-              <StyledDetail>Earn {farm.earnToken.toUpperCase()}</StyledDetail>
+              <StyledDetail>Earn {farm.earnToken}</StyledDetail>
             </StyledDetails>
             <Spacer />
             <Button
@@ -195,13 +235,13 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
             <StyledInsight>
               <span>APR:</span>
               <span>
-                {farm.apr && farm.apr.toNumber() !== 0
-                  ? `${farm.apr
+                {farm.apr0 && farm.apr0.toNumber() !== 0
+                  ? `${farm.apr0
                       .times(new BigNumber(100))
                       .toNumber()
                       .toLocaleString('en-US')
                       .slice(0, -1)}%`
-                  : farm.apr
+                  : farm.apr0
                   ? 'Not Incentivized'
                   : 'Loading ...'}
               </span>

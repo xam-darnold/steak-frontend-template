@@ -5,6 +5,7 @@ import * as AiIcons from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import SidebarData from './components/sidebarData'
 import AccountButton from './components/AccountButton'
+import peggyplayer from '../../assets/img/Peggy_Player.png'
 import './components/Navbar.css'
 import { IconContext } from 'react-icons'
 
@@ -42,6 +43,9 @@ const NavBar: React.FC = () => {
               )
             })}
           </ul>
+          <div>
+            {peggyplayer}
+          </div>
         </nav>
       </IconContext.Provider>
     </>

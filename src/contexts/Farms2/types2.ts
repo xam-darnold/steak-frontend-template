@@ -1,20 +1,20 @@
 import { Contract } from 'web3-eth-contract'
 
-export interface Farm {
+export interface Farm2 {
   pid: number
   name: string
   lpToken: string
   lpTokenAddress: string
   lpContract: Contract
   tokenAddress: string
-  earnToken: string
+  earnToken: string[]
   earnTokenAddress: string
   icon: React.ReactNode
   id: string
   tokenSymbol: string
 }
 
-export interface FarmsContext {
-  farms: Farm[]
+export interface FarmsContext2 {
+  farms: Farm2[]
   unharvested: number
 }

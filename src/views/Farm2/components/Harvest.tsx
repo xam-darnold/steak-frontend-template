@@ -6,8 +6,8 @@ import CardContent from '../../../components/CardContent'
 import CardIcon from '../../../components/CardIcon'
 import Label from '../../../components/Label'
 import Value from '../../../components/Value'
-import useEarnings from '../../../hooks/useEarnings2'
-import useReward from '../../../hooks/useReward2'
+import useEarnings2 from '../../../hooks/useEarnings2'
+import useReward2 from '../../../hooks/useReward2'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import steak from '../../../assets/img/steak_icons/steak_orange.png'
 
@@ -16,9 +16,9 @@ interface HarvestProps {
 }
 
 const Harvest: React.FC<HarvestProps> = ({ pid }) => {
-  const earnings = useEarnings(pid)
+  const earnings = useEarnings2(pid)
   const [pendingTx, setPendingTx] = useState(false)
-  const { onReward } = useReward(pid)
+  const { onReward } = useReward2(pid)
 
   return (
     <Card>

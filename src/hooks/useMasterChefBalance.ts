@@ -9,7 +9,7 @@ import useBlock from './useBlock'
 
 import { contractAddresses } from '../sushi/lib/constants'
 
-const useMasterChefBalance = (tokenAddress: string) => {
+const useMasterChefBalance2 = (tokenAddress: string) => {
   const [balance, setBalance] = useState(new BigNumber(0))
   const {
     account,
@@ -31,4 +31,4 @@ const useMasterChefBalance = (tokenAddress: string) => {
   return balance
 }
 
-export default useMasterChefBalance
+export default useMasterChefBalance2

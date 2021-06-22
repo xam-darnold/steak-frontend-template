@@ -7,33 +7,33 @@ import { provider } from 'web3-core'
 import { Contract } from 'web3-eth-contract'
 
 import { getAllowance } from '../utils/erc20'
-import { getMasterChefContract } from '../sushi/utils'
+import { getSteakHouseContract } from '../sushi/utils'
 
-const useAllowance = (lpContract: Contract) => {
+const useAllowance2 = (lpContract: Contract) => {
   const [allowance, setAllowance] = useState(new BigNumber(0))
   const { account }: { account: string; ethereum: provider } = useWallet()
   const sushi = useSushi()
-  const masterChefContract = getMasterChefContract(sushi)
+  const steakHouseContract = getSteakHouseContract(sushi)
 
   const fetchAllowance = useCallback(async () => {
     const allowance = await getAllowance(
       lpContract,
       account,
-      masterChefContract.options.address,
+      steakHouseContract.options.address,
     )
     setAllowance(new BigNumber(allowance))
-  }, [account, masterChefContract, lpContract])
+  }, [account, steakHouseContract, lpContract])
 
 
   useEffect(() => {
-    if (account && masterChefContract && lpContract) {
+    if (account && steakHouseContract && lpContract) {
       fetchAllowance()
     }
     let refreshInterval = setInterval(fetchAllowance, 10000)
     return () => clearInterval(refreshInterval)
-  }, [account, masterChefContract, lpContract, fetchAllowance])
+  }, [account, steakHouseContract, lpContract, fetchAllowance])
 
   return allowance
 }
 
-export default useAllowance
+export default useAllowance2
