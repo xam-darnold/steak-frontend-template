@@ -51,6 +51,13 @@ const App: React.FC = () => {
               return null
             }}
           />
+                    <Route
+            path="/bug"
+            component={(): any => {
+              window.location.href = 'https://immunefi.com/bounty/stakesteak/'
+              return null
+            }}
+          />
         </Switch>
       </Router>
     </Providers>

@@ -61,22 +61,22 @@ const TopBar: React.FC<TopBarProps> = ({ onPresentMobileMenu }) => {
             </li>
             <li className="nav-item">
               <Link
-                to="/StakeSteak_Product_Paper.pdf"
-                target="_blank"
-                className="nav-links"
-                onClick={closeMobileMenu}
-              >
-                Product Paper
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
                 to="/docs"
                 target="_blank"
                 className="nav-links"
                 onClick={closeMobileMenu}
               >
                 Docs
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link
+                to="/bug"
+                target="_blank"
+                className="nav-links"
+                onClick={closeMobileMenu}
+              >
+                Bug Bounty
               </Link>
             </li>
           </ul>
