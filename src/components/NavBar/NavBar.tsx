@@ -43,14 +43,25 @@ const NavBar: React.FC = () => {
               )
             })}
           </ul>
-          <div>
-            {peggyplayer}
-          </div>
+          <StyledNavImage>
+            <img src={peggyplayer} />
+          </StyledNavImage>
         </nav>
       </IconContext.Provider>
     </>
   )
 }
+
+const StyledNavImage = styled.div`
+  display: flex;
+  position: absolute;
+  align-items: flex-end;
+  justify-content: flex-end;
+  width: 250px;
+  padding-top: 400px;
+
+
+`
 
 const StyledAccountButtonWrapper = styled.div`
   align-items: center;
