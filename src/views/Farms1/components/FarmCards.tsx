@@ -196,15 +196,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
             <StyledInsight>
               <span>APR:</span>
               <span>
-                {farm.apr && farm.apr.toNumber() !== 0
-                  ? `${farm.apr
-                      .times(new BigNumber(100))
-                      .toNumber()
-                      .toLocaleString('en-US')
-                      .slice(0, -1)}%`
-                  : farm.apr
-                  ? 'Not Incentivized'
-                  : 'Loading ...'}
+                Not Incentivized
               </span>
               <span>TVL:</span>
               <span>
