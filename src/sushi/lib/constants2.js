@@ -46,7 +46,7 @@ export const contractAddresses = {
     250: '0x59cC5f5F9309448Fe4a7Bd2dB8eB2DaC0F8fCEA7',
   },
   steakHouseV2: {
-    250: '0x7D126886C9BFd1d99EE4716d6ac505901f8918A6'
+    250: '0x5bC37CAAA3b490b65F5A50E2553f4312126A8b7e'
   },
   wftm: {
     250: '0xad84341756bf337f5a0164515b1f6f993d194e1f'
@@ -79,7 +79,7 @@ export const supportedPools2 = [
     name: 'Ribeye!',
     symbol: 'STEAK-iFUSD spLP',
     tokenSymbol: 'STEAK',
-    earnToken: ["steak", "brad", "spirit", "spirit", "spirit"],
+    earnToken: 'STEAK and BRAD',
     icon: '/images/steak_orange.png',
   },
   {
@@ -93,7 +93,7 @@ export const supportedPools2 = [
     name: 'New York Strip!',
     symbol: 'USDC-iFUSD spLP',
     tokenSymbol: 'USDC',
-    earnToken: ["steak", "brad", "spirit", "spirit", "spirit"],
+    earnToken: 'STEAK and BRAD',
     icon: '/images/usdc.png',
   },
   {
@@ -107,7 +107,7 @@ export const supportedPools2 = [
     name: 'Porterhouse!',
     symbol: 'FTM-iFUSD spLP',
     tokenSymbol: 'FTM',
-    earnToken: ["steak", "brad", "spirit", "spirit", "spirit"],
+    earnToken: 'STEAK and BRAD',
     icon: '/images/ftm.png',
   },
 ]

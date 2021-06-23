@@ -19,6 +19,7 @@ import {
   getEarned,
   getMasterChefContract,
   getFUSDPrice,
+  getiFUSDShareValue
 } from '../../../sushi/utils'
 import { bnToDec } from '../../../utils'
 
@@ -33,6 +34,7 @@ interface FarmWithStakedValue extends Farm2, StakedValue {
 
 const FarmCards: React.FC = () => {
   const [fusdPrice, setFusdPrice] = useState<BigNumber>()
+  const [iFUSDShareValue, setiFUSDShareValue] = useState<BigNumber>()
   const [farms] = useFarms2()
   // console.log(farms)
 
@@ -51,14 +53,18 @@ const FarmCards: React.FC = () => {
 
   useEffect(() => {
     async function fetchPrices() {
-      const fusd = await getFUSDPrice(sushi)
+      const fusdInfo = await Promise.all([
+        getFUSDPrice(sushi),
+        getiFUSDShareValue(sushi)
+      ])
 
-      setFusdPrice(new BigNumber(fusd))
+      setFusdPrice(new BigNumber(fusdInfo[0]))
+      setiFUSDShareValue((fusdInfo[1]).div(new BigNumber(10).pow(18)))
     }
     if (sushi) {
       fetchPrices()
     }
-  }, [sushi, setFusdPrice])
+  }, [sushi, setFusdPrice, setiFUSDShareValue])
 
   const SECONDS_PER_YEAR = new BigNumber(31536000)
   const SUSHI_PER_SECOND = new BigNumber(0.031)
@@ -117,7 +123,7 @@ const FarmCards: React.FC = () => {
           : null,
         tvl:
           stakedValue[i] && sushi
-            ? fusdPrice.times(stakedValue[i].totalWethValue)
+            ? fusdPrice.times(iFUSDShareValue).times(stakedValue[i].totalWethValue)
             : null,
       }
       const newFarmRows = [...farmRows]
@@ -223,7 +229,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
             <Button
               disabled={!poolActive}
               text={poolActive ? 'Select' : undefined}
-              to={`/farms/${farm.id}`}
+              to={`/farms2/${farm.id}`}
             >
               {!poolActive && (
                 <Countdown

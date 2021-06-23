@@ -10,6 +10,7 @@ import IconButton from '../../../components/IconButton'
 import { AddIcon } from '../../../components/icons'
 import Label from '../../../components/Label'
 import Value from '../../../components/Value'
+import Spacer from '../../../components/Spacer'
 import useAllowance2 from '../../../hooks/useAllowance2'
 import useApprove2 from '../../../hooks/useApprove2'
 import useModal from '../../../hooks/useModal'
@@ -20,7 +21,7 @@ import useUnstake2 from '../../../hooks/useUnstake2'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import DepositModal from './DepositModal'
 import WithdrawModal from './WithdrawModal'
-import cow from '../../../assets/img/cow_icons/cow64.png'
+import cow from '../../../assets/img/cow_icons/peggy.png'
 
 interface StakeProps {
   lpContract: Contract
@@ -81,8 +82,9 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName }) => {
         <StyledCardContentInner>
           <StyledCardHeader>
             <CardIcon><img src={cow} width={45} alt="cow_image" /></CardIcon>
-            <Value value={getBalanceNumber(stakedBalance)} />
+            <Spacer />
             <Label text={`${tokenName} Tokens Staked`} />
+            <Value value={getBalanceNumber(stakedBalance)} />
           </StyledCardHeader>
           <StyledCardActions>
             {!allowance.toNumber() ? (

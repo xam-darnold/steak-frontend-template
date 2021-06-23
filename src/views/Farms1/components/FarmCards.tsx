@@ -30,6 +30,7 @@ interface FarmWithStakedValue extends Farm, StakedValue {
 const FarmCards: React.FC = () => {
   const [fusdPrice, setFusdPrice] = useState<BigNumber>()
   const [farms] = useFarms()
+  console.log(farms)
 
   const stakedValue = useAllStakedValue()
 

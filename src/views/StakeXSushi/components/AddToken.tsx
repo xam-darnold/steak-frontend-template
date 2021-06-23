@@ -3,10 +3,10 @@ import Button from '../../../components/Button'
 import { useWallet } from 'use-wallet'
 
 const AddToken: React.FC = () => {
-  const tokenAddress = '0x05848B832E872d9eDd84AC5718D58f21fD9c9649'
+  const tokenAddress = '0xb632c5d42BD4a44a617608Ad1c7d38f597E22E3C'
   const tokenSymbol = 'STEAK'
   const tokenDecimals = 18
-  const tokenImage = 'https://stakesteak.com/images/steak_orange.png'
+  const tokenImage = 'https://stakesteak.com/images/steak_purple.png'
   const { ethereum }: { ethereum: any } = useWallet()
 
   const handleAddToken = async () => {
@@ -35,7 +35,7 @@ const AddToken: React.FC = () => {
   return (
 
     <Button
-      text={'Add STEAK to MetaMask'}
+      text={'Add xSTEAK to MetaMask'}
       onClick={async () => {
         await handleAddToken()
       }}

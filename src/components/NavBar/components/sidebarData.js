@@ -1,5 +1,5 @@
 import React from 'react'
-import * as FaIcons from 'react-icons/fa'
+// import * as FaIcons from 'react-icons/fa'
 import * as AiIcons from 'react-icons/ai'
 import * as IoIcons from 'react-icons/io'
 import * as GiIcons from 'react-icons/gi'
@@ -42,18 +42,18 @@ const SidebarData = [
     },
 
     {
-        title: 'Product Paper',
-        path: '/StakeSteak_Product_Paper.pdf',
-        icon: <FaIcons.FaNewspaper/>,
-        cName: 'nav-text'
-    },
-
-    {
         title: 'Docs',
         path: '/docs',
         icon: <IoIcons.IoIosPaper/>,
         cName: 'nav-text'
-    }
+    },
+
+    {
+        title: 'Bug Bounty',
+        path: '/bug',
+        icon: <AiIcons.AiFillBug/>,
+        cName: 'nav-text'
+    },
 ]
 
 export default SidebarData

@@ -150,7 +150,12 @@ export const getEarned = async (masterChefContract, pid, account) => {
 }
 
 export const getEarned2 = async (masterChefContract, pid, account) => {
-  return masterChefContract.methods.pendingRewards(pid, account).call()
+  const pendingRewards = await masterChefContract.methods.pendingRewards(pid, account).call()
+  let pendingRewards2 = []
+  for (let i = 0; i < pendingRewards.length; i++) {
+    pendingRewards2[i] = new BigNumber(pendingRewards[i])
+  }
+  return pendingRewards2
 }
 
 export const getFUSDPrice = async (sushi) => {
@@ -404,6 +409,18 @@ export const getStaked = async (masterChefContract, pid, account) => {
   try {
     const { amount } = await masterChefContract.methods
       .userInfo(pid, account)
+      .call()
+      console.log(amount)
+    return new BigNumber(amount)
+  } catch {
+    return new BigNumber(0)
+  }
+}
+
+export const getStaked2 = async (masterChefContract, pid, account) => {
+  try {
+    const { amount } = await masterChefContract.methods
+      .getUserInfo(pid, account)
       .call()
     return new BigNumber(amount)
   } catch {

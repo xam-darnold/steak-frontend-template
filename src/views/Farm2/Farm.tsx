@@ -21,7 +21,7 @@ const Farm: React.FC = () => {
     lpToken: '',
     lpTokenAddress: '',
     tokenAddress: '',
-    earnToken: ['', '', '', '', ''],
+    earnToken: '',
     name: '',
     icon: '',
   }
@@ -55,7 +55,7 @@ const Farm: React.FC = () => {
             alt="icon_image"
           />
         }
-        subtitle={`Deposit ${lpTokenName}  Tokens and earn ${earnTokenName[2]}`}
+        subtitle={`Deposit ${lpTokenName}  Tokens and earn ${earnTokenName}`}
         title={name}
       />
       <StyledFarm>
@@ -79,8 +79,9 @@ const Farm: React.FC = () => {
         <StyledCardsWrapper>
           <StyledCardWrapper>
             <StyledInfo>
-              Every time you stake and unstake LP tokens, the contract will
-              automatically harvest STEAK rewards for you!
+              -Every time you stake and unstake LP tokens, the contract will
+              automatically harvest STEAK rewards for you! <br/>
+              -BRAD tokens are valueless test tokens that are used to test the functionality of SteakHouseV2
             </StyledInfo>
           </StyledCardWrapper>
         </StyledCardsWrapper>
@@ -119,18 +120,18 @@ const StyledCardWrapper = styled.div`
 `
 
 const StyledInfo = styled.h3`
-  font-family: 'Krona One', monospace;
+  font-family: 'Bebas Neue', monospace;
   color: ${(props) => props.theme.color.grey[400]};
   background: ${(props) => props.theme.color.grey[200]};
   border: 1px solid ${(props) => props.theme.color.grey[300]}ff;
   border-radius: 12px;
   box-shadow: inset 1px 1px 0px ${(props) => props.theme.color.grey[100]};
   color: ${(props) => props.theme.color.grey[400]};
-  font-size: 16px;
+  font-size: 30px;
   font-weight: 400;
   margin: 0;
   padding: 5px;
-  text-align: center;
+  text-align: left;
 `
 
 // const StyledLink = styled.a`

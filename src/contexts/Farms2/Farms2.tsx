@@ -11,9 +11,8 @@ const Farms2: React.FC = ({ children }) => {
   const [unharvested, setUnharvested] = useState(0)
 
   const sushi = useSushi()
-  console.log(sushi)
+
   const farms = getFarms2(sushi)
-  console.log(farms)
 
   return (
     <Context2.Provider

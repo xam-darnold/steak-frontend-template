@@ -8,7 +8,7 @@ import useSushi from './useSushi'
 import useBlock from './useBlock'
 
 const useEarnings2 = (pid: number) => {
-  const [balance, setBalance] = useState(new BigNumber(0))
+  const [balance, setBalance] = useState<BigNumber[] | any>([new BigNumber(0), new BigNumber(0), new BigNumber(0), new BigNumber(0), new BigNumber(0)])
   const {
     account,
   }: { account: string } = useWallet()
@@ -18,7 +18,8 @@ const useEarnings2 = (pid: number) => {
 
   const fetchBalance = useCallback(async () => {
     const balance = await getEarned2(steakHouseContract, pid, account)
-    setBalance(new BigNumber(balance))
+    console.log(balance)
+    setBalance(balance)
   }, [account, steakHouseContract, pid])
 
   useEffect(() => {

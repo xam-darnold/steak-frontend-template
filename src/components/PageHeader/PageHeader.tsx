@@ -108,9 +108,9 @@ const StyledTitle = styled.h1`
 `
 
 const StyledSubtitle = styled.h3`
-  font-family: 'Krona One', sans-serif;
+  font-family: 'Bebas Neue', sans-serif;
   color: ${(props) => props.theme.color.grey[500]};
-  font-size: 18px;
+  font-size: 30px;
   font-weight: 400;
   margin: 0;
   padding: 0;

@@ -5,7 +5,7 @@ import * as AiIcons from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import SidebarData from './components/sidebarData'
 import AccountButton from './components/AccountButton'
-import peggyplayer from '../../assets/img/Peggy_Player.png'
+// import peggyplayer from '../../assets/img/Peggy_Player.png'
 import './components/Navbar.css'
 import { IconContext } from 'react-icons'
 
@@ -43,25 +43,25 @@ const NavBar: React.FC = () => {
               )
             })}
           </ul>
-          <StyledNavImage>
-            <img src={peggyplayer} />
-          </StyledNavImage>
+          {/* <StyledNavImage>
+            <img src={peggyplayer} alt='Peggy!'/>
+          </StyledNavImage> */}
         </nav>
       </IconContext.Provider>
     </>
   )
 }
 
-const StyledNavImage = styled.div`
-  display: flex;
-  position: absolute;
-  align-items: flex-end;
-  justify-content: flex-end;
-  width: 250px;
-  padding-top: 400px;
+// const StyledNavImage = styled.div`
+//   display: flex;
+//   position: absolute;
+//   align-items: flex-end;
+//   justify-content: flex-end;
+//   width: 250px;
+//   padding-top: 400px;
 
 
-`
+// `
 
 const StyledAccountButtonWrapper = styled.div`
   align-items: center;

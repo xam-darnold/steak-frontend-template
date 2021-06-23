@@ -6,6 +6,7 @@ import { UseWalletProvider } from 'use-wallet'
 // import MobileMenu from './components/MobileMenu'
 import NavBar from './components/NavBar'
 import FarmsProvider from './contexts/Farms'
+import FarmsProvider2 from './contexts/Farms2'
 import ModalsProvider from './contexts/Modals'
 import TransactionProvider from './contexts/Transactions'
 import SushiProvider from './contexts/SushiProvider'
@@ -51,7 +52,16 @@ const App: React.FC = () => {
           <Route
             path="/docs"
             component={(): any => {
-              window.location.href = 'https://app.gitbook.com/@stakesteak-1/s/stak/'
+              window.location.href =
+                'https://app.gitbook.com/@stakesteak-1/s/stak/'
+              return null
+            }}
+          />
+          <Route
+            path="/bug"
+            component={(): any => {
+              window.location.href =
+                'https://immunefi.com/bounty/stakesteak/'
               return null
             }}
           />
@@ -73,7 +83,9 @@ const Providers: React.FC = ({ children }) => {
         <SushiProvider>
           <TransactionProvider>
             <FarmsProvider>
-              <ModalsProvider>{children}</ModalsProvider>
+              <FarmsProvider2>
+                <ModalsProvider>{children}</ModalsProvider>
+              </FarmsProvider2>
             </FarmsProvider>
           </TransactionProvider>
         </SushiProvider>

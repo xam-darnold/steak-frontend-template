@@ -88,7 +88,7 @@ font-size: 20px;
 
 const StyledDisclaimer = styled.h1`
 color: ${(props) => props.theme.color.grey[500]};
-font-family: 'Krona One', monospace;
+font-family: 'Bebas Neue', monospace;
 font-size: 30px;
 font-weight: 500px;
 margin-bottom: 20px;

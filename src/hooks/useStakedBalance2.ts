@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react'
 import BigNumber from 'bignumber.js'
 import { useWallet } from 'use-wallet'
 
-import { getStaked, getSteakHouseContract } from '../sushi/utils'
+import { getStaked2, getSteakHouseContract } from '../sushi/utils'
 import useSushi from './useSushi'
 import useBlock from './useBlock'
 
@@ -15,7 +15,7 @@ const useStakedBalance2 = (pid: number) => {
   const block = useBlock()
 
   const fetchBalance = useCallback(async () => {
-    const balance = await getStaked(steakHouseContract, pid, account)
+    const balance = await getStaked2(steakHouseContract, pid, account)
     setBalance(new BigNumber(balance))
   }, [account, pid, steakHouseContract])
 

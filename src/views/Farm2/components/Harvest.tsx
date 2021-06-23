@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import BigNumber from 'bignumber.js'
 import styled from 'styled-components'
 import Button from '../../../components/Button'
 import Card from '../../../components/Card'
@@ -16,7 +17,8 @@ interface HarvestProps {
 }
 
 const Harvest: React.FC<HarvestProps> = ({ pid }) => {
-  const earnings = useEarnings2(pid)
+  const earnings: BigNumber[] = useEarnings2(pid)
+  console.log(earnings)
   const [pendingTx, setPendingTx] = useState(false)
   const { onReward } = useReward2(pid)
 
@@ -26,12 +28,14 @@ const Harvest: React.FC<HarvestProps> = ({ pid }) => {
         <StyledCardContentInner>
           <StyledCardHeader>
             <CardIcon><img src={steak} width={45} alt="steak_logo_64"/></CardIcon>
-            <Value value={getBalanceNumber(earnings)} />
             <Label text="STEAK Earned" />
+            <Value value={getBalanceNumber(earnings[0])} />
+            <Label text="BRAD Earned" />
+            <Value value={getBalanceNumber(earnings[1])} />
           </StyledCardHeader>
           <StyledCardActions>
             <Button
-              disabled={!earnings.toNumber() || pendingTx}
+              disabled={getBalanceNumber(earnings[0]) === 0 || pendingTx}
               text={pendingTx ? 'Collecting STEAK' : 'Harvest'}
               onClick={async () => {
                 setPendingTx(true)

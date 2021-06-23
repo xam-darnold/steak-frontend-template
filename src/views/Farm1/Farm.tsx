@@ -13,6 +13,7 @@ import Stake from './components/Stake'
 const Farm: React.FC = () => {
   //@ts-ignore
   const { farmId } = useParams()
+  // console.log(farmId)
 
   const { pid, lpToken, lpTokenAddress, earnToken, name, icon } = useFarm(
     farmId,
@@ -119,14 +120,14 @@ const StyledCardWrapper = styled.div`
 `
 
 const StyledInfo = styled.h3`
-  font-family: 'Krona One', monospace;
+  font-family: 'Bebas Neue', monospace;
   color: ${(props) => props.theme.color.grey[400]};
   background: ${(props) => props.theme.color.grey[200]};
   border: 1px solid ${(props) => props.theme.color.grey[300]}ff;
   border-radius: 12px;
   box-shadow: inset 1px 1px 0px ${(props) => props.theme.color.grey[100]};
   color: ${(props) => props.theme.color.grey[400]};
-  font-size: 16px;
+  font-size: 30px;
   font-weight: 400;
   margin: 0;
   padding: 5px;
