@@ -8,7 +8,7 @@ import Button from '../../components/Button'
 import Page from '../../components/Page'
 import PageHeader from '../../components/PageHeader'
 
-import Farm from '../Farm'
+import Farm from '../Farm1'
 
 import FarmCards from './components/FarmCards'
 
@@ -20,7 +20,7 @@ const Farms: React.FC = () => {
           <>
             <Route exact path={path}>
               <PageHeader
-                icon={<img src={steakhouse} width={300} alt="butcher_256" />}
+                icon={<img src={steakhouse} width={200} alt="butcher_256" />}
                 subtitle="Welcome to the Steakhouse! Earn Steak with iFUSD and LP tokens"
                 title="Pick Your Cut of Meat"
               />

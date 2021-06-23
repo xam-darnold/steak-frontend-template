@@ -45,6 +45,9 @@ export const contractAddresses = {
   steakHouse: {
     250: '0x59cC5f5F9309448Fe4a7Bd2dB8eB2DaC0F8fCEA7',
   },
+  steakHouseV2: {
+    250: '0x9bF995Df0552796d5b71c4D31D3BBdfe07498B8e'
+  },
   wftm: {
     250: '0xad84341756bf337f5a0164515b1f6f993d194e1f'
   },
@@ -116,70 +119,5 @@ export const supportedPools = [
     symbol: 'FTM-fUSD spLP',
     tokenSymbol: 'FTM',
     icon: '/images/ftm.png',
-  },
-  {
-    pid: 3,
-    lpAddresses: {
-      250: '0x98c8cc0E444CE7490926A6C58484B937CF60E117'
-    },
-    tokenAddresses: {
-      250: '0x05848B832E872d9eDd84AC5718D58f21fD9c9649'
-    },
-    name: 'Sirloin!',
-    symbol: 'DAI-fUSD spLP',
-    tokenSymbol: 'DAI',
-    icon: '/images/dai.png',
-  },
-  {
-    pid: 4,
-    lpAddresses: {
-      250: '0x0Ec22C6018818ba765A6aB5E8B9C8db0457f967c'
-    },
-    tokenAddresses: {
-      250: '0x05848B832E872d9eDd84AC5718D58f21fD9c9649'
-    },
-    name: 'T-Bone!',
-    symbol: 'FUSDT-fUSD spLP',
-    tokenSymbol: 'FUSDT',
-    icon: '/images/usdt.png',
-  },
-  {
-    pid: 6,
-    lpAddresses: {
-      250: '0x74772FBe8ea1b9aD1D750D6334Cdb8C3e227D6ED'
-    },
-    tokenAddresses: {
-      250: '0x05848B832E872d9eDd84AC5718D58f21fD9c9649'
-    },
-    name: 'Flank!',
-    symbol: 'SPIRIT-fUSD spLP',
-    tokenSymbol: 'SPIRIT',
-    icon: '/images/spirit.png',
-  },
-  {
-    pid: 8,
-    lpAddresses: {
-      250: '0x91FA829538Ae3678b7EFDeffaf1198e03613d52A'
-    },
-    tokenAddresses: {
-      250: '0x05848B832E872d9eDd84AC5718D58f21fD9c9649'
-    },
-    name: 'Skirt!',
-    symbol: 'WETH-fUSD spLP',
-    tokenSymbol: 'WETH',
-    icon: '/images/weth.png',
-  },
-  {
-    pid: 9,
-    lpAddresses: {
-      250: '0x0bb7Ed20B61b34aE53222f32e4094C1Bba502B16'
-    },
-    tokenAddresses: {
-      250: '0x05848B832E872d9eDd84AC5718D58f21fD9c9649'
-    },
-    name: 'Tomahawk!',
-    symbol: 'BNB-fUSD spLP',
-    tokenSymbol: 'BNB',
-    icon: '/images/bnb.png',
   },
 ]

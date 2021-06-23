@@ -63,6 +63,7 @@ const SushiProvider: React.FC = ({ children }) => {
       window.sushisauce = sushiLib
     }
   }, [ethereum])
+  console.log(sushi)
 
   return <Context.Provider value={{ sushi }}>{children}</Context.Provider>
 }

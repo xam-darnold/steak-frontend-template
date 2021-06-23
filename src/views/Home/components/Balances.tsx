@@ -180,7 +180,6 @@ const Balances: React.FC = () => {
                   value={steakPrice ? '$' + steakPrice : 'Locked'}
                   decimals={2}
                 />
-                <Spacer size="md" />
                 <Label text="fUSD Price" />
                 <Value
                   value={fusdPrice ? '$' + fusdPrice : 'Locked'}
@@ -191,7 +190,7 @@ const Balances: React.FC = () => {
           </StyledBalances>
         </CardContent>
         <Footnote>
-          TVL:
+          TVL
           <FootnoteValue>
             {fusdValue && xSteakValue && fusdPrice && steakPrice
               ? `$${(
@@ -234,16 +233,16 @@ const Balances: React.FC = () => {
 }
 
 const Footnote = styled.div`
-  font-family: 'Krona One', monospace;
-  font-size: 12px;
+  font-family: 'Bebas Neue', monospace;
+  font-size: 17px;
   padding: 8px 20px;
   color: ${(props) => props.theme.color.grey[400]};
   border-top: solid 1px ${(props) => props.theme.color.grey[300]};
 `
 const FootnoteValue = styled.div`
-  font-family: 'Krona One', monospace;
+  font-family: 'Bebas Neue', monospace;
   float: right;
-  font-size: 10px;
+  font-size: 17px;
 `
 const StyledCard = styled.div`
   background: ${(props) => props.theme.color.grey[200]};
@@ -257,7 +256,8 @@ const StyledCard = styled.div`
 `
 
 const StyledWrapper = styled.div`
-  font-family: 'Krona One', monospace;
+  font-family: 'Bebas Neue', monospace;
+  font-size: 25px;
   align-items: center;
   display: flex;
   @media (max-width: 768px) {
@@ -268,12 +268,14 @@ const StyledWrapper = styled.div`
 `
 
 const StyledBalances = styled.div`
-  font-family: 'Krona One', monospace;
+  font-family: 'Bebas Neue', monospace;
+  font-size: 25px;
   display: flex;
 `
 
 const StyledBalance = styled.div`
-  font-family: 'Krona One', monospace;
+  font-family: 'Bebas Neue', monospace;
+  font-size: 25px;
   align-items: center;
   display: flex;
   flex: 1;

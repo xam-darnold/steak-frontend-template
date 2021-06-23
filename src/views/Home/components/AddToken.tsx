@@ -25,12 +25,7 @@ const AddToken: React.FC = () => {
                 },
               },
             });
-    
-            if (wasAdded) {
-              console.log('Thanks for your interest!');
-            } else {
-              console.log('Your loss!');
-            }
+            console.log(wasAdded)
           } catch (error) {
             console.log(error);
           }

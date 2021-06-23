@@ -77,11 +77,11 @@ const StakeiFUSD: React.FC = () => {
           {' '}
           <Button text="Buy FUSD" />
         </StyledLink>
-        <StyledInfo style={{ color: grey[900] }}>
+        <StyledInfo2 style={{ color: grey[900] }}>
               {iFusdShareValue
                 ? `APR: ${calcAPR().toLocaleString('en-US').slice(0, -1)}%`
                 : 'Pending ...'}
-            </StyledInfo>
+            </StyledInfo2>
         </StyledWrapper>
         <StyledCardsWrapper>
           <StyledCardWrapper>
@@ -164,17 +164,30 @@ const StyledLink = styled.a`
 `
 
 const StyledInfo = styled.h3`
-  font-family: 'Krona One', monospace;
+  font-family: 'Bebas Neue', monospace;
   color: ${(props) => props.theme.color.grey[400]};
   background: ${(props) => props.theme.color.grey[200]};
   border: 1px solid ${(props) => props.theme.color.grey[300]}ff;
   border-radius: 12px;
   box-shadow: inset 1px 1px 0px ${(props) => props.theme.color.grey[100]};
-  font-size: 16px;
+  font-size: 25px;
   font-weight: 400;
   margin-top: 20px;
   padding: 10px;
   text-align: left;
+`
+const StyledInfo2 = styled.h3`
+  font-family: 'Bebas Neue', monospace;
+  color: ${(props) => props.theme.color.grey[400]};
+  background: ${(props) => props.theme.color.grey[200]};
+  border: 1px solid ${(props) => props.theme.color.grey[300]}ff;
+  border-radius: 12px;
+  box-shadow: inset 1px 1px 0px ${(props) => props.theme.color.grey[100]};
+  font-size: 25px;
+  font-weight: 400;
+  margin-top: 20px;
+  padding: 10px;
+  text-align: center;
 `
 
 export default StakeiFUSD

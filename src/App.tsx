@@ -1,42 +1,47 @@
-import React, { useCallback, useState } from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import { UseWalletProvider } from 'use-wallet'
 // import DisclaimerModal from './components/DisclaimerModal'
-import MobileMenu from './components/MobileMenu'
-import TopBar from './components/TopBar'
+// import MobileMenu from './components/MobileMenu'
+import NavBar from './components/NavBar'
 import FarmsProvider from './contexts/Farms'
+import FarmsProvider2 from './contexts/Farms2'
 import ModalsProvider from './contexts/Modals'
 import TransactionProvider from './contexts/Transactions'
 import SushiProvider from './contexts/SushiProvider'
 import theme from './theme'
-import Farms from './views/Farms'
+import Farms from './views/Farms1'
+import Farms2 from './views/Farms2'
 import Home from './views/Home'
 import Staking from './views/Staking'
 import StakingFUSD from './views/StakingFUSD'
 
 const App: React.FC = () => {
-  const [mobileMenu, setMobileMenu] = useState(false)
+  // const [mobileMenu, setMobileMenu] = useState(false)
 
-  const handleDismissMobileMenu = useCallback(() => {
-    setMobileMenu(false)
-  }, [setMobileMenu])
+  // const handleDismissMobileMenu = useCallback(() => {
+  //   setMobileMenu(false)
+  // }, [setMobileMenu])
 
-  const handlePresentMobileMenu = useCallback(() => {
-    setMobileMenu(true)
-  }, [setMobileMenu])
+  // const handlePresentMobileMenu = useCallback(() => {
+  //   setMobileMenu(true)
+  // }, [setMobileMenu])
 
   return (
     <Providers>
       <Router>
-        <TopBar onPresentMobileMenu={handlePresentMobileMenu} />
-        <MobileMenu onDismiss={handleDismissMobileMenu} visible={mobileMenu} />
+        <NavBar />
+        {/* <MobileMenu onDismiss={handleDismissMobileMenu} visible={mobileMenu} /> */}
         <Switch>
           <Route path="/" exact>
             <Home />
           </Route>
           <Route path="/farms">
             <Farms />
+          </Route>
+          <Route path="/farms2">
+            <Farms2 />
           </Route>
           <Route path="/staking">
             <Staking />
@@ -47,7 +52,16 @@ const App: React.FC = () => {
           <Route
             path="/docs"
             component={(): any => {
-              window.location.href = 'https://app.gitbook.com/@stakesteak-1/s/stak/'
+              window.location.href =
+                'https://app.gitbook.com/@stakesteak-1/s/stak/'
+              return null
+            }}
+          />
+          <Route
+            path="/bug"
+            component={(): any => {
+              window.location.href =
+                'https://immunefi.com/bounty/stakesteak/'
               return null
             }}
           />
@@ -76,7 +90,9 @@ const Providers: React.FC = ({ children }) => {
         <SushiProvider>
           <TransactionProvider>
             <FarmsProvider>
-              <ModalsProvider>{children}</ModalsProvider>
+              <FarmsProvider2>
+                <ModalsProvider>{children}</ModalsProvider>
+              </FarmsProvider2>
             </FarmsProvider>
           </TransactionProvider>
         </SushiProvider>
