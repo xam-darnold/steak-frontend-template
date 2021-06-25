@@ -84,7 +84,7 @@ const Providers: React.FC = ({ children }) => {
       <UseWalletProvider
         chainId={250}
         connectors={{
-          walletconnect: { rpcUrl: 'https://rpc.fantom.network' },
+          walletconnect: { rpcUrl: 'https://rpcapi.fantom.network' },
         }}
       >
         <SushiProvider>

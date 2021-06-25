@@ -20,7 +20,7 @@ declare global {
   }
 }
 
-const defaultProvider = new Web3('https://rpc.fantom.network/')
+const defaultProvider = new Web3('https://rpcapi.fantom.network')
 
 const SushiProvider: React.FC = ({ children }) => {
   const { ethereum }: { ethereum: any } = useWallet()

@@ -160,24 +160,37 @@ export const getEarned2 = async (masterChefContract, pid, account) => {
 
 export const getFUSDPrice = async (sushi) => {
   const fusdAddress = '0xad84341756bf337f5a0164515b1f6f993d194e1f'
+  const wftmAddress = '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'
   const usdcAddress = '0x04068da6c83afcfa0e13ba15a6696662335d5b75'
   const fusd = await sushi.contracts.router.methods
-    .getAmountsOut('1000000000000000000', [fusdAddress, usdcAddress])
+    .getAmountsOut('1000000000000000000', [fusdAddress, wftmAddress, usdcAddress])
     .call()
-  let fusdPrice = new BigNumber(fusd[1])
+  let fusdPrice = new BigNumber(fusd[2])
     .div(new BigNumber(10).pow(6))
     .toFormat(2)
   return fusdPrice
 }
 
+export const getiFUSDPrice = async (sushi) => {
+  const ifusdAddress = '0x9fC071cE771c7B27b7d9A57C32c0a84c18200F8a'
+  const usdcAddress = '0x04068da6c83afcfa0e13ba15a6696662335d5b75'
+  const ifusd = await sushi.contracts.router.methods
+    .getAmountsOut('1000000000000000000', [ifusdAddress, usdcAddress])
+    .call()
+  let ifusdPrice = new BigNumber(ifusd[1])
+    .div(new BigNumber(10).pow(6))
+    .toFormat(2)
+  return ifusdPrice
+}
+
 export const getSteakPrice = async (sushi) => {
   const steakAddress = '0x05848B832E872d9eDd84AC5718D58f21fD9c9649'
-  const fusdAddress = '0xad84341756bf337f5a0164515b1f6f993d194e1f'
+  const ifusdAddress = '0x9fC071cE771c7B27b7d9A57C32c0a84c18200F8a'
   const usdcAddress = '0x04068da6c83afcfa0e13ba15a6696662335d5b75'
   const steak = await sushi.contracts.router.methods
     .getAmountsOut('1000000000000000000', [
       steakAddress,
-      fusdAddress,
+      ifusdAddress,
       usdcAddress,
     ])
     .call()
@@ -299,6 +312,18 @@ export const getTotalIFUSDValue = async (ifusdContract, masterChefContract) => {
     poolWeight: await getPoolWeight(masterChefContract, 0),
   }
 }
+
+export const getTotalFUSDValue = async (iFUSDContract, fusdContract) => {
+  // Get ifusd steakhouse
+  const fusdAmount = new BigNumber(
+    await fusdContract.methods
+      .balanceOf(iFUSDContract.options.address)
+      .call(),
+  ).div(new BigNumber(10).pow(18))
+
+  return fusdAmount
+}
+
 
 export const getTotalXSteakValue = async (xSteakContract, steakContract) => {
   // Get ifusd steakhouse

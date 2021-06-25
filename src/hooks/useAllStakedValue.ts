@@ -27,7 +27,7 @@ export interface StakedValue {
 const useAllStakedValue = () => {
   const [balances, setBalance] = useState([] as Array<StakedValue>)
   const [updateQueued, setUpdateQueued] = useState(true as boolean)
-  const defaultProvider = new Web3('https://rpc.fantom.network/')
+  const defaultProvider = new Web3('https://rpcapi.fantom.network')
   const sushi = useSushi()
   const farms = getFarms(sushi)
   const masterChefContract = getMasterChefContract(sushi)

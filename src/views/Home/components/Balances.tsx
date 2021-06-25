@@ -9,7 +9,7 @@ import Spacer from '../../../components/Spacer'
 import Value from '../../../components/Value'
 // import SteakIcon from '../../../components/SteakIcon'
 import useAllEarnings from '../../../hooks/useAllEarnings'
-import useAllStakedValue from '../../../hooks/useAllStakedValue'
+import useAllStakedValue2 from '../../../hooks/useAllStakedValue2'
 // import useFarms from '../../../hooks/useFarms'
 import useTokenBalance from '../../../hooks/useTokenBalance'
 import useSushi from '../../../hooks/useSushi'
@@ -17,10 +17,14 @@ import {
   getSushiAddress,
   getSushiSupply,
   getFUSDPrice,
+  getiFUSDPrice,
   getSteakPrice,
   getTotalXSteakValue,
   getSushiContract,
   getXSushiStakingContract,
+  getTotalFUSDValue,
+  getiFUSDContract,
+  getWethContract
 } from '../../../sushi/utils'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import { contractAddresses } from '../../../sushi/lib/constants'
@@ -80,6 +84,8 @@ const PendingRewards: React.FC = (sushi) => {
 const Balances: React.FC = () => {
   const [totalSupply, setTotalSupply] = useState<BigNumber>()
   const [fusdPrice, setFusdPrice] = useState<BigNumber>()
+  const [iFusdPrice, setiFusdPrice] = useState<BigNumber>()
+  const [iFusdValue, setiFusdValue] = useState<BigNumber>()
   const [steakPrice, setSteakPrice] = useState<BigNumber>()
   const [xSteakValue, setxSteakValue] = useState<BigNumber>()
   const [marketCap, setMarketCap] = useState<BigNumber>()
@@ -89,14 +95,16 @@ const Balances: React.FC = () => {
   const ifusdBalance = useTokenBalance(contractAddresses.ifusd[250])
   const steakContract = getSushiContract(sushi)
   const xsteakContract = getXSushiStakingContract(sushi)
+  const fusdContract = getWethContract(sushi)
+  const ifusdContract = getiFUSDContract(sushi)
   const { account }: { account: any } = useWallet()
-  let fusdValue: number = 0
+  let farmIFusdValue: number = 0
 
-  const stakedValue = useAllStakedValue()
+  const stakedValue = useAllStakedValue2()
 
   if (stakedValue[0] !== undefined) {
     for (let i = 0; i < stakedValue.length; i++) {
-      fusdValue += stakedValue[i].totalWethValue.toNumber()
+      farmIFusdValue += stakedValue[i].totalWethValue.toNumber()
     }
   }
 
@@ -109,13 +117,17 @@ const Balances: React.FC = () => {
         getSushiSupply(sushi),
         getFUSDPrice(sushi),
         getSteakPrice(sushi),
-        getTotalXSteakValue(xsteakContract, steakContract)
+        getiFUSDPrice(sushi),
+        getTotalXSteakValue(xsteakContract, steakContract),
+        getTotalFUSDValue(ifusdContract, fusdContract)
       ])
       const totalSupply = totalSteakHouseSupply.minus(balances[0])
       setTotalSupply(totalSupply)
       setFusdPrice(new BigNumber(balances[1]))
       setSteakPrice(new BigNumber(balances[2]))
-      setxSteakValue(balances[3])
+      setiFusdPrice(new BigNumber(balances[3]))
+      setxSteakValue(balances[4])
+      setiFusdValue(balances[5])
     }
     if (sushi) {
       fetchData()
@@ -125,8 +137,11 @@ const Balances: React.FC = () => {
     setFusdPrice,
     setSteakPrice,
     setxSteakValue,
+    setiFusdValue,
     steakContract,
     xsteakContract,
+    fusdContract,
+    ifusdContract
   ])
 
   useEffect(() => {
@@ -192,9 +207,10 @@ const Balances: React.FC = () => {
         <Footnote>
           TVL
           <FootnoteValue>
-            {fusdValue && xSteakValue && fusdPrice && steakPrice
+            {farmIFusdValue && xSteakValue && fusdPrice && steakPrice && iFusdValue && iFusdPrice
               ? `$${(
-                  fusdValue * fusdPrice.toNumber() +
+                  farmIFusdValue * iFusdPrice.toNumber() +
+                  iFusdValue.toNumber() * fusdPrice.toNumber() +
                   xSteakValue.toNumber() * steakPrice.toNumber()
                 )
                   .toLocaleString('en-US')
