@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import * as FaIcons from 'react-icons/fa'
-import * as AiIcons from 'react-icons/ai'
+// import * as FaIcons from 'react-icons/fa'
+// import * as AiIcons from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import SidebarData from './components/sidebarData'
 import AccountButton from './components/AccountButton'
-// import peggyplayer from '../../assets/img/Peggy_Player.png'
+import peggysummer from '../../assets/img/peggy_summer.png'
+import logo from '../../assets/img/logo.png'
 import './components/Navbar.css'
 import { IconContext } from 'react-icons'
 
 const NavBar: React.FC = () => {
-  const [sidebar, setSidebar] = useState(false)
+  const [sidebar, setSidebar] = useState(true)
 
   const showSidebar = () => setSidebar(!sidebar)
 
@@ -18,20 +19,23 @@ const NavBar: React.FC = () => {
     <>
       <IconContext.Provider value={{ color: '#fff' }}>
         <div className="navbar">
-          <Link to="#" className="menu-bars">
+          {/* <Link to="#" className="menu-bars">
             <FaIcons.FaBars onClick={showSidebar} />
-          </Link>
+          </Link> */}
           <StyledAccountButtonWrapper>
             <AccountButton />
           </StyledAccountButtonWrapper>
         </div>
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
+        <StyledLogoImage>
+            <img src={logo} alt= 'logo'/>
+        </StyledLogoImage>
           <ul className="nav-menu-items" onClick={showSidebar}>
-            <li className="navbar-toggle">
+            {/* <li className="navbar-toggle">
               <Link to="#" className="menu-bars">
                 <AiIcons.AiOutlineClose />
               </Link>
-            </li>
+            </li> */}
             {SidebarData.map((item, index) => {
               return (
                 <li key={index} className={item.cName}>
@@ -43,25 +47,34 @@ const NavBar: React.FC = () => {
               )
             })}
           </ul>
-          {/* <StyledNavImage>
-            <img src={peggyplayer} alt='Peggy!'/>
-          </StyledNavImage> */}
+          <StyledNavImage>
+            <img src={peggysummer} alt='Peggy!'/>
+          </StyledNavImage>
         </nav>
       </IconContext.Provider>
     </>
   )
 }
 
-// const StyledNavImage = styled.div`
-//   display: flex;
-//   position: absolute;
-//   align-items: flex-end;
-//   justify-content: flex-end;
-//   width: 250px;
-//   padding-top: 400px;
+const StyledLogoImage = styled.div`
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: flex-end;
+  width: 200px;
+  padding: 16px 16px 16px 16px;
+`
+
+const StyledNavImage = styled.div`
+  display: flex;
+  position: absolute;
+  align-items: flex-end;
+  justify-content: flex-end;
+  width: 250px;
+  padding-top: 515px;
 
 
-// `
+`
 
 const StyledAccountButtonWrapper = styled.div`
   align-items: center;
