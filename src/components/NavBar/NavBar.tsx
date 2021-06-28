@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import SidebarData from './components/sidebarData'
 import AccountButton from './components/AccountButton'
 import peggysummer from '../../assets/img/peggy_summer.png'
-import logo from '../../assets/img/logo.png'
+// import logo from '../../assets/img/logo.png'
 import './components/Navbar.css'
 import { IconContext } from 'react-icons'
 
@@ -27,9 +27,9 @@ const NavBar: React.FC = () => {
           </StyledAccountButtonWrapper>
         </div>
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
-        <StyledLogoImage>
+        {/* <StyledLogoImage>
             <img src={logo} alt= 'logo'/>
-        </StyledLogoImage>
+        </StyledLogoImage> */}
           <ul className="nav-menu-items" onClick={showSidebar}>
             {/* <li className="navbar-toggle">
               <Link to="#" className="menu-bars">
@@ -56,14 +56,14 @@ const NavBar: React.FC = () => {
   )
 }
 
-const StyledLogoImage = styled.div`
-  display: flex;
-  position: absolute;
-  align-items: center;
-  justify-content: flex-end;
-  width: 200px;
-  padding: 16px 16px 16px 16px;
-`
+// const StyledLogoImage = styled.div`
+//   display: flex;
+//   position: absolute;
+//   align-items: center;
+//   justify-content: flex-end;
+//   width: 200px;
+//   padding: 16px 16px 16px 16px;
+// `
 
 const StyledNavImage = styled.div`
   display: flex;
