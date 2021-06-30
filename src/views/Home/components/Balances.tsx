@@ -8,7 +8,7 @@ import Label from '../../../components/Label'
 import Spacer from '../../../components/Spacer'
 import Value from '../../../components/Value'
 // import SteakIcon from '../../../components/SteakIcon'
-import useAllEarnings from '../../../hooks/useAllEarnings'
+import useAllEarnings2 from '../../../hooks/useAllEarnings2'
 import useAllStakedValue2 from '../../../hooks/useAllStakedValue2'
 // import useFarms from '../../../hooks/useFarms'
 import useTokenBalance from '../../../hooks/useTokenBalance'
@@ -34,10 +34,10 @@ const PendingRewards: React.FC = (sushi) => {
   const [end, setEnd] = useState(0)
   const [scale, setScale] = useState(1)
 
-  const allEarnings = useAllEarnings()
+  const allEarnings = useAllEarnings2()
   let sumEarning = 0
   for (let earning of allEarnings) {
-    sumEarning += new BigNumber(earning)
+    sumEarning += new BigNumber(earning[0])
       .div(new BigNumber(10).pow(18))
       .toNumber()
   }

@@ -150,12 +150,17 @@ export const getEarned = async (masterChefContract, pid, account) => {
 }
 
 export const getEarned2 = async (masterChefContract, pid, account) => {
-  const pendingRewards = await masterChefContract.methods.pendingRewards(pid, account).call()
-  let pendingRewards2 = []
-  for (let i = 0; i < pendingRewards.length; i++) {
-    pendingRewards2[i] = new BigNumber(pendingRewards[i])
+  const staked = await getStaked2(masterChefContract, pid, account)
+  if (staked.toNumber() > 0) {
+    const pendingRewards = await masterChefContract.methods.pendingRewards(pid, account).call()
+    let pendingRewards2 = []
+    for (let i = 0; i < pendingRewards.length; i++) {
+      pendingRewards2[i] = new BigNumber(pendingRewards[i])
+    }
+    return pendingRewards2
+  } else {
+    return [new BigNumber(0), new BigNumber(0), new BigNumber(0), new BigNumber(0), new BigNumber(0)]
   }
-  return pendingRewards2
 }
 
 export const getFUSDPrice = async (sushi) => {
@@ -419,6 +424,23 @@ export const harvestAll = async (masterChefContract, pools, account) => {
       await getStaked(masterChefContract, pool.pid, account)
     ).toNumber()
     if (pendingSteak > 0) {
+      masterChefContract.methods
+        .deposit(pool.pid, '0')
+        .send({ from: account })
+        .on('transactionHash', (tx) => {
+          console.log(tx)
+          return tx.transactionHash
+        })
+    }
+  }
+}
+
+export const harvestAll2 = async (masterChefContract, pools, account) => {
+  for (const pool of pools) {
+    const pendingReward = (
+      await getStaked2(masterChefContract, pool.pid, account)
+    ).toNumber()
+    if (pendingReward > 0) {
       masterChefContract.methods
         .deposit(pool.pid, '0')
         .send({ from: account })

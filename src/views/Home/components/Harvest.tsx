@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import Button from '../../../components/Button'
-import useRewardsAll from '../../../hooks/useRewardsAll'
+import useRewardsAll2 from '../../../hooks/useRewardsAll2'
 
 const Harvest: React.FC = () => {
     const [pendingTx, setPendingTx] = useState(false)
-    const { onReward } = useRewardsAll()
+    const { onReward } = useRewardsAll2  ()
 
   return (
     <Button
