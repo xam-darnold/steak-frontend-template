@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-// import * as FaIcons from 'react-icons/fa'
-// import * as AiIcons from 'react-icons/ai'
+import * as FaIcons from 'react-icons/fa'
+import * as AiIcons from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import SidebarData from './components/sidebarData'
 import AccountButton from './components/AccountButton'
@@ -19,9 +19,12 @@ const NavBar: React.FC = () => {
     <>
       <IconContext.Provider value={{ color: '#fff' }}>
         <div className="navbar">
-          {/* <Link to="#" className="menu-bars">
+          {/* <StyledNavImage>
+            <img src={peggysummer} alt='Peggy!'/>
+          </StyledNavImage> */}
+          <Link to="#" className="menu-bars">
             <FaIcons.FaBars onClick={showSidebar} />
-          </Link> */}
+          </Link>
           <StyledAccountButtonWrapper>
             <AccountButton />
           </StyledAccountButtonWrapper>
@@ -31,11 +34,11 @@ const NavBar: React.FC = () => {
             <img src={logo} alt= 'logo'/>
         </StyledLogoImage> */}
           <ul className="nav-menu-items" onClick={showSidebar}>
-            {/* <li className="navbar-toggle">
+            <li className="navbar-toggle">
               <Link to="#" className="menu-bars">
                 <AiIcons.AiOutlineClose />
               </Link>
-            </li> */}
+            </li>
             {SidebarData.map((item, index) => {
               return (
                 <li key={index} className={item.cName}>
@@ -47,9 +50,9 @@ const NavBar: React.FC = () => {
               )
             })}
           </ul>
-          <StyledNavImage>
+          {/* <StyledNavImage>
             <img src={peggysummer} alt='Peggy!'/>
-          </StyledNavImage>
+          </StyledNavImage> */}
         </nav>
       </IconContext.Provider>
     </>
