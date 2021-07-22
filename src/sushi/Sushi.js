@@ -4,7 +4,7 @@ import { Contracts } from './lib/contracts.js'
 import { Account } from './lib/accounts.js'
 import { EVM } from './lib/evm.js'
 
-import { contractAddresses } from './lib/constants'
+import { contractAddresses } from './lib/constants2'
 
 export class Sushi {
   constructor(provider, networkId, testing, options) {
@@ -45,6 +45,7 @@ export class Sushi {
     this.wethAddress = contractAddresses.wftm[networkId]
     this.UNIV2RouterAddress = contractAddresses.router[networkId]
     this.iFUSDAddress = contractAddresses.ifusd[networkId]
+    this.crossSwapAddress = contractAddresses.ifusd[networkId]
   }
 
   async resetEVM() {

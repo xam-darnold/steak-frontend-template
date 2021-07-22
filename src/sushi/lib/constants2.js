@@ -63,6 +63,9 @@ export const contractAddresses = {
   fusd: {
     250: '0xad84341756bf337f5a0164515b1f6f993d194e1f'
   },
+  crossSwap: {
+    250: '0xE9026A8274f0Cb883419936Db88aE785744d4129'
+  }
 }
 
 

@@ -110,7 +110,7 @@ const Balances: React.FC = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const totalSteakHouseSupply = new BigNumber(3300000).times(
+      const totalSteakHouseSupply = new BigNumber(500000).times(
         new BigNumber(10).pow(18),
       ) //Initial Tokens sent to SteakHouse
       const balances = await Promise.all([
@@ -121,6 +121,7 @@ const Balances: React.FC = () => {
         getTotalXSteakValue(xsteakContract, steakContract),
         getTotalFUSDValue(ifusdContract, fusdContract)
       ])
+      console.log(balances[0].toNumber())
       const totalSupply = totalSteakHouseSupply.minus(balances[0])
       setTotalSupply(totalSupply)
       setFusdPrice(new BigNumber(balances[1]))

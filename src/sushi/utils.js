@@ -356,7 +356,7 @@ export const approveAddress = async (lpContract, address, account) => {
 export const getSushiSupply = async (sushi) => {
   return new BigNumber(
     await sushi.contracts.sushi.methods
-      .balanceOf(sushi.steakHouseAddress)
+      .balanceOf(sushi.steakHouseV2Address)
       .call(),
   )
 }

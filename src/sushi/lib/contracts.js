@@ -8,6 +8,7 @@ import UNIV2PairAbi from './abi/uni_v2_lp.json'
 import UNIV2Router from './abi/SpiritRouter.json'
 import iFUSD from './abi/iFUSD.json'
 import FUSD from './abi/fusd.json'
+import CrossSwap from './abi/CrossSwap.json'
 import {
   supportedPools,
 } from './constants.js'
@@ -34,7 +35,8 @@ export class Contracts {
     this.xsushiStaking = new this.web3.eth.Contract(xSteakAbi.abi)
     this.weth = new this.web3.eth.Contract(FUSD)
     this.ifusd = new this.web3.eth.Contract(iFUSD.abi)
-    this.router= new this.web3.eth.Contract(UNIV2Router)
+    this.router = new this.web3.eth.Contract(UNIV2Router)
+    this.crossSwap = new this.web3.eth.Contract(CrossSwap.abi)
 
     this.pools = supportedPools.map((pool) =>
       Object.assign(pool, {
@@ -72,6 +74,7 @@ export class Contracts {
     setProvider(this.weth, contractAddresses.wftm[networkId])
     setProvider(this.ifusd, contractAddresses.ifusd[networkId])
     setProvider(this.router, contractAddresses.router[networkId])
+    setProvider(this.CrossSwap, contractAddresses.crossSwap[networkId])
 
     this.pools.forEach(
       ({ lpContract, lpAddress, tokenContract, tokenAddress }) => {
