@@ -161,7 +161,7 @@ export default function CrossSwap() {
               </div>
             </div>
             <div className="p-6 space-y-2">
-              <p className="bg-black p-6 rounded text-white font-mono">
+              <p className="bg-black text-xs p-2 rounded text-white font-mono">
                 <div className="flex">
                   <p className="flex-1">Slippage</p>
                   <p>{slippage || 'XX'}%</p>
