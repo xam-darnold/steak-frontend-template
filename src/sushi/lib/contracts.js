@@ -48,13 +48,13 @@ export class Contracts {
     )
 
     this.pools2 = supportedPools2.map((pool) =>
-    Object.assign(pool, {
-      lpAddress: pool.lpAddresses[networkId],
-      tokenAddress: pool.tokenAddresses[networkId],
-      lpContract: new this.web3.eth.Contract(UNIV2PairAbi),
-      tokenContract: new this.web3.eth.Contract(ERC20Abi),
-    }),
-  )
+      Object.assign(pool, {
+        lpAddress: pool.lpAddresses[networkId],
+        tokenAddress: pool.tokenAddresses[networkId],
+        lpContract: new this.web3.eth.Contract(UNIV2PairAbi),
+        tokenContract: new this.web3.eth.Contract(ERC20Abi),
+      }),
+    )
 
     this.setProvider(provider, networkId)
     this.setDefaultAccount(this.web3.eth.defaultAccount)
@@ -74,7 +74,7 @@ export class Contracts {
     setProvider(this.weth, contractAddresses.wftm[networkId])
     setProvider(this.ifusd, contractAddresses.ifusd[networkId])
     setProvider(this.router, contractAddresses.router[networkId])
-    setProvider(this.CrossSwap, contractAddresses.crossSwap[networkId])
+    setProvider(this.crossSwap, contractAddresses.crossSwap[networkId])
 
     this.pools.forEach(
       ({ lpContract, lpAddress, tokenContract, tokenAddress }) => {

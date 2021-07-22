@@ -16,6 +16,7 @@ import Farms2 from './views/Farms2'
 import Home from './views/Home'
 import Staking from './views/Staking'
 import StakingFUSD from './views/StakingFUSD'
+import CrossSwap from './views/CrossSwap'
 
 const App: React.FC = () => {
   // const [mobileMenu, setMobileMenu] = useState(false)
@@ -49,6 +50,9 @@ const App: React.FC = () => {
           <Route path="/staking-fusd">
             <StakingFUSD />
           </Route>
+          <Route path="/crossswap">
+            <CrossSwap />
+          </Route>
           <Route
             path="/docs"
             component={(): any => {
@@ -60,12 +64,11 @@ const App: React.FC = () => {
           <Route
             path="/bug"
             component={(): any => {
-              window.location.href =
-                'https://immunefi.com/bounty/stakesteak/'
+              window.location.href = 'https://immunefi.com/bounty/stakesteak/'
               return null
             }}
           />
-                    <Route
+          <Route
             path="/bug"
             component={(): any => {
               window.location.href = 'https://immunefi.com/bounty/stakesteak/'
