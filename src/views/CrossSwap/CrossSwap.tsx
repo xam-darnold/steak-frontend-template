@@ -268,7 +268,7 @@ export default function CrossSwap() {
                       type="number"
                       placeholder="0.00"
                     />
-                    {fromMax && (
+                    {!!fromMax && (
                       <button
                         onClick={async () => updateFromField(fromMax)}
                         className="flex-stretch-1 text-xs font-bold p-4"
@@ -329,7 +329,7 @@ export default function CrossSwap() {
                       type="number"
                       placeholder="0.00"
                     />
-                    {toMax && (
+                    {!!toMax && (
                       <button
                         onClick={async () => updateToField(toMax)}
                         className="flex-stretch-1 text-xs font-bold p-4"
