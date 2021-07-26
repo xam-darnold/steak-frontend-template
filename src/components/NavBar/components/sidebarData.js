@@ -9,49 +9,49 @@ const SidebarData = [
     {
         title: 'Home',
         path: '/',
-        icon: <AiIcons.AiFillHome/>,
+        icon: <AiIcons.AiFillHome />,
         cName: 'nav-text'
     },
-
+    {
+        title: 'CrossSwap 🔁',
+        path: '/crossswap',
+        icon: <GiIcons.GiRoundTable />,
+        cName: 'nav-text'
+    },
     {
         title: 'SteakHouse 🚫',
         path: '/farms',
-        icon: <GiIcons.GiKnifeFork/>,
+        icon: <GiIcons.GiKnifeFork />,
         cName: 'nav-text'
     },
-
     {
         title: 'SteakHouseV2',
         path: '/farms2',
-        icon: <GiIcons.GiForkKnifeSpoon/>,
+        icon: <GiIcons.GiForkKnifeSpoon />,
         cName: 'nav-text'
     },
-
     {
         title: 'xSTEAK',
         path: '/staking',
-        icon: <GiIcons.GiSteak/>,
+        icon: <GiIcons.GiSteak />,
         cName: 'nav-text'
     },
-
     {
         title: 'iFUSD',
         path: '/staking-fusd',
-        icon: <RiIcons.RiCoinsLine/>,
+        icon: <RiIcons.RiCoinsLine />,
         cName: 'nav-text'
     },
-
     {
         title: 'Docs',
         path: '/docs',
-        icon: <IoIcons.IoIosPaper/>,
+        icon: <IoIcons.IoIosPaper />,
         cName: 'nav-text'
     },
-
     {
         title: 'Bug Bounty',
         path: '/bug',
-        icon: <AiIcons.AiFillBug/>,
+        icon: <AiIcons.AiFillBug />,
         cName: 'nav-text'
     },
 ]

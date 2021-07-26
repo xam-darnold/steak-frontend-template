@@ -4,7 +4,7 @@
 
 body {
   background: #1a1b3c;
-  background-image: url("./assets/background/still_background.png");
+  background-image: url('./assets/background/still_background.png');
   background-size: cover;
   background-repeat: no-repeat;
   margin: 0;
@@ -26,6 +26,14 @@ code {
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .hide-scroll-bars {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+*:focus {
+  outline: none !important;
+}
+
+*:active {
+  outline: none !important;
 }

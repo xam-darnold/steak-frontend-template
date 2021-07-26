@@ -45,7 +45,7 @@ export class Sushi {
     this.wethAddress = contractAddresses.wftm[networkId]
     this.UNIV2RouterAddress = contractAddresses.router[networkId]
     this.iFUSDAddress = contractAddresses.ifusd[networkId]
-    this.crossSwapAddress = contractAddresses.ifusd[networkId]
+    this.crossSwapAddress = contractAddresses.crossSwap[networkId]
   }
 
   async resetEVM() {
@@ -80,9 +80,8 @@ export class Sushi {
         account.address.toLowerCase() !== newAccount.address.toLowerCase())
     ) {
       throw new Error(`Loaded account address mismatch.
-        Expected ${account.address}, got ${
-        newAccount ? newAccount.address : null
-      }`)
+        Expected ${account.address}, got ${newAccount ? newAccount.address : null
+        }`)
     }
   }
 
