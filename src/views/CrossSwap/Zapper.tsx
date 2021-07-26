@@ -10,6 +10,7 @@ import ERC20 from '../../constants/abi/ERC20.json'
 import BigNumber from 'bignumber.js'
 import { IFUSD_ADDRESS, WFTM_ADDRESS } from '../../constants/tokenAddresses'
 import { CrossSwapContext } from '.'
+import { toWei } from 'web3-utils'
 
 export default function Zapper() {
   const wallet = useWallet()
@@ -32,22 +33,30 @@ export default function Zapper() {
         return alert('Please connect your wallet!')
       }
       const web3 = new Web3(wallet.ethereum)
+
       const fromTokenContract = new web3.eth.Contract(
         ERC20.abi,
         fromToken.address,
       )
+
       const allowance = await fromTokenContract.methods
         .allowance(wallet.account, sushi.crossSwapAddress)
         .call()
+
       const total =
         fromToken.token === 'USDC' || fromToken.token === 'fUSDT'
           ? fromInput * 10 ** 6
           : toWei(fromInput)
+
       if (allowance < total)
         await fromTokenContract.methods
           .approve(sushi.crossSwapAddress, total)
           .send({ from: wallet.account })
-      const amount = new BigNumber(fromInput).multipliedBy(10 ** fromToken.decimals).toString()
+
+      const amount = new BigNumber(fromInput)
+        .multipliedBy(10 ** fromToken.decimals)
+        .toString()
+
       if (fromToken.token === 'STEAK') {
         await sushi.contracts.crossSwap.methods
           .zapInToken(
@@ -59,14 +68,16 @@ export default function Zapper() {
           )
           .send({ from: wallet.account })
       } else {
-        await sushi.contracts.crossSwap.methods.customZapInToken(
-          fromToken.address,
-          amount,
-          IFUSD_ADDRESS,
-          toToken.address,
-          toToken.dexAddress,
-          wallet.account,
-        )
+        await sushi.contracts.crossSwap.methods
+          .customZapInToken(
+            fromToken.address,
+            amount,
+            IFUSD_ADDRESS,
+            toToken.address,
+            toToken.dexAddress,
+            wallet.account,
+          )
+          .send({ from: wallet.account })
       }
     } catch (error) {
       console.log(error)
@@ -120,6 +131,7 @@ export default function Zapper() {
             <div className="flex space-x-1 overflow-auto whitespace-no-wrap hide-scroll-bars">
               {tokens.map((token) => (
                 <button
+                  key={token.id}
                   onClick={() => setFromToken(token)}
                   type="button"
                   className={classNames(
@@ -181,6 +193,7 @@ export default function Zapper() {
             <div className="flex flex-gap-1 flex-wrap hide-scroll-bars">
               {lptokens.map((token) => (
                 <button
+                  key={token.id}
                   onClick={() => setToToken(token)}
                   type="button"
                   className={classNames(
