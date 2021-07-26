@@ -1,5 +1,6 @@
 // @ts-nocheck
 import React, { useCallback, useState } from 'react'
+import styled from 'styled-components'
 import NewModal from '../../components/NewModal'
 import tokens from '../../data/tokens.json'
 import classNames from 'classnames'
@@ -9,9 +10,12 @@ import { fromWei, toWei } from 'web3-utils'
 import useSushi from '../../hooks/useSushi'
 import { useWallet } from 'use-wallet'
 import Web3 from 'web3'
+import Page from '../../components/Page'
 import ERC20 from '../../constants/abi/ERC20.json'
 import UniV2Router from '../../sushi/lib/abi/UniV2Router.json'
 import BigNumber from 'bignumber.js'
+import peggy from '../../assets/img/cow_icons/peggy_head.png'
+
 
 const IFUSD_ADDRESS = '0x9fC071cE771c7B27b7d9A57C32c0a84c18200F8a'
 const WFTM_ADDRESS = '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'
@@ -122,7 +126,7 @@ export default function CrossSwap() {
         .allowance(wallet.account, sushi.crossSwapAddress)
         .call()
       const total =
-        fromToken.token === 'USDC' || fromToken.token === 'FUSDT'
+        fromToken.token === 'USDC' || fromToken.token === 'fUSDT'
           ? fromInput * 10 ** 6
           : toWei(fromInput)
       if (allowance < total)
@@ -195,18 +199,20 @@ export default function CrossSwap() {
   }, [fromToken])
 
   return (
-    <>
+    <Page>
       <div className="h-screen flex items-center justify-center p-6">
         <div className="max-w-md w-full bg-gray-800 text-white rounded-2xl overflow-hidden shadow-2xl">
           <div className="border-b border-gray-700 p-2 px-6 bg-gray-900 flex items-center">
             <p className="opacity-50 flex-1 text-xs uppercase font-bold">
               CrossSwap
             </p>
-            <i
+            <img
               className={classNames(
-                'fas fa-piggy-bank',
+                'w-6',
                 status === 'loading' && 'animate-spin',
               )}
+              src={peggy}
+              alt=""
             />
           </div>
           <div className="">
@@ -324,6 +330,51 @@ export default function CrossSwap() {
           </div>
         </div>
       </div>
-    </>
+      <StyledCardsWrapper>
+          <StyledCardWrapper>
+            <StyledInfo>
+              -xSTEAK holders earn 10% of all STEAK rewards from farms <br />
+              -You will earn a portion of the fees based on the amount of xSTEAK
+              held relative the weight of the staking. <br />
+              -xSTEAK can be minted by staking STEAK. <br />
+              To redeem STEAK staked plus fees convert xSTEAK back to STEAK.{' '}
+            </StyledInfo>
+          </StyledCardWrapper>
+        </StyledCardsWrapper>
+    </Page>
   )
 }
+
+
+const StyledCardsWrapper = styled.div`
+  display: flex;
+  width: 600px;
+  @media (max-width: 768px) {
+    width: 100%;
+    flex-flow: column nowrap;
+    align-items: center;
+  }
+`
+
+const StyledCardWrapper = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  @media (max-width: 768px) {
+    width: 80%;
+  }
+`
+
+const StyledInfo = styled.h3`
+  font-family: 'Bebas Neue', monospace;
+  color: ${(props) => props.theme.color.grey[400]};
+  background: ${(props) => props.theme.color.grey[200]};
+  border: 1px solid ${(props) => props.theme.color.grey[300]}ff;
+  border-radius: 12px;
+  box-shadow: inset 1px 1px 0px ${(props) => props.theme.color.grey[100]};
+  color: ${(props) => props.theme.color.grey[400]};
+  font-size: 25px;
+  font-weight: 400;
+  padding: 10px;
+  text-align: left;
+`

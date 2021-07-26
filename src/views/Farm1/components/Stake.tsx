@@ -20,7 +20,7 @@ import useUnstake from '../../../hooks/useUnstake'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import DepositModal from './DepositModal'
 import WithdrawModal from './WithdrawModal'
-import cow from '../../../assets/img/cow_icons/cow64.png'
+import cow from '../../../assets/img/cow_icons/peggy_head.png'
 
 interface StakeProps {
   lpContract: Contract
