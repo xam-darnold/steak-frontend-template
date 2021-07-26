@@ -19,12 +19,6 @@ const SidebarData = [
         cName: 'nav-text'
     },
     {
-        title: 'SteakHouse 🚫',
-        path: '/farms',
-        icon: <GiIcons.GiKnifeFork />,
-        cName: 'nav-text'
-    },
-    {
         title: 'SteakHouseV2',
         path: '/farms2',
         icon: <GiIcons.GiForkKnifeSpoon />,
@@ -52,6 +46,12 @@ const SidebarData = [
         title: 'Bug Bounty',
         path: '/bug',
         icon: <AiIcons.AiFillBug />,
+        cName: 'nav-text'
+    },
+    {
+        title: 'SteakHouse 🚫',
+        path: '/farms',
+        icon: <GiIcons.GiKnifeFork />,
         cName: 'nav-text'
     },
 ]

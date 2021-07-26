@@ -391,11 +391,9 @@ export default function CrossSwap() {
       <StyledCardsWrapper>
           <StyledCardWrapper>
             <StyledInfo>
-              -xSTEAK holders earn 10% of all STEAK rewards from farms <br />
-              -You will earn a portion of the fees based on the amount of xSTEAK
-              held relative the weight of the staking. <br />
-              -xSTEAK can be minted by staking STEAK. <br />
-              To redeem STEAK staked plus fees convert xSTEAK back to STEAK.{' '}
+              -Swap tokens with little or no liquidity across DEXes.<br />
+              -Connects PWA, Spooky, and Spirit in one place where projects unique to each DEX are able to interact.<br />
+              -(ZAP Coming Soon!)
             </StyledInfo>
           </StyledCardWrapper>
         </StyledCardsWrapper>
