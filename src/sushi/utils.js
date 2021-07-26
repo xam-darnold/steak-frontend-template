@@ -205,6 +205,19 @@ export const getSteakPrice = async (sushi) => {
   return steakPrice
 }
 
+export const getTokenPrice = async (sushi, path, routerId) => {
+  let prices
+  if (routerId === 1) {
+    prices = await sushi.contracts.router.methods
+      .getAmountsOut('1000000000000000000', path).call()
+  } else {
+    prices = await sushi.contracts.router2.methods
+    .getAmountsOut('1000000000000000000', path).call()
+  }
+  const price = new BigNumber(prices[prices.length - 1]).div(new BigNumber(10).pow(6)).toFormat(2)
+  return price
+}
+
 export const getTotalLPWethValue = async (
   masterChefContract,
   wethContract,

@@ -44,6 +44,7 @@ export class Sushi {
     this.steakHouseV2Address = contractAddresses.steakHouseV2[networkId]
     this.wethAddress = contractAddresses.wftm[networkId]
     this.UNIV2RouterAddress = contractAddresses.router[networkId]
+    this.UNIV2RouterAddress2 = contractAddresses.router2[networkId]
     this.iFUSDAddress = contractAddresses.ifusd[networkId]
     this.crossSwapAddress = contractAddresses.crossSwap[networkId]
   }

@@ -57,6 +57,9 @@ export const contractAddresses = {
   router: {
     250: '0x16327E3FbDaCA3bcF7E38F5Af2599D2DDc33aE52'
   },
+  router2: {
+    250: '0xF491e7B69E4244ad4002BC14e878a34207E38c29'
+  },
   ifusd: {
     250: '0x9fC071cE771c7B27b7d9A57C32c0a84c18200F8a'
   },
@@ -64,7 +67,7 @@ export const contractAddresses = {
     250: '0xad84341756bf337f5a0164515b1f6f993d194e1f'
   },
   crossSwap: {
-    250: '0x0789cCA328731F4AeC47553bf3000C2E1Dc6C9C5'
+    250: '0x6115d95C31B1b752341e07BF283e992C67DBcc74'
   }
 }
 

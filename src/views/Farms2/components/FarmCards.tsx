@@ -19,7 +19,8 @@ import {
   getEarned,
   getMasterChefContract,
   getFUSDPrice,
-  getiFUSDShareValue
+  getiFUSDShareValue,
+  getTokenPrice
 } from '../../../sushi/utils'
 import { bnToDec } from '../../../utils'
 
@@ -35,6 +36,7 @@ interface FarmWithStakedValue extends Farm2, StakedValue {
 const FarmCards: React.FC = () => {
   const [fusdPrice, setFusdPrice] = useState<BigNumber>()
   const [iFUSDShareValue, setiFUSDShareValue] = useState<BigNumber>()
+  const [tsharePrice, setTsharePrice] = useState<BigNumber>()
   const [farms] = useFarms2()
   // console.log(farms)
 
@@ -55,11 +57,14 @@ const FarmCards: React.FC = () => {
     async function fetchPrices() {
       const fusdInfo = await Promise.all([
         getFUSDPrice(sushi),
-        getiFUSDShareValue(sushi)
+        getiFUSDShareValue(sushi),
+        getTokenPrice(sushi, ['0x4cdf39285d7ca8eb3f090fda0c069ba5f4145b37','0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83','0x04068da6c83afcfa0e13ba15a6696662335d5b75'], 2)
       ])
 
       setFusdPrice(new BigNumber(fusdInfo[0]))
       setiFUSDShareValue((fusdInfo[1]).div(new BigNumber(10).pow(18)))
+      console.log(fusdInfo[2])
+      setTsharePrice(new BigNumber(fusdInfo[2]))
     }
     if (sushi) {
       fetchPrices()

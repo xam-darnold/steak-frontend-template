@@ -1,9 +1,13 @@
 // @ts-nocheck
 import classNames from 'classnames'
 import React, { useContext, useState } from 'react'
+import Web3 from 'web3'
 import { useWallet } from 'use-wallet'
 import tokens from '../../data/tokens.json'
+import lptokens from '../../data/lptokens.json'
 import useSushi from '../../hooks/useSushi'
+import ERC20 from '../../constants/abi/ERC20.json'
+import BigNumber from 'bignumber.js'
 import { IFUSD_ADDRESS, WFTM_ADDRESS } from '../../constants/tokenAddresses'
 import { CrossSwapContext } from '.'
 
@@ -27,6 +31,23 @@ export default function Zapper() {
         setStatus('idle')
         return alert('Please connect your wallet!')
       }
+      const web3 = new Web3(wallet.ethereum)
+      const fromTokenContract = new web3.eth.Contract(
+        ERC20.abi,
+        fromToken.address,
+      )
+      const allowance = await fromTokenContract.methods
+        .allowance(wallet.account, sushi.crossSwapAddress)
+        .call()
+      const total =
+        fromToken.token === 'USDC' || fromToken.token === 'fUSDT'
+          ? fromInput * 10 ** 6
+          : toWei(fromInput)
+      if (allowance < total)
+        await fromTokenContract.methods
+          .approve(sushi.crossSwapAddress, total)
+          .send({ from: wallet.account })
+      const amount = new BigNumber(fromInput).multipliedBy(10 ** fromToken.decimals).toString()
       if (fromToken.token === 'STEAK') {
         await sushi.contracts.crossSwap.methods
           .zapInToken(
@@ -158,7 +179,7 @@ export default function Zapper() {
               </div> */}
             </div>
             <div className="flex flex-gap-1 flex-wrap hide-scroll-bars">
-              {tokens.map((token) => (
+              {lptokens.map((token) => (
                 <button
                   onClick={() => setToToken(token)}
                   type="button"
@@ -194,7 +215,7 @@ export default function Zapper() {
               isDisabled && 'opacity-50 cursor-not-allowed',
             )}
           >
-            Initiate CrossSwap
+            Zap!
           </button>
         </div>
       </div>
