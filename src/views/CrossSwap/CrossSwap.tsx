@@ -1,11 +1,25 @@
-import React, { useState } from 'react'
+// @ts-nocheck
+import React, { useCallback, useState } from 'react'
 import NewModal from '../../components/NewModal'
 import tokens from '../../data/tokens.json'
 import classNames from 'classnames'
 import { useEffect } from 'react'
 import wait from 'wait'
+import { fromWei, toWei } from 'web3-utils'
+import useSushi from '../../hooks/useSushi'
+import { useWallet } from 'use-wallet'
+import Web3 from 'web3'
+import ERC20 from '../../constants/abi/ERC20.json'
+import UniV2Router from '../../sushi/lib/abi/UniV2Router.json'
+import BigNumber from 'bignumber.js'
+
+const IFUSD_ADDRESS = '0x9fC071cE771c7B27b7d9A57C32c0a84c18200F8a'
+const WFTM_ADDRESS = '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'
 
 export default function CrossSwap() {
+  const sushi = useSushi()
+  const wallet = useWallet()
+
   const [status, setStatus] = useState<'idle' | 'loading'>('idle')
   const [slippage, setSlippage] = useState(0)
   const [fromInput, setFromInput] = useState<any>('')
@@ -15,51 +29,179 @@ export default function CrossSwap() {
 
   const isDisabled = !toToken || !fromToken || !fromInput || !toInput
 
-  const updateToField = (value: any) => {
-    setToInput(value)
-    const math = value * 0.123
-    setFromInput(math)
+  const getAmountsOut = async (
+    amount: number,
+    dexAddress: string,
+    path: string[],
+  ) => {
+    if (!amount || amount < 0) return 0
+    const web3 = new Web3('https://rpc.ftm.tools')
+    const contract = new web3.eth.Contract(UniV2Router, dexAddress)
+    const amountsOut = await contract.methods.getAmountsOut(amount, path).call()
+    return amountsOut[amountsOut.length - 1]
   }
 
-  const updateFromField = (value: any) => {
-    setFromInput(value)
-    const math = value * 300
-    setToInput(math)
-  }
-
-  useEffect(() => {
-    const loadData = async () => {
-      setStatus('loading')
-      try {
-        // do some data loading here
-        // for now, we are simulating 3 second delay
-        await wait(3000)
-      } catch (error) {
-        console.log(error)
-      }
-      setStatus('idle')
+  const getToPath = (token) => {
+    if (token.token === 'STEAK') {
+      return [token.address, IFUSD_ADDRESS, WFTM_ADDRESS]
+    } else {
+      return [token.address, WFTM_ADDRESS]
     }
-    loadData()
-  }, [])
+  }
 
-  const getSomeMoreData = async () => {
+  const getFromPath = (token) => {
+    if (token.token === 'STEAK') {
+      return [WFTM_ADDRESS, IFUSD_ADDRESS, token.address]
+    } else {
+      return [WFTM_ADDRESS, token.address]
+    }
+  }
+
+  const updateFromField = async (value: any) => {
+    setFromInput(value)
+    if (!value || value < 0) return setToInput(0)
+    if (fromToken.address && toToken.address) {
+      const firstDex = await getAmountsOut(
+        new BigNumber(value).multipliedBy(10 ** fromToken.decimals).toString(),
+        fromToken.dexAddress,
+        getToPath(fromToken),
+      )
+      const secondDex = await getAmountsOut(
+        firstDex,
+        toToken.dexAddress,
+        getFromPath(toToken),
+      )
+      const final = new BigNumber(secondDex)
+        .dividedBy(new BigNumber(10).pow(toToken.decimals))
+        .toFixed(2)
+        .toString()
+
+      setToInput(final)
+    }
+  }
+
+  const updateToField = useCallback(
+    async (value: any) => {
+      setToInput(value)
+      if (!value || value < 0) return setFromInput(0)
+      if (fromToken.address && toToken.address) {
+        const firstDex = await getAmountsOut(
+          new BigNumber(value).times(10 ** toToken.decimals).toString(),
+          toToken.dexAddress,
+          getToPath(toToken),
+        )
+
+        const secondDex = await getAmountsOut(
+          firstDex,
+          fromToken.dexAddress,
+          getFromPath(fromToken),
+        )
+
+        const final = new BigNumber(secondDex)
+          .dividedBy(new BigNumber(10).pow(fromToken.decimals))
+          .toFixed(2)
+          .toString()
+
+        setFromInput(final)
+      }
+    },
+    [toToken, fromToken],
+  )
+
+  const crosSwap = async () => {
     setStatus('loading')
     try {
-      // do some data loading here
-      // for now, we are simulating 3 second delay
-      await wait(3000)
+      if (!wallet.account) return alert('Please connect your Web3 Wallet!')
+
+      const web3 = new Web3(wallet.ethereum)
+      const fromTokenContract = new web3.eth.Contract(
+        ERC20.abi,
+        fromToken.address,
+      )
+      const allowance = await fromTokenContract.methods
+        .allowance(wallet.account, sushi.crossSwapAddress)
+        .call()
+      const total =
+        fromToken.token === 'USDC' || fromToken.token === 'FUSDT'
+          ? fromInput * 10 ** 6
+          : toWei(fromInput)
+      if (allowance < total)
+        await fromTokenContract.methods
+          .approve(sushi.crossSwapAddress, total)
+          .send({ from: wallet.account })
+      if (fromToken.token === 'STEAK' || toToken.token === 'STEAK') {
+        await sushi.contracts.crossSwap.methods[
+          'crossSwap(address[],address[],address,address,uint256)'
+        ](
+          fromToken.token === 'STEAK'
+            ? [fromToken.address, IFUSD_ADDRESS, WFTM_ADDRESS]
+            : [fromToken.address, WFTM_ADDRESS],
+          toToken.token === 'STEAK'
+            ? [WFTM_ADDRESS, IFUSD_ADDRESS, toToken.address]
+            : [WFTM_ADDRESS, toToken.address],
+          fromToken.dexAddress,
+          toToken.dexAddress,
+          total,
+        ).estimateGas({ from: wallet.account })
+
+        await sushi.contracts.crossSwap.methods[
+          'crossSwap(address[],address[],address,address,uint256)'
+        ](
+          fromToken.token === 'STEAK'
+            ? [fromToken.address, IFUSD_ADDRESS, WFTM_ADDRESS]
+            : [fromToken.address, WFTM_ADDRESS],
+          toToken.token === 'STEAK'
+            ? [WFTM_ADDRESS, IFUSD_ADDRESS, toToken.address]
+            : [WFTM_ADDRESS, toToken.address],
+          fromToken.dexAddress,
+          toToken.dexAddress,
+          total,
+        ).send({ from: wallet.account })
+
+        return
+      }
+
+      await sushi.contracts.crossSwap.methods[
+        'crossSwap(address[],address[],address,address,uint256)'
+      ](
+        [fromToken.address, WFTM_ADDRESS],
+        [WFTM_ADDRESS, toToken.address],
+        fromToken.dexAddress,
+        toToken.dexAddress,
+        total,
+      ).estimateGas({ from: wallet.account })
+
+      await sushi.contracts.crossSwap.methods[
+        'crossSwap(address[],address[],address,address,uint256)'
+      ](
+        [fromToken.address, WFTM_ADDRESS],
+        [WFTM_ADDRESS, toToken.address],
+        fromToken.dexAddress,
+        toToken.dexAddress,
+        total,
+      ).send({ from: wallet.account })
     } catch (error) {
       console.log(error)
     }
     setStatus('idle')
   }
 
+  useEffect(() => {
+    if (toInput) updateToField(toInput)
+  }, [toToken])
+
+  useEffect(() => {
+    updateFromField(fromInput)
+  }, [fromToken])
+
   return (
     <>
-      <div className="h-screen flex items-center justify-center">
+      <div className="h-screen flex items-center justify-center p-6">
         <div className="max-w-md w-full bg-gray-800 text-white rounded-2xl overflow-hidden shadow-2xl">
           <div className="border-b border-gray-700 p-2 px-6 bg-gray-900 flex items-center">
-            <p className="opacity-50 flex-1 text-xs uppercase">CrossSwap</p>
+            <p className="opacity-50 flex-1 text-xs uppercase font-bold">
+              CrossSwap
+            </p>
             <i
               className={classNames(
                 'fas fa-piggy-bank',
@@ -98,7 +240,7 @@ export default function CrossSwap() {
                     placeholder="0.00"
                   />
                 </div>
-                <div className="flex space-x-1 justify-end overflow-auto whitespace-no-wrap hide-scroll-bars">
+                <div className="flex space-x-1 overflow-auto whitespace-no-wrap hide-scroll-bars">
                   {tokens.map((token) => (
                     <button
                       onClick={() => setFromToken(token)}
@@ -144,7 +286,7 @@ export default function CrossSwap() {
                     placeholder="0.00"
                   />
                 </div>
-                <div className="flex space-x-1 justify-end overflow-auto whitespace-no-wrap hide-scroll-bars">
+                <div className="flex space-x-1 overflow-auto whitespace-no-wrap hide-scroll-bars">
                   {tokens.map((token) => (
                     <button
                       onClick={() => setToToken(token)}
@@ -161,13 +303,14 @@ export default function CrossSwap() {
               </div>
             </div>
             <div className="p-6 space-y-2">
-              <p className="bg-black text-xs p-2 rounded text-white font-mono">
+              {/* <p className="bg-black text-xs p-2 rounded text-white font-mono">
                 <div className="flex">
                   <p className="flex-1">Slippage</p>
                   <p>{slippage || 'XX'}%</p>
                 </div>
-              </p>
+              </p> */}
               <button
+                onClick={crosSwap}
                 type="button"
                 disabled={isDisabled}
                 className={classNames(
