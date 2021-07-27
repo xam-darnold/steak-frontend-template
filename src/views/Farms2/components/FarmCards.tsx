@@ -20,7 +20,7 @@ import {
   getMasterChefContract,
   getFUSDPrice,
   getiFUSDShareValue,
-  getTokenPrice
+  getTokenPrice,
 } from '../../../sushi/utils'
 import { bnToDec } from '../../../utils'
 
@@ -58,12 +58,19 @@ const FarmCards: React.FC = () => {
       const fusdInfo = await Promise.all([
         getFUSDPrice(sushi),
         getiFUSDShareValue(sushi),
-        getTokenPrice(sushi, ['0x4cdf39285d7ca8eb3f090fda0c069ba5f4145b37','0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83','0x04068da6c83afcfa0e13ba15a6696662335d5b75'], 2)
+        getTokenPrice(
+          sushi,
+          [
+            '0x4cdf39285d7ca8eb3f090fda0c069ba5f4145b37',
+            '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83',
+            '0x04068da6c83afcfa0e13ba15a6696662335d5b75',
+          ],
+          2,
+        ),
       ])
 
       setFusdPrice(new BigNumber(fusdInfo[0]))
-      setiFUSDShareValue((fusdInfo[1]).div(new BigNumber(10).pow(18)))
-      console.log(fusdInfo[2])
+      setiFUSDShareValue(fusdInfo[1].div(new BigNumber(10).pow(18)))
       setTsharePrice(new BigNumber(fusdInfo[2]))
     }
     if (sushi) {
@@ -74,7 +81,7 @@ const FarmCards: React.FC = () => {
   const SECONDS_PER_YEAR = new BigNumber(31536000)
   const SUSHI_PER_SECOND = new BigNumber(0.031)
   const REWARD1_PER_SECOND = new BigNumber(0.031)
-  const REWARD2_PER_SECOND = new BigNumber(0.031)
+  const REWARD2_PER_SECOND = new BigNumber(0.00000579)
   const REWARD3_PER_SECOND = new BigNumber(0.031)
   const REWARD4_PER_SECOND = new BigNumber(0.031)
 
@@ -106,7 +113,7 @@ const FarmCards: React.FC = () => {
               .div(stakedValue[i].totalWethValue)
           : null,
         apr2: stakedValue[i]
-          ? sushiPrice
+          ? tsharePrice
               .times(REWARD2_PER_SECOND)
               .times(SECONDS_PER_YEAR)
               .times(stakedValue[i].poolWeight[2])
@@ -128,7 +135,9 @@ const FarmCards: React.FC = () => {
           : null,
         tvl:
           stakedValue[i] && sushi
-            ? fusdPrice.times(iFUSDShareValue).times(stakedValue[i].totalWethValue)
+            ? fusdPrice
+                .times(iFUSDShareValue)
+                .times(stakedValue[i].totalWethValue)
             : null,
       }
       const newFarmRows = [...farmRows]
@@ -244,27 +253,42 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
               )}
             </Button>
             <StyledInsight>
-              <span>APR:</span>
-              <span>
-                {farm.apr0 && farm.apr0.toNumber() !== 0
-                  ? `${farm.apr0
-                      .times(new BigNumber(100))
-                      .toNumber()
-                      .toLocaleString('en-US')
-                      .slice(0, -1)}%`
-                  : farm.apr0
-                  ? 'Not Incentivized'
-                  : 'Loading ...'}
-              </span>
-              <span>TVL:</span>
-              <span>
-                {farm.tvl
-                  ? `$${farm.tvl
-                      .toNumber()
-                      .toLocaleString('en-US')
-                      .slice(0, -1)}`
-                  : 'Loading ...'}
-              </span>
+            <div style={{margin: '0px'}}>
+                <span>
+                  {`TVL: ${farm.tvl
+                    ? `$${farm.tvl
+                        .toNumber()
+                        .toLocaleString('en-US')
+                        .slice(0, -1)}`
+                    : 'Loading ...'}`}
+                </span>
+              </div>
+              <div style={{margin: '0px'}}>
+                <span>{`STEAK APR: ${
+                  farm.apr0 && farm.apr0.toNumber() !== 0
+                    ? `${farm.apr0
+                        .times(new BigNumber(100))
+                        .toNumber()
+                        .toLocaleString('en-US')
+                        .slice(0, -1)}%`
+                    : farm.apr0
+                    ? 'Not Incentivized'
+                    : 'Loading ...'
+                }`}</span>
+              </div>
+              <div style={{margin: '0px'}}>
+                <span>
+                  {`TSHARE APR: ${farm.apr2 && farm.apr2.toNumber() !== 0
+                    ? `${farm.apr2
+                        .times(new BigNumber(100))
+                        .toNumber()
+                        .toLocaleString('en-US')
+                        .slice(0, -1)}%`
+                    : farm.apr2
+                    ? '0%'
+                    : 'Loading ...'}`}
+                </span>
+              </div>
               {/* <span>
                 {farm.tokenAmount
                   ? (farm.tokenAmount.toNumber() || 0).toLocaleString('en-US')
@@ -386,9 +410,6 @@ const StyledDetail = styled.div`
 `
 
 const StyledInsight = styled.div`
-  display: flex;
-  justify-content: space-between;
-  box-sizing: border-box;
   border-radius: 8px;
   background: #fffdfa;
   color: #aa9584;

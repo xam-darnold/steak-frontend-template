@@ -7,32 +7,5 @@
       "address": "0xad84341756bf337f5a0164515b1f6f993d194e1f",
       "dexAddress": "0xF491e7B69E4244ad4002BC14e878a34207E38c29",
       "swap": "Spooky"
-    },
-    {
-        "token": "USDC-iFUSD",
-        "decimals": 18,
-        "tokenImg": "img/usdc.png",
-        "dexImg": "/img/spirit.png",
-        "address": "0xA58fAD33798BD98Bd957446cbcae6c0809Db1486",
-        "dexAddress": "0x16327E3FbDaCA3bcF7E38F5Af2599D2DDc33aE52",
-        "swap": "Spirit"
-    },
-    {
-        "token": "FTM-iFUSD",
-        "decimals": 18,
-        "tokenImg": "img/ftm.png",
-        "dexImg": "/img/spirit.png",
-        "address": "0x02376D39c7cdC95207969F53958C09a69e70B155",
-        "dexAddress": "0x16327E3FbDaCA3bcF7E38F5Af2599D2DDc33aE52",
-        "swap": "Spirit"
-    },
-    {
-        "token": "STEAK-iFUSD",
-        "decimals": 18,
-        "tokenImg": "img/steak_orange.png",
-        "dexImg": "/img/spirit.png",
-        "address": "0x84222a59Bb8E1789E7599a137138d78A17DB3EB0",
-        "dexAddress": "0x16327E3FbDaCA3bcF7E38F5Af2599D2DDc33aE52",
-        "swap": "Spirit"
     }
 ]

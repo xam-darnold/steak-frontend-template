@@ -116,4 +116,18 @@ export const supportedPools2 = [
     earnToken: 'STEAK and BRAD',
     icon: '/img/ftm.png',
   },
+  {
+    pid: 3,
+    lpAddresses: {
+      250: '0xF6C7197eaFF13002a7b2A2e835a7bB6969A4b026'
+    },
+    tokenAddresses: {
+      250: '0x6c021ae822bea943b2e66552bde1d2696a53fbb7'
+    },
+    name: 'Tombsteak!',
+    symbol: 'TOMB-iFUSD spLP',
+    tokenSymbol: 'TOMB',
+    earnToken: 'STEAK and TSHARES',
+    icon: '/img/tomb.png'
+  }
 ]
