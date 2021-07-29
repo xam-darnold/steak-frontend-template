@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import * as FaIcons from 'react-icons/fa'
 import * as AiIcons from 'react-icons/ai'
@@ -8,33 +8,49 @@ import AccountButton from './components/AccountButton'
 // import peggyplayer from '../../assets/img/Peggy_Player.png'
 import './components/Navbar.css'
 import { IconContext } from 'react-icons'
+import useWindowWidth from '../../hooks/useWindowWidth'
 
 const NavBar: React.FC = () => {
+  const windowWidth = useWindowWidth()
   const [sidebar, setSidebar] = useState(false)
 
-  const showSidebar = () => setSidebar(!sidebar)
+  const toggleSidebar = () => setSidebar(!sidebar)
+
+  const shouldSidebarBeOpen = () => windowWidth > 1200
+
+  const handleLinkClick = () => {
+    if (!shouldSidebarBeOpen()) {
+      setSidebar(false)
+    }
+  }
+
+  useEffect(() => {
+    if (shouldSidebarBeOpen()) {
+      setSidebar(true)
+    }
+  }, [])
 
   return (
     <>
       <IconContext.Provider value={{ color: '#fff' }}>
         <div className="navbar">
           <Link to="#" className="menu-bars">
-            <FaIcons.FaBars onClick={showSidebar} />
+            <FaIcons.FaBars onClick={toggleSidebar} />
           </Link>
           <StyledAccountButtonWrapper>
             <AccountButton />
           </StyledAccountButtonWrapper>
         </div>
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
-          <ul className="nav-menu-items" onClick={showSidebar}>
-            <li className="navbar-toggle">
+          <ul className="nav-menu-items">
+            <li className="navbar-toggle" onClick={toggleSidebar}>
               <Link to="#" className="menu-bars">
                 <AiIcons.AiOutlineClose />
               </Link>
             </li>
             {SidebarData.map((item, index) => {
               return (
-                <li key={index} className={item.cName}>
+                <li key={index} className={item.cName} onClick={handleLinkClick}>
                   <Link to={item.path}>
                     {item.icon}
                     <span>{item.title}</span>
