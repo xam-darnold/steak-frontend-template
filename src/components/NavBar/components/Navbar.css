@@ -19,7 +19,8 @@
   width: 250px;
   height: 100vh;
   display: flex;
-  justify-content: flex-start;
+  flex-direction: column;
+  justify-content: space-between;
   position: fixed;
   top: 0;
   left: -100%;
@@ -75,6 +76,23 @@ span {
   margin-left: 16px;
 }
 
+.nav-price-text {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 8px 0px 8px 16px;
+  list-style: none;
+  height: 60 px;
+  text-decoration: none;
+  color: #f5f5f5;
+  font-size: 18px;
+}
+
+.nav-token-prices {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 
 /* .navbar {
   background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
