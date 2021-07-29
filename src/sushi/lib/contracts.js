@@ -36,6 +36,7 @@ export class Contracts {
     this.weth = new this.web3.eth.Contract(FUSD)
     this.ifusd = new this.web3.eth.Contract(iFUSD.abi)
     this.router = new this.web3.eth.Contract(UNIV2Router)
+    this.router2 = new this.web3.eth.Contract(UNIV2Router)
     this.crossSwap = new this.web3.eth.Contract(CrossSwap.abi)
 
     this.pools = supportedPools.map((pool) =>
@@ -74,6 +75,7 @@ export class Contracts {
     setProvider(this.weth, contractAddresses.wftm[networkId])
     setProvider(this.ifusd, contractAddresses.ifusd[networkId])
     setProvider(this.router, contractAddresses.router[networkId])
+    setProvider(this.router2, contractAddresses.router2[networkId])
     setProvider(this.crossSwap, contractAddresses.crossSwap[networkId])
 
     this.pools.forEach(

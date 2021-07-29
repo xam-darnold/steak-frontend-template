@@ -30,8 +30,8 @@ const Harvest: React.FC<HarvestProps> = ({ pid }) => {
             <CardIcon><img src={steak} width={45} alt="steak_logo_64"/></CardIcon>
             <Label text="STEAK Earned" />
             <Value value={getBalanceNumber(earnings[0])} />
-            <Label text="BRAD Earned" />
-            <Value value={getBalanceNumber(earnings[1])} />
+            <Label text={pid == 3 ? "TSHARES Earned": "BRAD Earned"} />
+            <Value value={pid == 3 ? getBalanceNumber(earnings[2]) : getBalanceNumber(earnings[1])} />
           </StyledCardHeader>
           <StyledCardActions>
             <Button

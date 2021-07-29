@@ -92,7 +92,7 @@ export const supportedPools = [
     name: 'Ribeye!',
     symbol: 'STEAK-fUSD spLP',
     tokenSymbol: 'STEAK',
-    icon: '/images/steak_orange.png',
+    icon: '/img/steak_orange.png',
   },
   {
     pid: 2,
@@ -105,7 +105,7 @@ export const supportedPools = [
     name: 'New York Strip!',
     symbol: 'USDC-fUSD spLP',
     tokenSymbol: 'USDC',
-    icon: '/images/usdc.png',
+    icon: '/img/usdc.png',
   },
   {
     pid: 5,
@@ -118,6 +118,6 @@ export const supportedPools = [
     name: 'Porterhouse!',
     symbol: 'FTM-fUSD spLP',
     tokenSymbol: 'FTM',
-    icon: '/images/ftm.png',
+    icon: '/img/ftm.png',
   },
 ]

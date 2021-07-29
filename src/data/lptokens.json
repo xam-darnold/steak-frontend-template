@@ -1,0 +1,11 @@
+[
+    {
+      "token": "TOMB-iFUSD",
+      "decimals": 18,
+      "tokenImg": "img/tomb.png",
+      "dexImg": "https://gblobscdn.gitbook.com/spaces%2F-MXi8tZ-Fm6oya_e72FM%2Favatar-1617829666394.png?alt=media",
+      "address": "0xad84341756bf337f5a0164515b1f6f993d194e1f",
+      "dexAddress": "0xF491e7B69E4244ad4002BC14e878a34207E38c29",
+      "swap": "Spooky"
+    }
+]

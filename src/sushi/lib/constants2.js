@@ -57,6 +57,9 @@ export const contractAddresses = {
   router: {
     250: '0x16327E3FbDaCA3bcF7E38F5Af2599D2DDc33aE52'
   },
+  router2: {
+    250: '0xF491e7B69E4244ad4002BC14e878a34207E38c29'
+  },
   ifusd: {
     250: '0x9fC071cE771c7B27b7d9A57C32c0a84c18200F8a'
   },
@@ -64,7 +67,7 @@ export const contractAddresses = {
     250: '0xad84341756bf337f5a0164515b1f6f993d194e1f'
   },
   crossSwap: {
-    250: '0x0789cCA328731F4AeC47553bf3000C2E1Dc6C9C5'
+    250: '0xffe87eFD73CEC5B16354c9E60358D7F75b620d65'
   }
 }
 
@@ -80,10 +83,10 @@ export const supportedPools2 = [
       250: '0x05848B832E872d9eDd84AC5718D58f21fD9c9649'
     },
     name: 'Ribeye!',
-    symbol: 'STEAK-iFUSD spLP',
+    symbol: 'STEAK-iFUSD SPIRIT-LP',
     tokenSymbol: 'STEAK',
     earnToken: 'STEAK and BRAD',
-    icon: '/images/steak_orange.png',
+    icon: '/img/steak_orange.png',
   },
   {
     pid: 1,
@@ -94,10 +97,10 @@ export const supportedPools2 = [
       250: '0x04068da6c83afcfa0e13ba15a6696662335d5b75'
     },
     name: 'New York Strip!',
-    symbol: 'USDC-iFUSD spLP',
+    symbol: 'USDC-iFUSD SPIRIT-LP',
     tokenSymbol: 'USDC',
     earnToken: 'STEAK and BRAD',
-    icon: '/images/usdc.png',
+    icon: '/img/usdc.png',
   },
   {
     pid: 2,
@@ -108,9 +111,23 @@ export const supportedPools2 = [
       250: '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'
     },
     name: 'Porterhouse!',
-    symbol: 'FTM-iFUSD spLP',
+    symbol: 'FTM-iFUSD SPIRIT-LP',
     tokenSymbol: 'FTM',
     earnToken: 'STEAK and BRAD',
-    icon: '/images/ftm.png',
+    icon: '/img/ftm.png',
   },
+  {
+    pid: 3,
+    lpAddresses: {
+      250: '0xF6C7197eaFF13002a7b2A2e835a7bB6969A4b026'
+    },
+    tokenAddresses: {
+      250: '0x6c021ae822bea943b2e66552bde1d2696a53fbb7'
+    },
+    name: 'Tombsteak!',
+    symbol: 'TOMB-iFUSD spLP',
+    tokenSymbol: 'TOMB',
+    earnToken: 'STEAK and TSHARES',
+    icon: '/img/tomb.png'
+  }
 ]

@@ -26,7 +26,7 @@ const Farms: React.FC = () => {
               />
               <StyledLink
                 target="_blank"
-                href="https://swap.spiritswap.finance/#/add/0xe9e7cea3dedca5984780bafc599bd69add087d56/0xAd84341756Bf337f5a0164515b1f6F993D194E1f"
+                href="https://swap.spiritswap.finance/#/add/0xe9e7cea3dedca5984780bafc599bd69add087d56/0x9fC071cE771c7B27b7d9A57C32c0a84c18200F8a"
               >
                 {' '}
                 <Button
