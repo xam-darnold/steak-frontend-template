@@ -1,3 +1,4 @@
+import BigNumber from 'bignumber.js'
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import * as FaIcons from 'react-icons/fa'
@@ -9,10 +10,21 @@ import AccountButton from './components/AccountButton'
 import './components/Navbar.css'
 import { IconContext } from 'react-icons'
 import useWindowWidth from '../../hooks/useWindowWidth'
+import {
+  getFUSDPrice,
+  getSteakPrice,
+} from '../../sushi/utils'
+import useSushi from '../../hooks/useSushi'
+import fusdImg from '../../assets/img/fusd_icons/fusd.png'
+import steakImg from '../../assets/img/steak_icons/steak_orange.png'
 
 const NavBar: React.FC = () => {
   const windowWidth = useWindowWidth()
+  const sushi = useSushi()
+
   const [sidebar, setSidebar] = useState(false)
+  const [fusdPrice, setFusdPrice] = useState<BigNumber>()
+  const [steakPrice, setSteakPrice] = useState<BigNumber>()
 
   const toggleSidebar = () => setSidebar(!sidebar)
 
@@ -22,6 +34,15 @@ const NavBar: React.FC = () => {
     if (!shouldSidebarBeOpen()) {
       setSidebar(false)
     }
+    setTokenPrices()
+  }
+
+  const setTokenPrices = async () => {
+    if (sushi) {
+      const prices = await Promise.all([getFUSDPrice(sushi), getSteakPrice(sushi)])
+      setFusdPrice(new BigNumber(prices[0]))
+      setSteakPrice(new BigNumber(prices[1]))
+    }
   }
 
   useEffect(() => {
@@ -29,6 +50,11 @@ const NavBar: React.FC = () => {
       setSidebar(true)
     }
   }, [])
+
+  useEffect(() => {
+    if (!fusdPrice || !steakPrice)
+      setTokenPrices()
+  }, [sushi])
 
   return (
     <>
@@ -62,6 +88,10 @@ const NavBar: React.FC = () => {
           {/* <StyledNavImage>
             <img src={peggyplayer} alt='Peggy!'/>
           </StyledNavImage> */}
+          <ul className="nav-token-prices">
+            <li className="nav-price-text"><img src={steakImg} height={27} width={27} alt="Steak logo" /><span>${steakPrice?.toNumber()}</span></li>
+            <li className="nav-price-text"><img src={fusdImg} height={27} width={27} alt="fUSD logo" /><span>${fusdPrice?.toNumber()}</span></li>
+          </ul>
         </nav>
       </IconContext.Provider>
     </>
