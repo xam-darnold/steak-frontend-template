@@ -53,15 +53,21 @@ export default function Zapper() {
           .approve(sushi.crossSwapAddress, total)
           .send({ from: wallet.account })
 
-      const amount = new BigNumber(fromInput)
-        .multipliedBy(10 ** fromToken.decimals)
-        .toString()
-
       if (fromToken.token === 'STEAK') {
+        await sushi.contracts.crossSwap.methods
+        .customZapInToken(
+          fromToken.address,
+          total,
+          IFUSD_ADDRESS,
+          toToken.address,
+          toToken.dexAddress,
+          wallet.account,
+        )
+        .send({ from: wallet.account })
         await sushi.contracts.crossSwap.methods
           .zapInToken(
             fromToken.address,
-            amount,
+            total,
             toToken.address,
             toToken.dexAddress,
             wallet.account,
@@ -69,10 +75,9 @@ export default function Zapper() {
           .send({ from: wallet.account })
       } else {
         await sushi.contracts.crossSwap.methods
-          .customZapInToken(
+          .zapInToken(
             fromToken.address,
-            amount,
-            IFUSD_ADDRESS,
+            total,
             toToken.address,
             toToken.dexAddress,
             wallet.account,
@@ -88,16 +93,16 @@ export default function Zapper() {
   return (
     <>
       <div className="">
-        <div className="p-6 border-b border-gray-700 flex w-full items-center space-x-8">
+        <div className="flex items-center w-full p-6 space-x-8 border-b border-gray-700">
           <div className="flex-shrink-0">
             <div
-              className="relative rounded-full w-20 h-20 bg-gray-200 shadow-2xl bg-center bg-cover"
+              className="relative w-20 h-20 bg-gray-200 bg-center bg-cover rounded-full shadow-2xl"
               style={{
                 backgroundImage: `url("${fromToken?.tokenImg}")`,
               }}
             >
               <div
-                className="absolute rounded-full w-10 h-10 bottom-0 right-0 bg-gray-400 shadow-xl bg-center bg-cover"
+                className="absolute bottom-0 right-0 w-10 h-10 bg-gray-400 bg-center bg-cover rounded-full shadow-xl"
                 style={{
                   backgroundImage: `url("${fromToken?.dexImg}")`,
                 }}
@@ -106,13 +111,13 @@ export default function Zapper() {
           </div>
           <div className="flex-1 space-y-2 overflow-hidden">
             <div className="flex-1 space-y-1">
-              <label htmlFor="" className="text-xs flex items-center">
+              <label htmlFor="" className="flex items-center text-xs">
                 <p className="flex-1 font-bold">From</p>
-                <p className="opacity-50 font-mono">{fromToken?.swap}</p>
+                <p className="font-mono opacity-50">{fromToken?.swap}</p>
               </label>
-              <div className="flex items-stretch items-center rounded border border-gray-700 w-full">
+              <div className="flex items-stretch items-center w-full border border-gray-700 rounded">
                 <input
-                  className="text-2xl p-2 flex-1 bg-transparent"
+                  className="flex-1 p-2 text-2xl bg-transparent"
                   value={fromInput}
                   onChange={(e) => setFromInput(e.target.value)}
                   type="number"
@@ -121,7 +126,7 @@ export default function Zapper() {
                 {!!fromMax && (
                   <button
                     onClick={async () => setFromInput(fromMax)}
-                    className="flex-stretch-1 text-xs font-bold p-4"
+                    className="p-4 text-xs font-bold flex-stretch-1"
                   >
                     Max
                   </button>
@@ -150,16 +155,16 @@ export default function Zapper() {
             </div> */}
           </div>
         </div>
-        <div className="p-6 border-b border-gray-700 flex w-full items-center space-x-8">
+        <div className="flex items-center w-full p-6 space-x-8 border-b border-gray-700">
           <div className="flex-shrink-0">
             <div
-              className="relative rounded-full w-20 h-20 bg-gray-200 shadow-2xl bg-center bg-cover"
+              className="relative w-20 h-20 bg-gray-200 bg-center bg-cover rounded-full shadow-2xl"
               style={{
                 backgroundImage: `url("${toToken?.tokenImg}")`,
               }}
             >
               <div
-                className="absolute rounded-full w-10 h-10 bottom-0 right-0 bg-gray-400 shadow-xl bg-center bg-cover"
+                className="absolute bottom-0 right-0 w-10 h-10 bg-gray-400 bg-center bg-cover rounded-full shadow-xl"
                 style={{
                   backgroundImage: `url("${toToken?.dexImg}")`,
                 }}
@@ -168,13 +173,13 @@ export default function Zapper() {
           </div>
           <div className="flex-1 space-y-2 overflow-hidden">
             <div className="flex-1 space-y-1">
-              <label htmlFor="" className="text-xs flex items-center">
+              <label htmlFor="" className="flex items-center text-xs">
                 <p className="flex-1 font-bold">To</p>
-                <p className="opacity-50 font-mono">{toToken?.swap}</p>
+                <p className="font-mono opacity-50">{toToken?.swap}</p>
               </label>
-              {/* <div className="flex items-stretch items-center rounded border border-gray-700 w-full">
+              {/* <div className="flex items-stretch items-center w-full border border-gray-700 rounded">
                 <input
-                  className="text-2xl p-2 flex-1 bg-transparent"
+                  className="flex-1 p-2 text-2xl bg-transparent"
                   value={toInput}
                   onChange={(e) => updateToField(e.target.value)}
                   type="number"
@@ -183,14 +188,14 @@ export default function Zapper() {
                 {!!toMax && (
                   <button
                     onClick={async () => updateToField(toMax)}
-                    className="flex-stretch-1 text-xs font-bold p-4"
+                    className="p-4 text-xs font-bold flex-stretch-1"
                   >
                     Max
                   </button>
                 )}
               </div> */}
             </div>
-            <div className="flex flex-gap-1 flex-wrap hide-scroll-bars">
+            <div className="flex flex-wrap flex-gap-1 hide-scroll-bars">
               {lptokens.map((token) => (
                 <button
                   key={token.id}
@@ -213,7 +218,7 @@ export default function Zapper() {
           </div>
         </div>
         <div className="p-6 space-y-2">
-          {/* <p className="bg-black text-xs p-2 rounded text-white font-mono">
+          {/* <p className="p-2 font-mono text-xs text-white bg-black rounded">
             <div className="flex">
               <p className="flex-1">Slippage</p>
               <p>{slippage || 'XX'}%</p>

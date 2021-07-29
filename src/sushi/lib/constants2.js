@@ -67,7 +67,7 @@ export const contractAddresses = {
     250: '0xad84341756bf337f5a0164515b1f6f993d194e1f'
   },
   crossSwap: {
-    250: '0x6115d95C31B1b752341e07BF283e992C67DBcc74'
+    250: '0xffe87eFD73CEC5B16354c9E60358D7F75b620d65'
   }
 }
 
