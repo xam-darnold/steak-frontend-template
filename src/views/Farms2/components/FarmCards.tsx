@@ -16,11 +16,13 @@ import useAllStakedValue, {
 import useFarms2 from '../../../hooks/useFarms2'
 import useSushi from '../../../hooks/useSushi'
 import {
-  getEarned,
-  getMasterChefContract,
+  // getEarned,
+  // getMasterChefContract,
+  getSteakHouseContract,
   getFUSDPrice,
   getiFUSDShareValue,
   getTokenPrice,
+  getTotalLPWethValue2
 } from '../../../sushi/utils'
 import { bnToDec } from '../../../utils'
 
@@ -28,8 +30,8 @@ interface FarmWithStakedValue extends Farm2, StakedValue {
   apr0: BigNumber
   apr1: BigNumber
   apr2: BigNumber
-  apr3: BigNumber
-  apr4: BigNumber
+  // apr3: BigNumber
+  // apr4: BigNumber
   tvl: BigNumber
 }
 
@@ -37,6 +39,9 @@ const FarmCards: React.FC = () => {
   const [fusdPrice, setFusdPrice] = useState<BigNumber>()
   const [iFUSDShareValue, setiFUSDShareValue] = useState<BigNumber>()
   const [tsharePrice, setTsharePrice] = useState<BigNumber>()
+  const [screamPrice, setScreamPrice] = useState<BigNumber>()
+  const [screamValue, setScreamValue] = useState<BigNumber>()
+  const [screamWeight, setScreamWeight] = useState<BigNumber>()
   const [farms] = useFarms2()
   // console.log(farms)
 
@@ -67,11 +72,25 @@ const FarmCards: React.FC = () => {
           ],
           2,
         ),
+        // getTokenPrice(
+        //   sushi,
+        //   [
+        //     '0xe0654C8e6fd4D733349ac7E09f6f23DA256bF475',
+        //     '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83',
+        //     '0x04068da6c83afcfa0e13ba15a6696662335d5b75',
+        //   ],
+        //   2,
+        // ),
+        // getTotalLPWethValue2(
+        //   getSteakHouseContract(sushi),
+
+        // )
       ])
 
       setFusdPrice(new BigNumber(fusdInfo[0]))
       setiFUSDShareValue(fusdInfo[1].div(new BigNumber(10).pow(18)))
       setTsharePrice(new BigNumber(fusdInfo[2]))
+      // setScreamPrice(new BigNumber(fusdInfo[3]))
     }
     if (sushi) {
       fetchPrices()
@@ -82,7 +101,7 @@ const FarmCards: React.FC = () => {
   const SUSHI_PER_SECOND = new BigNumber(0.031)
   const REWARD1_PER_SECOND = new BigNumber(0.031)
   const REWARD2_PER_SECOND = new BigNumber(0.00000579)
-  const REWARD3_PER_SECOND = new BigNumber(0.031)
+  const REWARD3_PER_SECOND = new BigNumber(0.00264275)
   const REWARD4_PER_SECOND = new BigNumber(0.031)
 
   if (stakedValue[0] !== undefined) {
@@ -119,20 +138,20 @@ const FarmCards: React.FC = () => {
               .times(stakedValue[i].poolWeight[2])
               .div(stakedValue[i].totalWethValue)
           : null,
-        apr3: stakedValue[i]
-          ? sushiPrice
-              .times(REWARD3_PER_SECOND)
-              .times(SECONDS_PER_YEAR)
-              .times(stakedValue[i].poolWeight[3])
-              .div(stakedValue[i].totalWethValue)
-          : null,
-        apr4: stakedValue[i]
-          ? sushiPrice
-              .times(REWARD4_PER_SECOND)
-              .times(SECONDS_PER_YEAR)
-              .times(stakedValue[i].poolWeight[4])
-              .div(stakedValue[i].totalWethValue)
-          : null,
+        // apr3: stakedValue[i]
+        //   ? screamPrice
+        //       .times(REWARD3_PER_SECOND)
+        //       .times(SECONDS_PER_YEAR)
+        //       .times(stakedValue[i].poolWeight[3])
+        //       .div(stakedValue[i].totalWethValue)
+        //   : null,
+        // apr4: stakedValue[i]
+        //   ? sushiPrice
+        //       .times(REWARD4_PER_SECOND)
+        //       .times(SECONDS_PER_YEAR)
+        //       .times(stakedValue[i].poolWeight[4])
+        //       .div(stakedValue[i].totalWethValue)
+        //   : null,
         tvl:
           stakedValue[i] && sushi
             ? fusdPrice
@@ -209,20 +228,20 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
     )
   }
 
-  useEffect(() => {
-    async function fetchEarned() {
-      if (sushi) return
-      const earned = await getEarned(
-        getMasterChefContract(sushi),
-        lpTokenAddress,
-        account,
-      )
-      setHarvestable(bnToDec(earned))
-    }
-    if (sushi && account) {
-      fetchEarned()
-    }
-  }, [sushi, lpTokenAddress, account, setHarvestable])
+  // useEffect(() => {
+  //   async function fetchEarned() {
+  //     if (sushi) return
+  //     const earned = await getEarned(
+  //       getMasterChefContract(sushi),
+  //       lpTokenAddress,
+  //       account,
+  //     )
+  //     setHarvestable(bnToDec(earned))
+  //   }
+  //   if (sushi && account) {
+  //     fetchEarned()
+  //   }
+  // }, [sushi, lpTokenAddress, account, setHarvestable])
 
   const poolActive = true // startTime * 1000 - Date.now() <= 0
   return (

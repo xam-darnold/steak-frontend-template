@@ -129,5 +129,19 @@ export const supportedPools2 = [
     tokenSymbol: 'TOMB',
     earnToken: 'STEAK and TSHARES',
     icon: '/img/tomb.png'
+  },
+  {
+    pid: 4,
+    lpAddresses: {
+      250: '0x30872e4fc4edbfd7a352bfc2463eb4fae9c09086'
+    },
+    tokenAddresses: {
+      250: '0xe0654C8e6fd4D733349ac7E09f6f23DA256bF475'
+    },
+    name: 'SCREAM!',
+    symbol: 'SCREAM-FTM spLP',
+    tokenSymbol: 'SCREAM',
+    earnToken: 'SCREAM',
+    icon: '/img/scream.png'
   }
 ]
