@@ -7,6 +7,7 @@ export interface Farm2 {
   lpTokenAddress: string
   lpContract: Contract
   tokenAddress: string
+  tokenContract: Contract
   earnToken: string[]
   earnTokenAddress: string
   icon: React.ReactNode

@@ -53,6 +53,10 @@ export const getRouterContract = (sushi) => {
   return sushi && sushi.contracts && sushi.contracts.router
 }
 
+export const getWFTMContract = (sushi) => {
+  return sushi && sushi.contracts && sushi.contracts.wftm
+}
+
 export const getFarms = (sushi) => {
   return sushi
     ? sushi.contracts.pools.map(

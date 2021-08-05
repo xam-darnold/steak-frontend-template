@@ -47,6 +47,8 @@ export class Sushi {
     this.UNIV2RouterAddress2 = contractAddresses.router2[networkId]
     this.iFUSDAddress = contractAddresses.ifusd[networkId]
     this.crossSwapAddress = contractAddresses.crossSwap[networkId]
+    this.wftmAddress = contractAddresses.wftm2[networkId]
+
   }
 
   async resetEVM() {

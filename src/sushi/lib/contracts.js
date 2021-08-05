@@ -34,6 +34,7 @@ export class Contracts {
     this.steakHouse = new this.web3.eth.Contract(SteakHouseV2Abi.abi)
     this.xsushiStaking = new this.web3.eth.Contract(xSteakAbi.abi)
     this.weth = new this.web3.eth.Contract(FUSD)
+    this.wftm = new this.web3.eth.Contract(ERC20Abi)
     this.ifusd = new this.web3.eth.Contract(iFUSD.abi)
     this.router = new this.web3.eth.Contract(UNIV2Router)
     this.router2 = new this.web3.eth.Contract(UNIV2Router)
@@ -77,6 +78,7 @@ export class Contracts {
     setProvider(this.router, contractAddresses.router[networkId])
     setProvider(this.router2, contractAddresses.router2[networkId])
     setProvider(this.crossSwap, contractAddresses.crossSwap[networkId])
+    setProvider(this.wftm, contractAddresses.wftm2[networkId])
 
     this.pools.forEach(
       ({ lpContract, lpAddress, tokenContract, tokenAddress }) => {

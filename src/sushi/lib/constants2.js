@@ -68,6 +68,9 @@ export const contractAddresses = {
   },
   crossSwap: {
     250: '0xffe87eFD73CEC5B16354c9E60358D7F75b620d65'
+  },
+  wftm2: {
+    250: '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'
   }
 }
 

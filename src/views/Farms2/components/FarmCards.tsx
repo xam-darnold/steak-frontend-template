@@ -18,11 +18,12 @@ import useSushi from '../../../hooks/useSushi'
 import {
   // getEarned,
   // getMasterChefContract,
+  getWFTMContract,
   getSteakHouseContract,
   getFUSDPrice,
   getiFUSDShareValue,
   getTokenPrice,
-  getTotalLPWethValue2
+  getTotalLPWethValue2,
 } from '../../../sushi/utils'
 import { bnToDec } from '../../../utils'
 
@@ -39,11 +40,10 @@ const FarmCards: React.FC = () => {
   const [fusdPrice, setFusdPrice] = useState<BigNumber>()
   const [iFUSDShareValue, setiFUSDShareValue] = useState<BigNumber>()
   const [tsharePrice, setTsharePrice] = useState<BigNumber>()
-  const [screamPrice, setScreamPrice] = useState<BigNumber>()
-  const [screamValue, setScreamValue] = useState<BigNumber>()
-  const [screamWeight, setScreamWeight] = useState<BigNumber>()
+  const [screamTVL, setScreamTVL] = useState<BigNumber>()
+  const [screamAPR, setScreamAPR] = useState<BigNumber>()
+
   const [farms] = useFarms2()
-  // console.log(farms)
 
   const stakedValue = useAllStakedValue()
 
@@ -57,6 +57,12 @@ const FarmCards: React.FC = () => {
     sushiIndex >= 0 && stakedValue[sushiIndex]
       ? stakedValue[sushiIndex].tokenPriceInWeth
       : new BigNumber(0)
+
+  const SECONDS_PER_YEAR = new BigNumber(31536000)
+  const SUSHI_PER_SECOND = new BigNumber(0.031)
+  const REWARD1_PER_SECOND = new BigNumber(0.031)
+  const REWARD2_PER_SECOND = new BigNumber(0.00000579)
+  // const REWARD3_PER_SECOND = new BigNumber(0.00264275)
 
   useEffect(() => {
     async function fetchPrices() {
@@ -72,37 +78,16 @@ const FarmCards: React.FC = () => {
           ],
           2,
         ),
-        // getTokenPrice(
-        //   sushi,
-        //   [
-        //     '0xe0654C8e6fd4D733349ac7E09f6f23DA256bF475',
-        //     '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83',
-        //     '0x04068da6c83afcfa0e13ba15a6696662335d5b75',
-        //   ],
-        //   2,
-        // ),
-        // getTotalLPWethValue2(
-        //   getSteakHouseContract(sushi),
-
-        // )
       ])
 
       setFusdPrice(new BigNumber(fusdInfo[0]))
       setiFUSDShareValue(fusdInfo[1].div(new BigNumber(10).pow(18)))
       setTsharePrice(new BigNumber(fusdInfo[2]))
-      // setScreamPrice(new BigNumber(fusdInfo[3]))
     }
     if (sushi) {
       fetchPrices()
     }
-  }, [sushi, setFusdPrice, setiFUSDShareValue])
-
-  const SECONDS_PER_YEAR = new BigNumber(31536000)
-  const SUSHI_PER_SECOND = new BigNumber(0.031)
-  const REWARD1_PER_SECOND = new BigNumber(0.031)
-  const REWARD2_PER_SECOND = new BigNumber(0.00000579)
-  const REWARD3_PER_SECOND = new BigNumber(0.00264275)
-  const REWARD4_PER_SECOND = new BigNumber(0.031)
+  }, [sushi, setFusdPrice, setiFUSDShareValue, setTsharePrice])
 
   if (stakedValue[0] !== undefined) {
     // console.log(stakedValue[0].poolWeight.toString())
@@ -142,15 +127,15 @@ const FarmCards: React.FC = () => {
         //   ? screamPrice
         //       .times(REWARD3_PER_SECOND)
         //       .times(SECONDS_PER_YEAR)
-        //       .times(stakedValue[i].poolWeight[3])
-        //       .div(stakedValue[i].totalWethValue)
+        //       .times(screamWeight[i])
+        //       .div(screamValue[i])
         //   : null,
         // apr4: stakedValue[i]
         //   ? sushiPrice
         //       .times(REWARD4_PER_SECOND)
         //       .times(SECONDS_PER_YEAR)
-        //       .times(stakedValue[i].poolWeight[4])
-        //       .div(stakedValue[i].totalWethValue)
+        //       .times(screamWeight)
+        //       .div(screamValue)
         //   : null,
         tvl:
           stakedValue[i] && sushi
@@ -159,6 +144,7 @@ const FarmCards: React.FC = () => {
                 .times(stakedValue[i].totalWethValue)
             : null,
       }
+
       const newFarmRows = [...farmRows]
       if (newFarmRows[newFarmRows.length - 1].length === 3) {
         newFarmRows.push([farmWithStakedValue])
@@ -211,10 +197,16 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
   const [startTime, setStartTime] = useState(0)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [harvestable, setHarvestable] = useState(0)
+  const [screamTVL, setScreamTVL] = useState<BigNumber>()
+  const [screamAPR, setScreamAPR] = useState<BigNumber>()
 
   const { account } = useWallet()
   const { lpTokenAddress } = farm
   const sushi = useSushi()
+  const [farms] = useFarms2()
+
+  const SECONDS_PER_YEAR = new BigNumber(31536000)
+  const REWARD3_PER_SECOND = new BigNumber(0.00264275)
 
   const renderer = (countdownProps: CountdownRenderProps) => {
     const { hours, minutes, seconds } = countdownProps
@@ -227,6 +219,51 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
       </span>
     )
   }
+
+  useEffect(() => {
+    async function fetchPrices() {
+      const screamInfo = await Promise.all([
+        getTokenPrice(
+          sushi,
+          [
+            '0xe0654C8e6fd4D733349ac7E09f6f23DA256bF475',
+            '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83',
+            '0x04068da6c83afcfa0e13ba15a6696662335d5b75',
+          ],
+          2,
+        ),
+        getTokenPrice(
+          sushi,
+          [
+            '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83',
+            '0x04068da6c83afcfa0e13ba15a6696662335d5b75',
+          ],
+          2,
+        ),
+        getTotalLPWethValue2(
+          getSteakHouseContract(sushi),
+          getWFTMContract(sushi),
+          farms[4].lpContract,
+          farms[4].tokenContract,
+          4,
+        ),
+      ])
+
+      const screamPrice = new BigNumber(screamInfo[0])
+      const ftmPrice = new BigNumber(screamInfo[1])
+      const screamValue = screamInfo[2].totalWethValue
+      const sAPR = screamPrice
+        .times(REWARD3_PER_SECOND)
+        .times(SECONDS_PER_YEAR)
+        .div(screamValue)
+      const sTVL = screamValue.times(ftmPrice)
+      setScreamAPR(sAPR)
+      setScreamTVL(sTVL)
+    }
+    if (sushi) {
+      fetchPrices()
+    }
+  }, [sushi, setScreamAPR, setScreamTVL])
 
   // useEffect(() => {
   //   async function fetchEarned() {
@@ -272,44 +309,80 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
               )}
             </Button>
             <StyledInsight>
-            <div style={{margin: '0px'}}>
+              <div style={{ margin: '0px' }}>
                 <span>
-                  {`TVL: ${farm.tvl
-                    ? `$${farm.tvl
-                        .toNumber()
-                        .toLocaleString('en-US')
-                        .slice(0, -1)}`
-                    : 'Loading ...'}`}
+                  {`TVL: ${
+                    farm.tokenSymbol === 'SCREAM' && screamTVL
+                      ? `$${screamTVL
+                          .toNumber()
+                          .toLocaleString('en-US')
+                          .slice(0, -1)}`
+                      : farm.tvl
+                      ? `$${farm.tvl
+                          .toNumber()
+                          .toLocaleString('en-US')
+                          .slice(0, -1)}`
+                      : 'Loading ...'
+                  } `}
                 </span>
               </div>
-              <div style={{margin: '0px'}}>
-                <span>{`STEAK APR: ${
-                  farm.apr0 && farm.apr0.toNumber() !== 0
-                    ? `${farm.apr0
-                        .times(new BigNumber(100))
-                        .toNumber()
-                        .toLocaleString('en-US')
-                        .slice(0, -1)}%`
-                    : farm.apr0
-                    ? 'Not Incentivized'
-                    : 'Loading ...'
-                }`}</span>
-              </div>
-              <div style={{margin: '0px'}}>
-                <span>
-                  {`TSHARE APR: ${farm.apr2 && farm.apr2.toNumber() !== 0
-                    ? `${farm.apr2
-                        .times(new BigNumber(100))
-                        .toNumber()
-                        .toLocaleString('en-US')
-                        .slice(0, -1)}%`
-                    : farm.apr2
-                    ? '0%'
-                    : 'Loading ...'}`}
-                </span>
-              </div>
-              {/* <span>
-                {farm.tokenAmount
+              {farm.apr0 && farm.apr0.toNumber() ? (
+                <div style={{ margin: '0px' }}>
+                  <span>
+                    {`STEAK APR: ${
+                      farm.apr0 && farm.apr0.toNumber() !== 0
+                        ? `${farm.apr0
+                            .times(new BigNumber(100))
+                            .toNumber()
+                            .toLocaleString('en-US')
+                            .slice(0, -1)}%`
+                        : farm.apr0
+                        ? '0%'
+                        : 'Loading ...'
+                    }`}
+                  </span>
+                </div>
+              ) : (
+                <div></div>
+              )}
+              {farm.apr2 && farm.apr2.toNumber() ? (
+                <div style={{ margin: '0px' }}>
+                  <span>
+                    {`TSHARE APR: ${
+                      farm.apr2 && farm.apr2.toNumber() !== 0
+                        ? `${farm.apr2
+                            .times(new BigNumber(100))
+                            .toNumber()
+                            .toLocaleString('en-US')
+                            .slice(0, -1)}%`
+                        : farm.apr2
+                        ? '0%'
+                        : 'Loading ...'
+                    }`}
+                  </span>
+                </div>
+              ) : (
+                <div></div>
+              )}
+              {farm.tokenSymbol === 'SCREAM' ? (
+                <div style={{ margin: '0px' }}>
+                  <span>
+                    {`SCREAM APR: ${
+                      screamAPR && screamAPR.toNumber() !== 0
+                        ? `${screamAPR
+                            .times(new BigNumber(100))
+                            .toNumber()
+                            .toLocaleString('en-US')
+                            .slice(0, -1)}%`
+                        : 'Loading ...'
+                    }`}
+                  </span>
+                </div>
+              ) : (
+                <div></div>
+              )}
+
+              {/* {farm.tokenAmount
                   ? (farm.tokenAmount.toNumber() || 0).toLocaleString('en-US')
                   : '-'}{' '}
                 {farm.tokenSymbol}
@@ -319,7 +392,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
                   ? (farm.wethAmount.toNumber() || 0).toLocaleString('en-US')
                   : '-'}{' '}
                 ETH
-              </span> */}
+                </span> */}
             </StyledInsight>
           </StyledContent>
         </CardContent>
